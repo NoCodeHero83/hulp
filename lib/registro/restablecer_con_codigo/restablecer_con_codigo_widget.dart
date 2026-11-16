@@ -1,5 +1,5 @@
+import '/components/encabezado_principal_widget.dart';
 import '/backend/supabase/supabase.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -184,35 +184,9 @@ class _RestablecerConCodigoWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Text(
-            'Restablecer contraseña',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(fontWeight: FontWeight.w600),
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
-          centerTitle: true,
-          elevation: 0.0,
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Restablecer contraseña',
+          alVolver: context.safePop,
         ),
         body: SafeArea(
           top: true,
@@ -325,7 +299,7 @@ class _RestablecerConCodigoWidgetState
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600),
                                   color: Colors.white,
                                   fontSize: 16.0,
@@ -428,7 +402,7 @@ class _RestablecerConCodigoWidgetState
                 const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
           ),
           style: FlutterFlowTheme.of(context).headlineSmall.override(
-                font: GoogleFonts.interTight(fontWeight: FontWeight.w700),
+                font: GoogleFonts.inter(fontWeight: FontWeight.w700),
                 letterSpacing: 12.0,
                 fontWeight: FontWeight.w700,
               ),
@@ -507,7 +481,6 @@ class _RestablecerConCodigoWidgetState
                 isVisible
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: FlutterFlowTheme.of(context).secondaryText,
                 size: 22.0,
               ),
             ),

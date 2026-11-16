@@ -170,6 +170,44 @@ void main() {
     });
   }
 
+  testWidgets('permite leer y editar una dirección larga al 200 %',
+      (tester) async {
+    tester.view.physicalSize = const Size(320, 640);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    const direccionLarga =
+        'Carrera 123 # 45-67, barrio Centro Histórico, Cali, Valle del Cauca';
+    final repo = Repo();
+    repo.rows[0] = DireccionGuardada({
+      ...repo.rows.first.data,
+      'direccion': direccionLarga,
+    });
+    await tester.pumpWidget(MaterialApp(
+      builder: (context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(2)),
+        child: child!,
+      ),
+      home: MisDireccionesPage(
+          repository: repo, cargarCiudades: () async => ciudades),
+    ));
+    await tester.pumpAndSettle();
+    final editar = find.byTooltip('Editar Casa');
+    await Scrollable.ensureVisible(tester.element(editar), alignment: 0.5);
+    await tester.pumpAndSettle();
+    expect(editar.hitTestable(), findsOneWidget);
+    await tester.tap(editar);
+    await tester.pumpAndSettle();
+    final campo = find.byKey(const ValueKey('Dirección *'));
+    await tester.ensureVisible(campo);
+    expect(
+        tester.widget<TextFormField>(campo).controller?.text, direccionLarga);
+    final guardar = find.text('Guardar cambios');
+    await tester.ensureVisible(guardar);
+    expect(guardar.hitTestable(), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('agrega desde la libreta y cancela una edición sin guardar',
       (tester) async {
     final repo = Repo()..rows.clear();

@@ -104,7 +104,7 @@ class _NotificacionesModalWidgetState extends State<NotificacionesModalWidget> {
                                     .fontStyle,
                               ),
                               color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 22.0,
+                              fontSize: 16.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
                               fontStyle: FlutterFlowTheme.of(context)
@@ -178,7 +178,7 @@ class _NotificacionesModalWidgetState extends State<NotificacionesModalWidget> {
                                 .fontStyle,
                           ),
                           color: FlutterFlowTheme.of(context).texto1,
-                          fontSize: 18.0,
+                          fontSize: 16.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
                           fontStyle:
@@ -202,7 +202,7 @@ class _NotificacionesModalWidgetState extends State<NotificacionesModalWidget> {
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
-                                font: GoogleFonts.interTight(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .fontWeight,

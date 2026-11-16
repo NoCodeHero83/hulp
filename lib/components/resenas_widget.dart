@@ -101,7 +101,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                                     .fontStyle,
                               ),
                               color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 22.0,
+                              fontSize: 18.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
                               fontStyle: FlutterFlowTheme.of(context)
@@ -195,7 +195,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                                     .bodyMedium
                                     .fontStyle,
                               ),
-                              color: Color(0xFF8A8A8A),
+                              color: Color(0xFF65676A),
                               letterSpacing: 0.0,
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -232,7 +232,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                                     .bodyMedium
                                     .fontStyle,
                               ),
-                              color: Color(0xFF8A8A8A),
+                              color: Color(0xFF65676A),
                               letterSpacing: 0.0,
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -274,7 +274,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                         TextSpan(
                           text: ' (opcional) ',
                           style: TextStyle(
-                            color: Color(0xFF8A8A8A),
+                            color: Color(0xFF65676A),
                             fontSize: 16.0,
                           ),
                         )
@@ -338,7 +338,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                                         .labelMedium
                                         .fontStyle,
                                   ),
-                                  color: Color(0xFF757575),
+                                  color: Color(0xFF65676A),
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
@@ -358,7 +358,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xFFDFDFDF),
+                            color: FlutterFlowTheme.of(context).primary,
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
@@ -481,7 +481,7 @@ class _ResenasWidgetState extends State<ResenasWidget> {
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .fontWeight,

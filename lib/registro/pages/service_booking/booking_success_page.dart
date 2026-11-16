@@ -2,22 +2,24 @@
 // UI fiel al mockup aprobado: SPEC_REQ-001_service-form.md §4
 // Args se reciben vía BookingArgsStore (no GoRouter extra) para compatibilidad con FFParameters.
 
+import '/components/encabezado_principal_widget.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '/flutter_flow/hulp_colors.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/registro/pages/historial/historial_widget.dart';
 import 'booking_args_store.dart';
 import '/components/menu_bar_widget.dart';
 
 // ── Tokens de color (SPEC §1.1) ───────────────────────────────────────────────
-const _kButton = Color(0xFF157867);
-const _kPrimaryLight = Color(0xFFE8F5EE);
-const _kAccent = Color(0xFF2D8653);
-const _kBg = Color(0xFFFFFFFF);
-const _kBorder = Color(0xFFE8E8E8);
-const _kTextPrimary = Color(0xFF0D0D0D);
-const _kTextSecondary = Color(0xFF757575);
+const _kButton = HulpColors.brand;
+const _kPrimaryLight = HulpColors.brandSoft;
+const _kAccent = HulpColors.brand;
+const _kBg = HulpColors.background;
+const _kBorder = HulpColors.border;
+const _kTextPrimary = HulpColors.textPrimary;
+const _kTextSecondary = HulpColors.textMuted;
 const _kInfoBg = Color(0xFFEAF4F8);
 const _kInfoIcon = Color(0xFF4A9FC5);
 
@@ -43,12 +45,29 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
   String get _fechaLabel {
     if (_args == null) return '';
     const meses = [
-      '', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+      '',
+      'enero',
+      'febrero',
+      'marzo',
+      'abril',
+      'mayo',
+      'junio',
+      'julio',
+      'agosto',
+      'septiembre',
+      'octubre',
+      'noviembre',
+      'diciembre'
     ];
     const dias = [
-      '', 'lunes', 'martes', 'miércoles', 'jueves',
-      'viernes', 'sábado', 'domingo'
+      '',
+      'lunes',
+      'martes',
+      'miércoles',
+      'jueves',
+      'viernes',
+      'sábado',
+      'domingo'
     ];
     final d = _args!.fecha;
     final dow = dias[d.weekday];
@@ -70,7 +89,7 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
               const SizedBox(height: 16),
               Text('¡Reserva confirmada!',
                   style: GoogleFonts.inter(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w700,
                       color: _kTextPrimary)),
               const SizedBox(height: 24),
@@ -95,24 +114,10 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
 
     return Scaffold(
       backgroundColor: _kBg,
-      appBar: AppBar(
-        backgroundColor: _kBg,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Hulp',
-          style: GoogleFonts.inter(
-            fontSize: 28,
-            fontWeight: FontWeight.w700,
-            color: _kTextPrimary,
-          ),
-        ),
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-        // Hueco inferior para que el contenido no quede bajo el menú flotante.
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 120),
+      appBar: const EncabezadoPrincipalWidget(titulo: 'Hulp'),
+      bottomNavigationBar: const MenuBarWidget(index: 0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -128,7 +133,7 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
             Text(
               '¡Reserva confirmada!',
               style: GoogleFonts.inter(
-                fontSize: 22,
+                fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: _kTextPrimary,
               ),
@@ -161,10 +166,10 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
             const SizedBox(height: 32),
             SizedBox(
               width: double.infinity,
-              height: 52,
               child: ElevatedButton(
                 onPressed: () => context.pushNamed(HistorialWidget.routeName),
                 style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(0, 52),
                   backgroundColor: _kButton,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -174,7 +179,7 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
                   'Ver solicitud',
                   style: GoogleFonts.inter(
                     color: Colors.white,
-                    fontSize: 17,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -183,10 +188,10 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
             const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
-              height: 52,
               child: OutlinedButton(
                 onPressed: () => context.go('/'),
                 style: OutlinedButton.styleFrom(
+                  minimumSize: const Size(0, 52),
                   side: const BorderSide(color: _kButton, width: 1.5),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -195,7 +200,7 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
                   'Volver al inicio',
                   style: GoogleFonts.inter(
                     color: _kButton,
-                    fontSize: 17,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -204,11 +209,6 @@ class _BookingSuccessPageState extends State<BookingSuccessPage> {
             const SizedBox(height: 16),
           ],
         ),
-      ),
-          // El mismo menú que el resto de la app: esta pantalla llevaba uno
-          // propio y se notaba el salto al llegar aquí desde el agendamiento.
-          const MenuBarWidget(index: 0),
-        ],
       ),
     );
   }
@@ -236,7 +236,8 @@ class _ServiceCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: _kBorder),
         boxShadow: const [
-          BoxShadow(blurRadius: 6, color: Color(0x0F000000), offset: Offset(0, 2)),
+          BoxShadow(
+              blurRadius: 6, color: Color(0x0F000000), offset: Offset(0, 2)),
         ],
       ),
       child: Row(
@@ -273,7 +274,7 @@ class _ServiceCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.inter(
-                        fontSize: 13, color: _kTextSecondary)),
+                        fontSize: 14, color: _kTextSecondary)),
                 const SizedBox(height: 6),
                 Text(price,
                     style: GoogleFonts.inter(
@@ -319,10 +320,10 @@ class _SuccessIndicator extends StatelessWidget {
     const colors = [
       Color(0xFF4ECDC4),
       Color(0xFFA8E6CF),
-      Color(0xFF2D8653),
+      HulpColors.brand,
       Color(0xFF4ECDC4),
       Color(0xFFA8E6CF),
-      Color(0xFF2D8653),
+      HulpColors.brand,
     ];
     return List.generate(6, (i) {
       final angle = (2 * math.pi / 6) * i;
@@ -365,7 +366,8 @@ class _SummaryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: _kBorder),
         boxShadow: const [
-          BoxShadow(blurRadius: 6, color: Color(0x0F000000), offset: Offset(0, 2)),
+          BoxShadow(
+              blurRadius: 6, color: Color(0x0F000000), offset: Offset(0, 2)),
         ],
       ),
       child: Column(
@@ -440,7 +442,7 @@ class _SummaryRow extends StatelessWidget {
                   flex: 3,
                   child: Text(label,
                       style: GoogleFonts.inter(
-                          fontSize: 13, color: _kTextSecondary)),
+                          fontSize: 14, color: _kTextSecondary)),
                 ),
                 const SizedBox(width: 6),
                 Flexible(
@@ -449,7 +451,7 @@ class _SummaryRow extends StatelessWidget {
                     value,
                     textAlign: TextAlign.right,
                     style: GoogleFonts.inter(
-                      fontSize: 13,
+                      fontSize: 14,
                       fontWeight:
                           valueAccent ? FontWeight.w600 : FontWeight.w400,
                       color: valueAccent ? _kAccent : _kTextPrimary,
@@ -486,11 +488,10 @@ class _InfoBanner extends StatelessWidget {
           Expanded(
             child: Text(text,
                 style: GoogleFonts.inter(
-                    fontSize: 13, color: _kTextSecondary, height: 1.4)),
+                    fontSize: 14, color: _kTextSecondary, height: 1.4)),
           ),
         ],
       ),
     );
   }
 }
-

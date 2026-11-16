@@ -1,3 +1,4 @@
+import '/components/encabezado_principal_widget.dart';
 import '/backend/supabase/supabase.dart';
 // REQ-001 — ServiceBookingFormPage
 // UI fiel al mockup aprobado: SPEC_REQ-001_service-form.md
@@ -5,6 +6,8 @@ import '/backend/supabase/supabase.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '/flutter_flow/hulp_colors.dart';
+import '/flutter_flow/hulp_text_styles.dart';
 import '/backend/direcciones_usuario.dart';
 import '/components/agregar_direccion_agenda_page.dart';
 import '/components/direcciones_agenda_estilo.dart';
@@ -18,16 +21,16 @@ import 'booking_success_page.dart';
 import 'booking_args_store.dart';
 
 // ── Tokens de color (SPEC §1.1) ───────────────────────────────────────────────
-const _kButton = Color(0xFF157867);
-const _kPrimaryLight = Color(0xFFE8F5EE);
-const _kAccent = Color(0xFF2D8653);
-const _kBg = Color(0xFFFFFFFF);
-const _kSurface = Color(0xFFF7F8F9);
-const _kBorder = Color(0xFFE8E8E8);
-const _kBorderSelected = Color(0xFF2D8653);
-const _kTextPrimary = Color(0xFF0D0D0D);
-const _kTextSecondary = Color(0xFF757575);
-const _kError = Color(0xFFD32F2F);
+const _kButton = HulpColors.brand;
+const _kPrimaryLight = HulpColors.brandSoft;
+const _kAccent = HulpColors.brand;
+const _kBg = HulpColors.background;
+const _kSurface = HulpColors.inputSurface;
+const _kBorder = HulpColors.border;
+const _kBorderSelected = HulpColors.brand;
+const _kTextPrimary = HulpColors.textPrimary;
+const _kTextSecondary = HulpTextStyles.muted;
+const _kError = HulpTextStyles.error;
 
 // ── Chips de hora predefinidos (SPEC §3.3) ───────────────────────────────────
 // Intervalos de 30 min cubriendo la jornada de servicio: 08:00 → 18:00 (21 chips).
@@ -104,8 +107,7 @@ class _ServiceBookingFormState extends State<ServiceBookingFormPage> {
               agregar: (context) => Navigator.of(context)
                   .push<DireccionGuardada>(MaterialPageRoute(
                       builder: (_) => AgregarDireccionAgendaPage(
-                          ciudades: ciudades,
-                          guardar: _direcciones.guardar))),
+                          ciudades: ciudades, guardar: _direcciones.guardar))),
             )),
       );
       if (direccion == null || !mounted) return;
@@ -467,160 +469,142 @@ class _ServiceBookingFormState extends State<ServiceBookingFormPage> {
       // El teclado se superpone en vez de encoger la pantalla: si no, la
       // barra de abajo sube y queda pegada sobre las teclas.
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: _kBg,
-        elevation: 0,
-        leading: const BackButton(color: _kTextPrimary),
-        title: Text(
-          'Hulp',
-          style: GoogleFonts.inter(
-            fontSize: 28,
-            fontWeight: FontWeight.w700,
-            color: _kTextPrimary,
-          ),
-        ),
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            // Padding inferior extra para que el contenido no quede tapado por
-            // el menú inferior flotante (MenuBarWidget). Con el teclado abierto
-            // el menú se esconde y ese hueco lo ocupa el teclado, para que el
-            // campo enfocado quede a la vista y no debajo de las teclas.
-            padding: EdgeInsets.fromLTRB(
-                20, 16, 20, tecladoAbierto ? altoTeclado + 24 : 120),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Agenda tu servicio',
-                  style: GoogleFonts.inter(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    color: _kTextPrimary,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Cuéntanos cuándo y dónde necesitas el servicio.',
-                  style:
-                      GoogleFonts.inter(fontSize: 14, color: _kTextSecondary),
-                ),
-                const SizedBox(height: 20),
-
-                // Fecha
-                const _FieldLabel('Fecha'),
-                const SizedBox(height: 6),
-                _PickerField(
-                  value: _dateLabel,
-                  icon: Icons.event_outlined,
-                  hasError: _errors.containsKey('date'),
-                  errorText: _errors['date'],
-                  onTap: _pickDate,
-                  trailing: const Icon(Icons.keyboard_arrow_right,
-                      color: _kAccent, size: 20),
-                ),
-                const SizedBox(height: 20),
-
-                // Hora
-                const _FieldLabel('Hora'),
-                const SizedBox(height: 6),
-                _TimeChipSelector(
-                  selectedChip: _selectedTimeChip,
-                  hasError: _errors.containsKey('time'),
-                  errorText: _errors['time'],
-                  onChipSelected: (val) => setState(() {
-                    _selectedTimeChip = val;
-                    _errors.remove('time');
-                  }),
-                  onMore: _pickTime,
-                ),
-                const SizedBox(height: 20),
-
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const _FieldLabel('Dirección'),
-                      if (_direccionElegida != null)
-                        TextButton(
-                            onPressed: _abriendoDireccion || _isSubmitting
-                                ? null
-                                : _abrirDirecciones,
-                            style: TextButton.styleFrom(
-                                foregroundColor: direccionVerde,
-                                padding: EdgeInsets.zero,
-                                minimumSize: const Size(48, 28),
-                                tapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap),
-                            child: Text('Cambiar',
-                                style: textoDireccion(
-                                    weight: FontWeight.w600,
-                                    color: direccionVerde))),
-                    ]),
-                const SizedBox(height: 6),
-                _BotonUbicacion(
-                  direccion: _addressCtrl.text,
-                  seleccionada: _direccionElegida,
-                  ciudad: _selectedCiudad?.nombre,
-                  cargando: _cargandoCiudades,
-                  errorText: _errors['address'],
-                  onTap: _abrirDirecciones,
-                ),
-                const SizedBox(height: 28),
-
-                const _FieldLabel('Notas para el equipo Hulp (opcional)'),
-                const SizedBox(height: 6),
-                TextField(
-                    controller: _notasCtrl,
-                    maxLines: 3,
-                    decoration: const InputDecoration(
-                        hintText: 'Indicaciones para tu servicio',
-                        border: OutlineInputBorder())),
-                const SizedBox(height: 24),
-
-                // Botón Agendar
-                SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: ElevatedButton(
-                    onPressed: _isSubmitting ? null : _onAgendar,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _kButton,
-                      disabledBackgroundColor: _kButton.withValues(alpha: 0.6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: _isSubmitting
-                        ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2.5,
-                              color: Colors.white,
-                            ),
-                          )
-                        : Text(
-                            'Agendar',
-                            style: GoogleFonts.inter(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-              ],
+      appBar: const EncabezadoPrincipalWidget.subpantalla(titulo: 'Hulp'),
+      bottomNavigationBar:
+          tecladoAbierto ? null : const MenuBarWidget(index: 0),
+      body: SingleChildScrollView(
+        // El espacio extra permite desplazar el campo enfocado por
+        // encima del teclado, que se superpone al formulario.
+        padding: EdgeInsets.fromLTRB(
+            20, 16, 20, tecladoAbierto ? altoTeclado + 24 : 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Agenda tu servicio',
+              style: GoogleFonts.inter(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: _kTextPrimary,
+              ),
             ),
-          ),
-          // Menú inferior compartido, anclado al fondo (patrón estándar del
-          // resto de la app). MenuBarWidget ya se alinea abajo internamente.
-          // Se esconde con el teclado abierto: si no, queda flotando sobre las
-          // teclas tapando justo el campo que se está escribiendo.
-          if (!tecladoAbierto) const MenuBarWidget(index: 0),
-        ],
+            const SizedBox(height: 4),
+            Text(
+              'Cuéntanos cuándo y dónde necesitas el servicio.',
+              style: GoogleFonts.inter(fontSize: 14, color: _kTextSecondary),
+            ),
+            if (_servicio != null) ...[
+              const SizedBox(height: 16),
+              _ServiceHeaderCard(
+                imageUrl: _serviceImage,
+                name: _serviceName,
+                description: _serviceDesc,
+                price: _servicePrice,
+              ),
+              const SizedBox(height: 20),
+            ] else
+              const SizedBox(height: 20),
+
+            // Fecha
+            const _FieldLabel('Fecha'),
+            const SizedBox(height: 6),
+            _PickerField(
+              value: _dateLabel,
+              icon: Icons.event_outlined,
+              hasError: _errors.containsKey('date'),
+              errorText: _errors['date'],
+              onTap: _pickDate,
+              trailing: const Icon(Icons.keyboard_arrow_right,
+                  color: _kAccent, size: 20),
+            ),
+            const SizedBox(height: 20),
+
+            // Hora
+            const _FieldLabel('Hora'),
+            const SizedBox(height: 6),
+            _TimeChipSelector(
+              selectedChip: _selectedTimeChip,
+              hasError: _errors.containsKey('time'),
+              errorText: _errors['time'],
+              onChipSelected: (val) => setState(() {
+                _selectedTimeChip = val;
+                _errors.remove('time');
+              }),
+              onMore: _pickTime,
+            ),
+            const SizedBox(height: 20),
+
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              const _FieldLabel('Dirección'),
+              if (_direccionElegida != null)
+                TextButton(
+                    onPressed: _abriendoDireccion || _isSubmitting
+                        ? null
+                        : _abrirDirecciones,
+                    style: TextButton.styleFrom(
+                        foregroundColor: direccionVerde,
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(48, 28),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                    child: Text('Cambiar',
+                        style: textoDireccion(
+                            weight: FontWeight.w600, color: direccionVerde))),
+            ]),
+            const SizedBox(height: 6),
+            _BotonUbicacion(
+              direccion: _addressCtrl.text,
+              seleccionada: _direccionElegida,
+              ciudad: _selectedCiudad?.nombre,
+              cargando: _cargandoCiudades,
+              errorText: _errors['address'],
+              onTap: _abrirDirecciones,
+            ),
+            const SizedBox(height: 28),
+
+            const _FieldLabel('Notas para el equipo Hulp (opcional)'),
+            const SizedBox(height: 6),
+            TextField(
+                controller: _notasCtrl,
+                maxLines: 3,
+                style: HulpTextStyles.input,
+                decoration: const InputDecoration(
+                    hintText: 'Indicaciones para tu servicio',
+                    border: OutlineInputBorder())),
+            const SizedBox(height: 24),
+
+            // Botón Agendar
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _isSubmitting ? null : _onAgendar,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(0, 56),
+                  backgroundColor: _kButton,
+                  disabledBackgroundColor: _kButton.withValues(alpha: 0.6),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  elevation: 0,
+                ),
+                child: _isSubmitting
+                    ? const SizedBox(
+                        width: 22,
+                        height: 22,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Text(
+                        'Agendar',
+                        style: HulpTextStyles.primaryAction
+                            .copyWith(color: Colors.white),
+                      ),
+              ),
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
       ),
     );
   }
@@ -630,6 +614,104 @@ class _ServiceBookingFormState extends State<ServiceBookingFormPage> {
 // Sub-widgets
 // ══════════════════════════════════════════════════════════════════════════════
 
+class _ServiceHeaderCard extends StatelessWidget {
+  const _ServiceHeaderCard({
+    required this.imageUrl,
+    required this.name,
+    required this.description,
+    required this.price,
+  });
+
+  final String imageUrl;
+  final String name;
+  final String description;
+  final String price;
+
+  Widget _placeholder() => const ColoredBox(
+        color: HulpColors.brandSoft,
+        child: Center(
+          child: Icon(
+            Icons.home_repair_service_outlined,
+            color: HulpColors.brand,
+            size: 28,
+          ),
+        ),
+      );
+
+  @override
+  Widget build(BuildContext context) => Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: HulpColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: HulpColors.border),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.06),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: SizedBox.square(
+                dimension: 80,
+                child: imageUrl.trim().isEmpty
+                    ? _placeholder()
+                    : Image.network(
+                        imageUrl,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, progress) =>
+                            progress == null ? child : _placeholder(),
+                        errorBuilder: (context, error, stackTrace) =>
+                            _placeholder(),
+                      ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: HulpTextStyles.card.copyWith(
+                      color: HulpColors.brand,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: HulpTextStyles.body.copyWith(
+                      color: HulpTextStyles.muted,
+                    ),
+                  ),
+                  if (price.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      price,
+                      style: HulpTextStyles.card.copyWith(
+                        color: HulpColors.brand,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
 class _FieldLabel extends StatelessWidget {
   const _FieldLabel(this.text);
   final String text;
@@ -637,8 +719,7 @@ class _FieldLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         text,
-        style: GoogleFonts.inter(
-            fontSize: 12, fontWeight: FontWeight.w500, color: _kTextSecondary),
+        style: HulpTextStyles.label,
       );
 }
 
@@ -685,7 +766,7 @@ class _PickerField extends StatelessWidget {
                 Expanded(
                   child: Text(value,
                       style: GoogleFonts.inter(
-                        fontSize: 15,
+                        fontSize: 16,
                         color: isPlaceholder ? _kTextSecondary : _kTextPrimary,
                       )),
                 ),
@@ -792,7 +873,7 @@ class _TimeChip extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 42,
+        constraints: const BoxConstraints(minHeight: 42),
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: isSelected ? _kPrimaryLight : Colors.white,

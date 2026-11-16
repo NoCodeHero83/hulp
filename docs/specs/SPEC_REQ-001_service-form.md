@@ -1,8 +1,9 @@
 # SPEC UI — REQ-001: Formulario de Reserva y Pantalla de Éxito
-> Sprint: S 05-2026 · Versión: 1.11 · Estado: **IMPLEMENTADO**
+> Sprint: S 05-2026 · Versión: 1.12 · Estado: **IMPLEMENTADO**
 > Referencia visual: mockup adjunto (imagen entregada el 2026-06-10)
 >
 > **Changelog:**
+> - v1.12 (2026-11-14): §1.1 armoniza los colores de acción, selección y énfasis con la paleta compartida de Hulp (`#0B6244`); superficies y texto adoptan los tokens comunes de Usuarios. Se conservan los colores semánticos de información y los destellos decorativos.
 > - v1.11 (2026-07-07): **fix de agendamiento** — el insert de `solicitudes_servicio` fallaba con `23505 unique_violation` en `ticket`. Causa real: `ticket` tiene `DEFAULT nextval('ticket_seq')` + `UNIQUE`, pero el panel admin insertaba `ticket` como `MAX+1` explícito **sin avanzar la secuencia**; ésta quedó rezagada (1458 vs MAX 1460) y colisionaba al omitir `ticket`. Fix: resincronizar `ticket_seq` (migración `0002_resync_ticket_seq.sql`, aplicada en prod el 2026-07-07) y hacer que el admin use la secuencia. El insert de la app queda explícito en `tipo`/`estado_pago`/`precio_base`/`precio_adicionales` por claridad (§6.1). §3.8 el menú inferior pasa a usar el componente compartido `MenuBarWidget` (antes un `BottomNavigationBar` local sin navegación).
 > - v1.10 (2026-06-19): §3.3 el rango de los chips de hora se ajusta a la jornada laboral 08:00–18:00 (21 chips, intervalos de 30 min). El chip "Más" se mantiene para horas fuera de ese rango.
 > - v1.9 (2026-06-19): §3.3 los chips de hora predefinidos pasan de intervalos de 1 h (08:00–11:00) a intervalos de 30 min cubriendo toda la jornada de servicio: 06:00 a 20:00 (29 chips). El chip "Más" se mantiene para horas personalizadas. Afecta §2.3, §5.3 e IP-03.
@@ -59,25 +60,27 @@ Los siguientes tres lugares del código navegan ahora a `ServiceBookingFormPage`
 
 | Token | Hex | Uso |
 |---|---|---|
-| `colorPrimary` | `#1A3C2E` | Botones principales, borde selected, íconos activos |
-| `colorPrimaryLight` | `#E8F5EE` | Fondo chip seleccionado, fondo tarjeta éxito |
-| `colorAccent` | `#2D8653` | Precios, textos de énfasis en verde, valor hora selected |
-| `colorSuccess` | `#2D8653` | Ícono check en pantalla de éxito |
-| `colorSuccessCircle` | `#E8F5EE` | Fondo del círculo de éxito |
-| `colorBackground` | `#FFFFFF` | Fondo general de pantallas |
-| `colorSurface` | `#FFFFFF` | Fondo de tarjetas e inputs |
-| `colorBorder` | `#E8E8E8` | Bordes de inputs, tarjetas, chips no seleccionados |
-| `colorBorderSelected` | `#2D8653` | Borde chip de hora seleccionado |
-| `colorTextPrimary` | `#0D0D0D` | Títulos, texto de campos |
-| `colorTextSecondary` | `#757575` | Labels de campo, subtítulos, placeholder |
-| `colorTextPrice` | `#2D8653` | Precio en tarjeta de servicio |
-| `colorTextSelected` | `#2D8653` | Valor dentro del chip de hora seleccionado |
+| `colorPrimary` | `#0B6244` | Botones principales, borde selected, íconos activos |
+| `colorPrimaryLight` | `#E8F1EA` | Fondo chip seleccionado, fondo tarjeta éxito |
+| `colorAccent` | `#0B6244` | Precios, textos de énfasis en verde, valor hora selected |
+| `colorSuccess` | `#0B6244` | Ícono check en pantalla de éxito |
+| `colorSuccessCircle` | `#E8F1EA` | Fondo del círculo de éxito |
+| `colorBackground` | `#FBF8F4` | Fondo general de pantallas |
+| `colorSurface` | `#FFFFFF` | Fondo de tarjetas |
+| `colorInputSurface` | `#FBFAF9` | Fondo de inputs y superficies suaves |
+| `colorBorder` | `#DFDFDF` | Bordes de inputs, tarjetas, chips no seleccionados |
+| `colorBorderSelected` | `#0B6244` | Borde chip de hora seleccionado |
+| `colorTextPrimary` | `#1C2029` | Títulos, texto de campos |
+| `colorTextSecondary` | `#65676A` | Labels de campo, subtítulos, placeholder |
+| `colorError` | `#B61516` | Texto y bordes de validación |
+| `colorTextPrice` | `#0B6244` | Precio en tarjeta de servicio |
+| `colorTextSelected` | `#0B6244` | Valor dentro del chip de hora seleccionado |
 | `colorInfoBg` | `#EAF4F8` | Fondo del banner informativo en éxito |
 | `colorInfoIcon` | `#4A9FC5` | Color del ícono ℹ en el banner |
-| `colorButtonPrimary` | `#157867` | Fondo botón "Agendar" / "Ver solicitud" |
+| `colorButtonPrimary` | `#0B6244` | Fondo botón "Agendar" / "Ver solicitud" |
 | `colorButtonSecondary` | `#FFFFFF` | Fondo botón "Volver al inicio" |
-| `colorButtonSecondaryBorder` | `#157867` | Borde y texto botón "Volver al inicio" |
-| `colorSparkle` | `#4ECDC4` / `#A8E6CF` | Destellos decorativos en pantalla de éxito |
+| `colorButtonSecondaryBorder` | `#0B6244` | Borde y texto botón "Volver al inicio" |
+| `colorSparkle` | `#4ECDC4` / `#A8E6CF` / `#0B6244` | Destellos decorativos en pantalla de éxito |
 
 ### 1.2 Tipografía
 
@@ -154,9 +157,9 @@ error text (12sp, colorError) — solo si hay error
 ```
 
 - **Borde normal:** 1 dp `colorBorder`, radius `radiusInput`
-- **Borde error:** 1.5 dp `colorError` (#D32F2F), radius `radiusInput`
+- **Borde error:** 1.5 dp `colorError` (`#B61516`), radius `radiusInput`
 - **Borde focused:** 1.5 dp `colorPrimary`
-- **Fondo:** `#F7F8F9`
+- **Fondo:** `#FBFAF9`
 - **Ícono leading:** 20 dp, color `colorTextSecondary`
 
 ### 2.3 `TimeChip`
@@ -168,7 +171,7 @@ Chip individual del selector de hora. La fila de chips usa scroll horizontal por
 - Tamaño: height 42 dp, padding H 16 dp
 
 **Estado selected:**
-- Fondo: `colorPrimaryLight` (`#E8F5EE`), borde 1.5 dp `colorBorderSelected`
+- Fondo: `colorPrimaryLight` (`#E8F1EA`), borde 1.5 dp `colorBorderSelected`
 - Texto: `textChipSelected` (green, semibold)
 
 **Chip "Más":**
@@ -317,7 +320,7 @@ Label: "Complemento / referencia (opcional)"
 
 - **Width:** `double.infinity` (full width con padding de pantalla)
 - **Height:** 56 dp
-- **Background:** `colorButtonPrimary` (`#1A3C2E`)
+- **Background:** `colorButtonPrimary` (`#0B6244`)
 - **Texto:** "Agendar", `textButtonPrimary` (blanco, 17 sp, semibold)
 - **Radius:** `radiusButton` (14 dp)
 - **Estado disabled (isSubmitting):** mismo fondo con opacidad 0.6, muestra `CircularProgressIndicator` blanco en lugar del texto
@@ -383,8 +386,8 @@ Hemos enviado la información a      ← textSubtitle (gray)
 tu sección de solicitudes.
 ```
 
-- **Círculo:** 80×80 dp, fondo `colorSuccessCircle` (`#E8F5EE`), forma circular
-- **Ícono check:** `Icons.check_circle_outline_rounded` (o `Icons.check` dentro de Container), 48 dp, color `colorSuccess` (`#2D8653`)
+- **Círculo:** 80×80 dp, fondo `colorSuccessCircle` (`#E8F1EA`), forma circular
+- **Ícono check:** `Icons.check_circle_outline_rounded` (o `Icons.check` dentro de Container), 48 dp, color `colorSuccess` (`#0B6244`)
 - **Destellos (sparkles):** 6–8 puntos pequeños (4–6 dp) distribuidos alrededor del círculo en colores `colorSparkle` (`#4ECDC4`, `#A8E6CF`). Pueden implementarse como `CustomPaint` o simplemente como `Container` circulares con `Positioned` dentro de un `Stack`.
 - **Gap círculo → título:** 20 dp
 - **Gap título → subtítulo:** 8 dp
@@ -455,9 +458,9 @@ tu sección de solicitudes.
 - **Width:** `double.infinity`
 - **Height:** 52 dp
 - **Background:** `colorButtonSecondary` (`#FFFFFF`)
-- **Borde:** 1.5 dp `colorButtonSecondaryBorder` (`#1A3C2E`)
+- **Borde:** 1.5 dp `colorButtonSecondaryBorder` (`#0B6244`)
 - **Radius:** `radiusButton` (14 dp)
-- **Texto:** "Volver al inicio", `textButtonSecondary` (17 sp, semibold, `#1A3C2E`)
+- **Texto:** "Volver al inicio", `textButtonSecondary` (17 sp, semibold, `#0B6244`)
 - **Acción:** `context.go('/')` — limpia el stack de navegación
 
 ---

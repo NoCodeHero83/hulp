@@ -1,10 +1,9 @@
+import '/components/encabezado_principal_widget.dart';
 import '/components/menu_bar_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'terminosycondiciones_copy_model.dart';
 export 'terminosycondiciones_copy_model.dart';
@@ -54,44 +53,9 @@ class _TerminosycondicionesCopyWidgetState
         // el menu inferior sube y queda pegado sobre las teclas.
         resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFEFF3ED),
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 54.0,
-            icon: FaIcon(
-              FontAwesomeIcons.angleLeft,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Text(
-            'Política de privacidad ',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
-                    fontWeight:
-                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                  ),
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.5,
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Política de privacidad',
+          alVolver: context.safePop,
         ),
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
@@ -165,7 +129,7 @@ class _TerminosycondicionesCopyWidgetState
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
-                                          font: GoogleFonts.interTight(
+                                          font: GoogleFonts.inter(
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
@@ -189,7 +153,7 @@ class _TerminosycondicionesCopyWidgetState
                                         ),
                                     elevation: 0.0,
                                     borderSide: BorderSide(
-                                      color: Color(0xFF8A8A8A),
+                                      color: Color(0xFF65676A),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),

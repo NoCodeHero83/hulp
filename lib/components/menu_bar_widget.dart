@@ -1,14 +1,18 @@
-import '/auth/base_auth_user_provider.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'menu_bar_model.dart';
+import '/flutter_flow/hulp_colors.dart';
+import '/flutter_flow/hulp_text_styles.dart';
+
+import '/auth/base_auth_user_provider.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart'
+    show HistorialWidget, HomePageWidget, LoginWidget, MiperfilWidget;
+
 export 'menu_bar_model.dart';
 
-class MenuBarWidget extends StatefulWidget {
+const _textoMenu = Colors.white;
+
+class MenuBarWidget extends StatelessWidget {
   const MenuBarWidget({
     super.key,
     required this.index,
@@ -18,363 +22,63 @@ class MenuBarWidget extends StatefulWidget {
   final int? index;
   final bool resaltarCuenta;
 
-  @override
-  State<MenuBarWidget> createState() => _MenuBarWidgetState();
-}
+  void _abrir(BuildContext context, String ruta,
+      {bool requiereSesion = false}) {
+    final destino = requiereSesion && !loggedIn ? LoginWidget.routeName : ruta;
+    if (ModalRoute.of(context)?.settings.name == destino) return;
 
-class _MenuBarWidgetState extends State<MenuBarWidget> {
-  late MenuBarModel _model;
-
-  @override
-  void setState(VoidCallback callback) {
-    super.setState(callback);
-    _model.onUpdate();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _model = createModel(context, () => MenuBarModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
-  }
-
-  @override
-  void dispose() {
-    _model.maybeDispose();
-
-    super.dispose();
+    context.pushNamed(
+      destino,
+      extra: {
+        '__transition_info__': TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(
+            milliseconds: destino == LoginWidget.routeName ? 500 : 0,
+          ),
+        ),
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // Alto real de la barra de sistema: los tres botones de Android ocupan
-    // más que el indicador del iPhone, y estaba fijo en 34 —la medida de
-    // iPhone—, así que en Android el menú quedaba pisado por los botones.
-    final margenSistema = MediaQuery.of(context).viewPadding.bottom;
-    final margenAbajo = margenSistema > 0 ? margenSistema + 8.0 : 20.0;
-
-    return Align(
-      alignment: AlignmentDirectional(0.0, 1.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: widget.resaltarCuenta
-              ? const Color(0xFFEDF4ED)
-              : const Color(0xFFEFF3ED),
-          boxShadow: widget.resaltarCuenta
-              ? null
-              : [
-                  BoxShadow(
-                    blurRadius: 15.0,
-                    color: Color(0x23272727),
-                    offset: Offset(
-                      0.0,
-                      -5.0,
-                    ),
-                  )
-                ],
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(0.0),
-            bottomRight: Radius.circular(0.0),
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
-          ),
-          border: Border.all(
-            color: Color(0xFFDFDFDF),
-            width: 1.0,
-          ),
-        ),
+    final seleccionado = resaltarCuenta ? 3 : index;
+    return Material(
+      color: HulpColors.brand,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: SafeArea(
+        top: false,
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, margenAbajo),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(
-                        HomePageWidget.routeName,
-                        extra: <String, dynamic>{
-                          '__transition_info__': TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
-                        },
-                      );
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Builder(
-                          builder: (context) {
-                            if (widget.index == 0) {
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 5.0, 2.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/house.svg',
-                                    width: 36.0,
-                                    height: 36.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 5.0, 2.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/house.svg',
-                                    width: 36.0,
-                                    height: 36.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              2.0, 3.0, 2.0, 0.0),
-                          child: Text(
-                            'Inicio',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  fontSize: 12.5,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                        ),
-                      ].divide(SizedBox(height: 4.0)),
-                    ),
-                  ),
-                ),
+              _destino(
+                texto: 'Inicio',
+                icono: _iconoSvg('house'),
+                activo: seleccionado == 0,
+                onTap: () => _abrir(context, HomePageWidget.routeName),
               ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      if (loggedIn) {
-                        context.pushNamed(
-                          HistorialWidget.routeName,
-                          extra: <String, dynamic>{
-                            '__transition_info__': TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      } else {
-                        context.pushNamed(
-                          LoginWidget.routeName,
-                          extra: <String, dynamic>{
-                            '__transition_info__': TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 500),
-                            ),
-                          },
-                        );
-                      }
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Builder(
-                          builder: (context) {
-                            if (true == false) {
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 5.0, 2.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/calendar-check.svg',
-                                    width: 36.0,
-                                    height: 36.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 5.0, 2.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/k7eg7_8.png',
-                                    width: 36.0,
-                                    height: 36.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              2.0, 3.0, 2.0, 0.0),
-                          child: Text(
-                            'Solicitudes',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  fontSize: 12.5,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                        ),
-                      ].divide(SizedBox(height: 4.0)),
-                    ),
-                  ),
+              _destino(
+                texto: 'Solicitudes',
+                icono: Icon(
+                  Icons.history_rounded,
+                  size: 29,
+                  color: _textoMenu,
                 ),
+                activo: seleccionado == 2,
+                onTap: () => _abrir(context, HistorialWidget.routeName,
+                    requiereSesion: true),
               ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      if (loggedIn) {
-                        context.pushNamed(
-                          MiperfilWidget.routeName,
-                          extra: <String, dynamic>{
-                            '__transition_info__': TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      } else {
-                        context.pushNamed(
-                          LoginWidget.routeName,
-                          extra: <String, dynamic>{
-                            '__transition_info__': TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 500),
-                            ),
-                          },
-                        );
-                      }
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Builder(
-                          builder: (context) {
-                            if (widget.index == 3 || widget.resaltarCuenta) {
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 5.0, 2.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/user.svg',
-                                    colorFilter: widget.resaltarCuenta
-                                        ? const ColorFilter.mode(
-                                            Color(0xFF006D5B), BlendMode.srcIn)
-                                        : null,
-                                    width: 36.0,
-                                    height: 36.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 5.0, 2.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/user.svg',
-                                    width: 36.0,
-                                    height: 36.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              2.0, 3.0, 2.0, 0.0),
-                          child: Text(
-                            'Cuenta',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  color: widget.resaltarCuenta
-                                      ? const Color(0xFF006D5B)
-                                      : null,
-                                  fontSize: 12.5,
-                                  letterSpacing: 0.0,
-                                  fontWeight: widget.resaltarCuenta
-                                      ? FontWeight.w700
-                                      : FontWeight.w500,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                        ),
-                      ].divide(SizedBox(height: 4.0)),
-                    ),
-                  ),
-                ),
+              _destino(
+                texto: 'Cuenta',
+                icono: _iconoSvg('user'),
+                activo: seleccionado == 3,
+                onTap: () => _abrir(context, MiperfilWidget.routeName,
+                    requiereSesion: true),
               ),
             ],
           ),
@@ -382,4 +86,50 @@ class _MenuBarWidgetState extends State<MenuBarWidget> {
       ),
     );
   }
+
+  Widget _iconoSvg(String nombre) => SvgPicture.asset(
+        'assets/images/$nombre.svg',
+        width: 27,
+        height: 27,
+        colorFilter: const ColorFilter.mode(_textoMenu, BlendMode.srcIn),
+      );
+
+  Widget _destino({
+    required String texto,
+    required Widget icono,
+    required bool activo,
+    required VoidCallback onTap,
+  }) =>
+      Expanded(
+        child: Semantics(
+          selected: activo,
+          button: true,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(17),
+            onTap: onTap,
+            child: Ink(
+              decoration: BoxDecoration(
+                color: activo ? HulpColors.navigationSelectedOverlay : null,
+                borderRadius: BorderRadius.circular(17),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  icono,
+                  const SizedBox(height: 2),
+                  Text(
+                    texto,
+                    textAlign: TextAlign.center,
+                    style: HulpTextStyles.secondaryAction.copyWith(
+                      fontWeight: activo ? FontWeight.w600 : FontWeight.w500,
+                      color: _textoMenu,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
 }

@@ -14,7 +14,8 @@ import 'auth/supabase_auth/supabase_user_provider.dart';
 import 'auth/supabase_auth/auth_util.dart';
 
 import '/backend/supabase/supabase.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/hulp_colors.dart';
+import '/flutter_flow/hulp_text_styles.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 
@@ -86,7 +87,6 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
 
   ThemeMode _themeMode = ThemeMode.system;
-  double _textScaleFactor = 1.0;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
@@ -130,27 +130,6 @@ class _MyAppState extends State<MyApp> {
         _themeMode = mode;
       });
 
-  void setTextScaleFactor(double updatedFactor) {
-    if (updatedFactor < FlutterFlowTheme.minTextScaleFactor ||
-        updatedFactor > FlutterFlowTheme.maxTextScaleFactor) {
-      return;
-    }
-    safeSetState(() {
-      _textScaleFactor = updatedFactor;
-    });
-  }
-
-  void incrementTextScaleFactor(double incrementValue) {
-    final updatedFactor = _textScaleFactor + incrementValue;
-    if (updatedFactor < FlutterFlowTheme.minTextScaleFactor ||
-        updatedFactor > FlutterFlowTheme.maxTextScaleFactor) {
-      return;
-    }
-    safeSetState(() {
-      _textScaleFactor = updatedFactor;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -172,24 +151,62 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         brightness: Brightness.light,
         useMaterial3: false,
+        primaryColor: HulpColors.brand,
+        scaffoldBackgroundColor: HulpColors.background,
+        colorScheme: const ColorScheme.light(
+          primary: HulpColors.brand,
+          onPrimary: HulpColors.surface,
+          secondary: HulpColors.brand,
+          onSecondary: HulpColors.surface,
+          surface: HulpColors.surface,
+          onSurface: HulpColors.textPrimary,
+          error: HulpColors.error,
+          onError: HulpColors.surface,
+        ),
+        textTheme: HulpTextStyles.textTheme,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style:
+              ElevatedButton.styleFrom(textStyle: HulpTextStyles.primaryAction),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style:
+              FilledButton.styleFrom(textStyle: HulpTextStyles.primaryAction),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            textStyle: HulpTextStyles.secondaryAction,
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style:
+              TextButton.styleFrom(textStyle: HulpTextStyles.secondaryAction),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: HulpTextStyles.label,
+          hintStyle: HulpTextStyles.input.copyWith(color: HulpTextStyles.muted),
+          helperStyle: HulpTextStyles.help,
+          errorStyle: HulpTextStyles.fieldError,
+          errorMaxLines: 4,
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: HulpColors.brand, width: 1.5),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: HulpColors.error, width: 1.5),
+          ),
+          prefixIconColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.focused)
+                ? HulpColors.brand
+                : HulpColors.textMuted,
+          ),
+          suffixIconColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.focused)
+                ? HulpColors.brand
+                : HulpColors.textMuted,
+          ),
+        ),
       ),
       themeMode: _themeMode,
       routerConfig: _router,
-      builder: (_, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(
-          textScaler:
-              _textScaleFactor == FlutterFlowTheme.defaultTextScaleFactor
-                  ? MediaQuery.of(context).textScaler.clamp(
-                        minScaleFactor: FlutterFlowTheme.minTextScaleFactor,
-                        maxScaleFactor: FlutterFlowTheme.maxTextScaleFactor,
-                      )
-                  : TextScaler.linear(_textScaleFactor).clamp(
-                      minScaleFactor: FlutterFlowTheme.minTextScaleFactor,
-                      maxScaleFactor: FlutterFlowTheme.maxTextScaleFactor,
-                    ),
-        ),
-        child: child!,
-      ),
     );
   }
 }

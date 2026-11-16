@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/environment_values.dart';
-
-bool get usaEstadosSprint3Cliente =>
-    Uri.tryParse(FFDevEnvironmentValues().supabaseUrl)?.host ==
-    'ptafsiwlhxomgqmdmidf.supabase.co';
+bool get usaEstadosSprint3Cliente => true;
 
 String etiquetaEstadoSprint3Cliente(String? estado) => switch (estado) {
       'entrantes' => 'Pendiente',

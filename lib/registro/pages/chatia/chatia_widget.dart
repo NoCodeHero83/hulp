@@ -1,3 +1,4 @@
+import '/components/encabezado_principal_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
@@ -90,6 +91,10 @@ class _ChatiaWidgetState extends State<ChatiaWidget> {
         // el menu inferior sube y queda pegado sobre las teclas.
         resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Asistente Hulp',
+          alVolver: context.safePop,
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -97,22 +102,6 @@ class _ChatiaWidgetState extends State<ChatiaWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 54.0, 16.0, 8.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.network(
-                          'https://zexegravzidwloxeimxx.supabase.co/storage/v1/object/public/archivos/imageneshulp/Logo.png',
-                          width: 100.0,
-                          height: 36.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ],
-                    ),
-                  ),
                   Flexible(
                     child: Builder(
                       builder: (context) {
@@ -393,7 +382,7 @@ class _ChatiaWidgetState extends State<ChatiaWidget> {
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 15.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xFFFBFAF9),
+                        color: FlutterFlowTheme.of(context).customColor1,
                         borderRadius: BorderRadius.circular(24.0),
                         border: Border.all(
                           color: Color(0xFF9F9F9F),

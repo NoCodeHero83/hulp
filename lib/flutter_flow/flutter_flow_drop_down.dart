@@ -155,9 +155,16 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
   @override
   Widget build(BuildContext context) {
     final dropdownWidget = _buildDropdownWidget();
+    final fontSize = widget.textStyle.fontSize ?? 16;
+    final fontExtra =
+        MediaQuery.textScalerOf(context).scale(fontSize) - fontSize;
+    final height = widget.height;
     return SizedBox(
       width: widget.width,
-      height: widget.height,
+      height: height == null
+          ? null
+          : height +
+              (fontExtra > 0 ? fontExtra * widget.selectedMaxLines * 1.4 : 0),
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -183,6 +190,12 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
       !widget.isOverButton ||
       widget.maxHeight != null;
 
+  double _itemHeight(BuildContext context) {
+    final fontSize = widget.textStyle.fontSize ?? 16;
+    final scaled = MediaQuery.textScalerOf(context).scale(fontSize);
+    return scaled > fontSize ? 48 + (scaled - fontSize) * 2.7 : 48;
+  }
+
   Widget _buildDropdownWidget() =>
       _useDropdown2() ? _buildDropdown() : _buildLegacyDropdown();
 
@@ -195,6 +208,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
       onChanged: widget.disabled ? null : (value) => controller.value = value,
       icon: widget.icon,
       isExpanded: true,
+      itemHeight: _itemHeight(context),
       dropdownColor: widget.fillColor,
       focusColor: Colors.transparent,
       decoration: InputDecoration(
@@ -297,6 +311,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
       menuItemStyleData: MenuItemStyleData(
         overlayColor: overlayColor,
         padding: EdgeInsets.zero,
+        height: _itemHeight(context),
       ),
       dropdownStyleData: DropdownStyleData(
         elevation: widget.elevation.toInt(),

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '/backend/supabase/database/tables/ciudades.dart';
+import '/components/encabezado_principal_widget.dart';
 import '/environment_values.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/places_service.dart';
@@ -241,6 +242,9 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
 
     return Scaffold(
       backgroundColor: tema.secondaryBackground,
+      appBar: const EncabezadoPrincipalWidget.subpantalla(
+        titulo: 'Ubicación del servicio',
+      ),
       body: Stack(
         children: [
           GoogleMap(
@@ -277,7 +281,6 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
                 _BarraSuperior(
                   controller: _buscarCtrl,
                   onChanged: _buscar,
-                  onVolver: () => Navigator.of(context).pop(),
                 ),
                 if (_sugerencias.isNotEmpty)
                   Container(
@@ -336,12 +339,10 @@ class _BarraSuperior extends StatelessWidget {
   const _BarraSuperior({
     required this.controller,
     required this.onChanged,
-    required this.onVolver,
   });
 
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
-  final VoidCallback onVolver;
 
   @override
   Widget build(BuildContext context) {
@@ -358,11 +359,7 @@ class _BarraSuperior extends StatelessWidget {
         ),
         child: Row(
           children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back_rounded,
-                  size: 22.0, color: tema.primaryText),
-              onPressed: onVolver,
-            ),
+            const SizedBox(width: 16.0),
             Expanded(
               child: TextFormField(
                 controller: controller,
@@ -587,7 +584,7 @@ class _FilaSugerencia extends StatelessWidget {
                       style: tema.bodySmall.override(
                         font: GoogleFonts.inter(),
                         color: tema.secondaryText,
-                        fontSize: 11.0,
+                        fontSize: 12,
                         letterSpacing: 0.0,
                       ),
                     ),

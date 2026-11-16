@@ -1,9 +1,11 @@
+import '/components/encabezado_principal_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '/backend/direcciones_usuario.dart';
 import '/backend/supabase/database/tables/ciudades.dart';
 import '/environment_values.dart';
+import '/flutter_flow/hulp_colors.dart';
 import '/flutter_flow/places_service.dart';
 import '/flutter_flow/ubicacion_helpers.dart';
 import 'direcciones_agenda_estilo.dart';
@@ -238,6 +240,7 @@ class _AgregarDireccionAgendaPageState
               autovalidateMode: AutovalidateMode.onUserInteraction,
               key: ValueKey(label),
               controller: controller,
+              maxLines: null,
               enabled: !_guardando,
               style: textoDireccion(size: 16),
               textCapitalization: TextCapitalization.sentences,
@@ -257,25 +260,19 @@ class _AgregarDireccionAgendaPageState
         canPop: !_guardando,
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-              backgroundColor: Colors.white,
-              surfaceTintColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              automaticallyImplyLeading: false,
-              leading: botonVolverDireccion(context,
-                  onPressed: _guardando ? null : () => Navigator.pop(context)),
-              title: Text(
-                  widget.direccionInicial == null
-                      ? 'Agregar dirección'
-                      : 'Editar dirección',
-                  style: textoDireccion(size: 21, weight: FontWeight.w700)),
-              actions: [
-                IconButton(
-                    tooltip: 'Cerrar',
-                    onPressed: _guardando ? null : () => Navigator.pop(context),
-                    icon: const Icon(Icons.close))
-              ]),
+          appBar: EncabezadoPrincipalWidget.subpantalla(
+            claveVolver: const ValueKey('volver-direcciones'),
+            titulo: widget.direccionInicial == null
+                ? 'Agregar dirección'
+                : 'Editar dirección',
+            volverHabilitado: !_guardando,
+            alVolver: () => Navigator.pop(context),
+            accion: IconButton(
+              tooltip: 'Cerrar',
+              onPressed: _guardando ? null : () => Navigator.pop(context),
+              icon: const Icon(Icons.close),
+            ),
+          ),
           body: SafeArea(
               top: false,
               child: Form(
@@ -326,9 +323,6 @@ class _AgregarDireccionAgendaPageState
                                                     'oficina' => 'Oficina',
                                                     _ => 'Otra'
                                                   },
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
                                                   style: const TextStyle(
                                                       fontSize: 14))),
                                         ]))),
@@ -370,7 +364,7 @@ class _AgregarDireccionAgendaPageState
                                               size: 16,
                                               color: _ciudad == null
                                                   ? direccionGris
-                                                  : const Color(0xFF0D0D0D)))),
+                                                  : HulpColors.textPrimary))),
                                   const Icon(Icons.chevron_right,
                                       color: direccionVerde),
                                 ]))),

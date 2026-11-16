@@ -15,7 +15,7 @@ class Registro1Model extends FlutterFlowModel<Registro1Widget> {
   String? _textFieldnomTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Nombre * es requerido';
+      return 'Ingresa tus nombres.';
     }
 
     return null;
@@ -28,7 +28,7 @@ class Registro1Model extends FlutterFlowModel<Registro1Widget> {
   String? _textFieldapTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Apellidos * es requerido';
+      return 'Ingresa tus apellidos.';
     }
 
     return null;
@@ -52,7 +52,7 @@ class Registro1Model extends FlutterFlowModel<Registro1Widget> {
   String? _textFieldtelTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Teléfono * es requerido';
+      return 'Ingresa tu número de teléfono.';
     }
 
     return null;
@@ -65,7 +65,7 @@ class Registro1Model extends FlutterFlowModel<Registro1Widget> {
   String? _textFieldcorrTextControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Correo electrónico * es requerido';
+      return 'Ingresa tu correo electrónico.';
     }
 
     return null;

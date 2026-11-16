@@ -1,7 +1,7 @@
+import '/components/encabezado_principal_widget.dart';
 import '/auth/base_auth_user_provider.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/menu_bar_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -30,6 +30,8 @@ class ServiciosWidget extends StatefulWidget {
 
 class _ServiciosWidgetState extends State<ServiciosWidget> {
   late ServiciosModel _model;
+  late Future<List<ServiciosRow>> _serviciosFuture;
+  String _busqueda = '';
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -40,22 +42,17 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
-    _model.textFieldFocusNode!.addListener(
-      () async {
-        context.pushNamed(
-          BusquedasWidget.routeName,
-          extra: <String, dynamic>{
-            '__transition_info__': TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 0),
-            ),
-          },
-        );
-      },
-    );
+    _serviciosFuture = _cargarServicios();
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
+
+  Future<List<ServiciosRow>> _cargarServicios() =>
+      ServiciosTable().queryRows(
+        queryFn: (q) => (widget.subcategoria != null
+                ? q.eq('subcategoria_id', widget.subcategoria!)
+                : q)
+            .order('creado_en', ascending: false),
+      );
 
   @override
   void dispose() {
@@ -77,44 +74,9 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
         // el menu inferior sube y queda pegado sobre las teclas.
         resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFFBFAF9),
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: Color(0xFF7C766C),
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Text(
-            'Servicios',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
-                    fontWeight:
-                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                  ),
-                  color: Color(0xFF7C766C),
-                  fontSize: 18.0,
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.1,
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Servicios',
+          alVolver: context.safePop,
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -138,6 +100,8 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
                             controller: _model.textController,
                             focusNode: _model.textFieldFocusNode,
                             autofocus: false,
+                            onChanged: (value) =>
+                                setState(() => _busqueda = value),
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
@@ -189,7 +153,7 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
+                                  color: FlutterFlowTheme.of(context).primary,
                                   width: 0.5,
                                 ),
                                 borderRadius: BorderRadius.circular(20.0),
@@ -213,7 +177,6 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
                                   .secondaryBackground,
                               prefixIcon: Icon(
                                 Icons.search_rounded,
-                                color: FlutterFlowTheme.of(context).tertiary,
                                 size: 24.0,
                               ),
                             ),
@@ -250,13 +213,7 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 20.0, 20.0, 0.0),
                               child: FutureBuilder<List<ServiciosRow>>(
-                                future: ServiciosTable().queryRows(
-                                  queryFn: (q) => (widget.subcategoria != null
-                                          ? q.eq('subcategoria_id',
-                                              widget.subcategoria!)
-                                          : q)
-                                      .order('creado_en', ascending: false),
-                                ),
+                                future: _serviciosFuture,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasError) {
                                     return Center(
@@ -283,8 +240,34 @@ class _ServiciosWidgetState extends State<ServiciosWidget> {
                                       ),
                                     );
                                   }
-                                  List<ServiciosRow> listViewServiciosRowList =
-                                      snapshot.data!;
+                                  final termino = _busqueda.trim().toLowerCase();
+                                  final servicios = snapshot.data!;
+                                  final listViewServiciosRowList = termino.isEmpty
+                                      ? servicios
+                                      : servicios
+                                          .where((servicio) =>
+                                              servicio.nombre
+                                                  .toLowerCase()
+                                                  .contains(termino) ||
+                                              servicio.descripcion
+                                                  .toLowerCase()
+                                                  .contains(termino))
+                                          .toList();
+
+                                  if (listViewServiciosRowList.isEmpty) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 24.0),
+                                      child: Text(
+                                        termino.isEmpty
+                                            ? 'No hay servicios disponibles en esta subcategoría.'
+                                            : 'No hay servicios que coincidan con tu búsqueda.',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    );
+                                  }
 
                                   return ListView.separated(
                                     padding: EdgeInsets.fromLTRB(

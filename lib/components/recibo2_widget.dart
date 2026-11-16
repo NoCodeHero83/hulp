@@ -97,7 +97,7 @@ class _Recibo2WidgetState extends State<Recibo2Widget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
                       child: Text(
-                        'Metodos de pago',
+                        'Métodos de pago',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,

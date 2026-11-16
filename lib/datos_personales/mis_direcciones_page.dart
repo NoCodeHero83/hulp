@@ -1,3 +1,4 @@
+import '/components/encabezado_principal_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -95,21 +96,17 @@ class _MisDireccionesPageState extends State<MisDireccionesPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            surfaceTintColor: Colors.transparent,
-            centerTitle: true,
-            elevation: .5,
-            automaticallyImplyLeading: false,
-            leading: botonVolverDireccion(context, onPressed: () {
-              if (Navigator.of(context).canPop()) {
-                Navigator.of(context).pop();
-              } else {
-                context.go('/datosPersonales');
-              }
-            }),
-            title: Text('Mis direcciones',
-                style: textoDireccion(size: 21, weight: FontWeight.w700))),
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          claveVolver: const ValueKey('volver-direcciones'),
+          titulo: 'Mis direcciones',
+          alVolver: () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            } else {
+              context.go('/datosPersonales');
+            }
+          },
+        ),
         body: FutureBuilder<(List<DireccionGuardada>, List<CiudadesRow>)>(
           future: _datos,
           builder: (context, snapshot) {
@@ -188,7 +185,7 @@ class _MisDireccionesPageState extends State<MisDireccionesPage> {
           },
         ),
         bottomNavigationBar:
-            const IntrinsicHeight(child: MenuBarWidget(index: 2)),
+            const IntrinsicHeight(child: MenuBarWidget(index: 3)),
       );
 
   Widget _tab(String texto, bool archivadas) => Expanded(

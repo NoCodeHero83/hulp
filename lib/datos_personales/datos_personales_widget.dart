@@ -1,8 +1,8 @@
+import '/components/encabezado_principal_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/menu_bar_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -83,7 +83,7 @@ class _DatosPersonalesWidgetState extends State<DatosPersonalesWidget> {
 
     return InputDecoration(
       hintText: hint,
-      hintStyle: _estiloValor.copyWith(color: const Color(0xFF737373)),
+      hintStyle: _estiloValor.copyWith(color: const Color(0xFF65676A)),
       isDense: true,
       filled: true,
       fillColor: _fondoCampo,
@@ -101,14 +101,22 @@ class _DatosPersonalesWidgetState extends State<DatosPersonalesWidget> {
     );
   }
 
-  Widget _fila(Widget izquierda, Widget derecha) => Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(child: izquierda),
-          const SizedBox(width: 18),
-          Expanded(child: derecha),
-        ],
+  Widget _fila(Widget izquierda, Widget derecha) {
+    if (MediaQuery.textScalerOf(context).scale(16) > 24) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [izquierda, const SizedBox(height: 18), derecha],
       );
+    }
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(child: izquierda),
+        const SizedBox(width: 18),
+        Expanded(child: derecha),
+      ],
+    );
+  }
 
   Widget _campo(String etiqueta, Widget control) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -232,39 +240,9 @@ class _DatosPersonalesWidgetState extends State<DatosPersonalesWidget> {
             // el menu inferior sube y queda pegado sobre las teclas.
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              automaticallyImplyLeading: false,
-              leading: FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                icon: Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: const Color(0xFF293332),
-                  size: 22,
-                ),
-                onPressed: () async {
-                  context.pop();
-                },
-              ),
-              title: Text(
-                'Datos personales',
-                style: GoogleFonts.interTight(
-                  color: const Color(0xFF102621),
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              centerTitle: true,
-              toolbarHeight: 56,
-              elevation: 0,
-              surfaceTintColor: Colors.transparent,
-              bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(1),
-                child: Divider(height: 1, thickness: 1, color: _borde),
-              ),
+            appBar: EncabezadoPrincipalWidget.subpantalla(
+              titulo: 'Datos personales',
+              alVolver: context.safePop,
             ),
             body: Form(
               key: _model.formKey,
@@ -594,9 +572,9 @@ class _DatosPersonalesWidgetState extends State<DatosPersonalesWidget> {
                                 width: double.infinity,
                                 height: 52,
                                 color: FlutterFlowTheme.of(context).primary,
-                                textStyle: GoogleFonts.interTight(
+                                textStyle: GoogleFonts.inter(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                 ),
                                 elevation: 0,

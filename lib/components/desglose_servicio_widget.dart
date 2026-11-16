@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '/backend/supabase/supabase.dart';
+import '/flutter_flow/hulp_text_styles.dart';
 
 /// Lee importes guardados; abrir este panel no cotiza ni modifica el cobro.
 class DesgloseServicioWidget extends StatefulWidget {
@@ -16,6 +17,8 @@ class DesgloseServicioWidget extends StatefulWidget {
 
 class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
   static const verde = Color(0xFF086349);
+  static const _menta = Color(0xFFE8F1EA);
+  static const _textoSecundario = HulpTextStyles.secondary;
   late Future<Map<String, dynamic>> _datos;
   bool _abierto = false;
   final _moneda =
@@ -51,34 +54,57 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
       });
   String _importe(dynamic valor) => _moneda.format(num.parse(valor.toString()));
   Widget _fila(String texto, dynamic valor,
-          {bool total = false, bool descuento = false}) =>
-      Padding(
-          padding: const EdgeInsets.symmetric(vertical: 7),
-          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Expanded(
-                child: Text(texto,
-                    style: TextStyle(
-                        fontSize: total ? 17 : 14,
-                        color: total ? verde : const Color(0xFF62645E),
-                        fontWeight:
-                            total ? FontWeight.w700 : FontWeight.w400))),
-            const SizedBox(width: 10),
-            Flexible(
-                child: Text('${descuento ? '− ' : ''}${_importe(valor)}',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        fontSize: total ? 19 : 15,
-                        color: total ? verde : const Color(0xFF353934),
-                        fontWeight:
-                            total ? FontWeight.w700 : FontWeight.w500))),
-          ]));
+      {bool total = false, bool descuento = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+      child: LayoutBuilder(builder: (context, constraints) {
+        final estilo = Theme.of(context).textTheme.bodyMedium!;
+        final etiqueta = Text(texto,
+            style: estilo.copyWith(
+              color: total ? verde : _textoSecundario,
+              fontWeight: total ? FontWeight.w700 : FontWeight.w400,
+            ));
+        final importe = Text(
+          '${descuento ? '− ' : ''}${_importe(valor)}',
+          textAlign: TextAlign.end,
+          style: estilo.copyWith(
+            color: total ? verde : null,
+            fontWeight: total ? FontWeight.w700 : FontWeight.w600,
+          ),
+        );
+        final fontSize = MediaQuery.textScalerOf(context).scale(14);
+        if (constraints.maxWidth < fontSize * 17) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [etiqueta, importe],
+          );
+        }
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(flex: 3, child: etiqueta),
+            const SizedBox(width: 8),
+            Expanded(flex: 2, child: importe),
+          ],
+        );
+      }),
+    );
+  }
+
   Widget _nota(String text) => Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(text,
-          style: const TextStyle(fontSize: 12, color: Color(0xFF73766F))));
+      padding: const EdgeInsets.fromLTRB(9, 0, 9, 5),
+      child: Text(text, style: const TextStyle(color: _textoSecundario)));
+
+  Widget _bloque(Color color, Widget contenido) => DecoratedBox(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: contenido,
+      );
   @override
   Widget build(BuildContext context) => Container(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -86,7 +112,7 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
           border: Border.all(color: const Color(0xFFD2D6CE))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Material(
-            color: const Color(0xFFEEF4EC),
+            color: _menta,
             child: InkWell(
                 onTap: () {
                   setState(() {
@@ -95,17 +121,17 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
                   });
                 },
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 13),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Row(children: [
                       const Icon(Icons.receipt_long_outlined,
-                          color: verde, size: 23),
+                          color: verde, size: 18),
                       const SizedBox(width: 9),
                       const Expanded(
                           child: Text('Desglose del precio',
                               style: TextStyle(
                                   color: verde,
-                                  fontSize: 17,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w700))),
                       Icon(_abierto ? Icons.expand_less : Icons.expand_more,
                           color: verde)
@@ -136,18 +162,26 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
                 }
                 final d = snapshot.data!;
                 return Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 6, 12, 8),
+                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          _fila('Servicio', d['precio']),
-                          _fila('Materiales', d['materiales_total']),
-                          for (final item in (d['items'] as List? ?? [])
-                              .where((i) => i['tipo_item'] == 'material'))
-                            _nota(
-                                '${item['descripcion']} · ${item['cantidad']} × ${_importe(item['precio_unitario'])}'),
-                          _fila('Ajuste IVA', d['ajuste_iva_valor']),
-                          const Divider(),
+                          _bloque(
+                            const Color(0xFFF1F2F3),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                _fila('Servicio', d['precio']),
+                                _fila('Materiales', d['materiales_total']),
+                                for (final item in (d['items'] as List? ?? [])
+                                    .where((i) => i['tipo_item'] == 'material'))
+                                  _nota(
+                                      '${item['descripcion']} · ${item['cantidad']} × ${_importe(item['precio_unitario'])}'),
+                                _fila('Ajuste IVA', d['ajuste_iva_valor']),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 4),
                           _fila('Subtotal', d['subtotal']),
                           _fila('Recargo Wompi (5 %)', d['wompi_valor']),
                           const Divider(),
@@ -158,8 +192,12 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
                                 'El recargo aplica a tarjeta, Nequi y otros pagos por Wompi.'),
                           if ((d['pagos'] as List? ?? []).isNotEmpty) ...[
                             const Divider(),
-                            const Text('Pagos realizados',
-                                style: TextStyle(fontWeight: FontWeight.w600)),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 9),
+                              child: Text('Pagos realizados',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w600)),
+                            ),
                             for (final pago in d['pagos'] as List) ...[
                               _fila(
                                   pago['recibo_id'] == null
@@ -174,11 +212,19 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
                             _fila('Total pagado', d['pagos_realizados']),
                             const Divider(),
                           ],
-                          _fila('Saldo pendiente', d['saldo_pendiente'],
-                              total: true),
-                          Align(
-                              alignment: Alignment.centerLeft,
-                              child: Chip(
+                          const SizedBox(height: 4),
+                          _bloque(
+                            _menta,
+                            _fila('Saldo pendiente', d['saldo_pendiente'],
+                                total: true),
+                          ),
+                          const SizedBox(height: 4),
+                          Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 4,
+                            children: [
+                              Chip(
                                   avatar: Icon(
                                       num.parse(d['saldo_pendiente']
                                                   .toString()) <=
@@ -187,21 +233,29 @@ class _DesgloseServicioWidgetState extends State<DesgloseServicioWidget> {
                                           : Icons.payment,
                                       color: verde,
                                       size: 18),
-                                  label: Text(num.parse(d['saldo_pendiente']
-                                              .toString()) <=
-                                          0
-                                      ? 'Pago recibido'
-                                      : 'Pago pendiente'),
+                                  label: Text(
+                                      num.parse(
+                                                  d[
+                                                          'saldo_pendiente']
+                                                      .toString()) <=
+                                              0
+                                          ? 'Pago recibido'
+                                          : 'Pago pendiente'),
+                                  labelStyle:
+                                      Theme.of(context).textTheme.bodyMedium,
                                   side: BorderSide.none,
-                                  backgroundColor: const Color(0xFFEEF4EC))),
-                          Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton.icon(
+                                  backgroundColor: _menta),
+                              TextButton.icon(
                                   onPressed: _recargar,
                                   icon: const Icon(Icons.refresh, size: 16),
                                   label: const Text('Actualizar'),
                                   style: TextButton.styleFrom(
-                                      foregroundColor: verde))),
+                                      foregroundColor: verde,
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium)),
+                            ],
+                          ),
                         ]));
               }),
       ]));

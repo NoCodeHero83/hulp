@@ -3,6 +3,7 @@ import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/hulp_colors.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
@@ -474,7 +475,7 @@ class _DaviplataVerificationWidgetState
                     Text(
                       'Vincular Daviplata',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -555,7 +556,7 @@ class _DaviplataVerificationWidgetState
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: _primaryColor, width: 2),
+                borderSide: BorderSide(color: HulpColors.brand, width: 2),
               ),
             ),
           ),
@@ -588,7 +589,7 @@ class _DaviplataVerificationWidgetState
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: _primaryColor, width: 2),
+                borderSide: BorderSide(color: HulpColors.brand, width: 2),
               ),
             ),
           ),
@@ -619,7 +620,7 @@ class _DaviplataVerificationWidgetState
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: _primaryColor, width: 2),
+                borderSide: BorderSide(color: HulpColors.brand, width: 2),
               ),
             ),
           ),
@@ -695,7 +696,7 @@ class _DaviplataVerificationWidgetState
         Text(
           'Código de verificación',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -733,7 +734,7 @@ class _DaviplataVerificationWidgetState
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: _primaryColor, width: 2),
+              borderSide: BorderSide(color: HulpColors.brand, width: 2),
             ),
           ),
         ),
@@ -826,7 +827,7 @@ class _DaviplataVerificationWidgetState
         Text(
           '¡Daviplata vinculado!',
           style: TextStyle(
-            fontSize: 26,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -868,7 +869,7 @@ class _DaviplataVerificationWidgetState
               SelectableText(
                 _paymentSourceId?.toString() ?? 'N/A',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: _primaryColor,
                 ),
@@ -892,7 +893,7 @@ class _DaviplataVerificationWidgetState
               SelectableText(
                 _daviplataTOKEN ?? 'N/A',
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: 12,
                   color: Colors.grey[700],
                 ),
                 textAlign: TextAlign.center,

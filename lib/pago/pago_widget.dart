@@ -1,6 +1,6 @@
+import '/components/encabezado_principal_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/registro/pages/service_booking/booking_args_store.dart';
 import '/registro/pages/service_booking/service_booking_form_page.dart';
@@ -69,26 +69,8 @@ class _PagoWidgetState extends State<PagoWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFEFF3ED),
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 20.0,
-            borderWidth: 1.0,
-            buttonSize: 40.0,
-            icon: Icon(
-              Icons.arrow_back,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
-            onPressed: () async {
-              Navigator.pop(context);
-            },
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
+        appBar: const EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Agregar tarjeta',
         ),
         body: Form(
           key: _model.formKey,
@@ -102,7 +84,7 @@ class _PagoWidgetState extends State<PagoWidget> {
                   'Información de pago',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        font: GoogleFonts.interTight(
+                        font: GoogleFonts.inter(
                           fontWeight: FontWeight.bold,
                           fontStyle: FlutterFlowTheme.of(context)
                               .headlineMedium
@@ -121,7 +103,7 @@ class _PagoWidgetState extends State<PagoWidget> {
                     Text(
                       'Detalles de la tarjeta',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
-                            font: GoogleFonts.interTight(
+                            font: GoogleFonts.inter(
                               fontWeight: FontWeight.w600,
                               fontStyle: FlutterFlowTheme.of(context)
                                   .titleMedium
@@ -332,7 +314,6 @@ class _PagoWidgetState extends State<PagoWidget> {
                             16.0, 16.0, 16.0, 16.0),
                         prefixIcon: Icon(
                           Icons.credit_card,
-                          color: FlutterFlowTheme.of(context).secondaryText,
                           size: 20.0,
                         ),
                       ),
@@ -844,7 +825,7 @@ class _PagoWidgetState extends State<PagoWidget> {
                       textStyle: FlutterFlowTheme.of(context)
                           .titleMedium
                           .override(
-                            font: GoogleFonts.interTight(
+                            font: GoogleFonts.inter(
                               fontWeight: FontWeight.w600,
                               fontStyle: FlutterFlowTheme.of(context)
                                   .titleMedium
@@ -915,7 +896,7 @@ class _PagoWidgetState extends State<PagoWidget> {
               'Tarjeta guardada',
               textAlign: TextAlign.center,
               style: tema.headlineSmall.override(
-                font: GoogleFonts.interTight(fontWeight: FontWeight.w600),
+                font: GoogleFonts.inter(fontWeight: FontWeight.w600),
                 fontSize: 20.0,
               ),
             ),
@@ -951,7 +932,7 @@ class _PagoWidgetState extends State<PagoWidget> {
               height: 44.0,
               color: tema.primary,
               textStyle: tema.titleSmall.override(
-                font: GoogleFonts.interTight(fontWeight: FontWeight.w600),
+                font: GoogleFonts.inter(fontWeight: FontWeight.w600),
                 color: Colors.white,
               ),
               borderRadius: BorderRadius.circular(10.0),

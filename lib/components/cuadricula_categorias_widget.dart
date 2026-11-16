@@ -101,6 +101,7 @@ class _CuadriculaCategoriasWidgetState
             );
           }
 
+          final escala = MediaQuery.textScalerOf(context).scale(14);
           return GridView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
@@ -109,13 +110,13 @@ class _CuadriculaCategoriasWidgetState
             // columnas fijas, una sola categoría ocupa un tercio de la
             // pantalla y en tableta salen tarjetas gigantes. Así el tamaño de
             // la tarjeta manda y las columnas se ajustan solas.
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 170.0,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: escala > 18 ? 220 : 170,
               crossAxisSpacing: 12.0,
               mainAxisSpacing: 12.0,
               // Más anchas que altas: dentro solo hay un icono de 24 y el
               // nombre. Cuadradas dejaban la tarjeta medio vacía.
-              childAspectRatio: 1.7,
+              mainAxisExtent: 54 + escala * 2 * 1.35,
             ),
             itemCount: categorias.length,
             itemBuilder: (context, i) => _TarjetaCategoria(
@@ -152,9 +153,15 @@ class _TarjetaCategoria extends StatelessWidget {
       // tarjeta no hacía nada al tocarla.
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFFF7F8F9),
+          color: FlutterFlowTheme.of(context).customColor1,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(color: const Color(0xFFD9D9D9), width: 1.2),
+        ),
+        foregroundDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border(
+            top: BorderSide(color: tema.primary, width: 3.0),
+          ),
         ),
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -188,7 +195,7 @@ class _TarjetaCategoria extends StatelessWidget {
                 style: tema.bodyMedium.override(
                   font: GoogleFonts.inter(fontWeight: FontWeight.w500),
                   color: tema.primaryText,
-                  fontSize: 13.0,
+                  fontSize: 14.0,
                   letterSpacing: 0.0,
                 ),
               ),

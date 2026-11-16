@@ -48,6 +48,37 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+  testWidgets('mantiene los importes y las acciones visibles al 200 %',
+      (tester) async {
+    tester.view.physicalSize = const Size(320, 640);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(MaterialApp(
+      builder: (context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(2)),
+        child: child!,
+      ),
+      home: Scaffold(
+        body: SingleChildScrollView(
+          child: DesgloseServicioWidget(
+            solicitudId: 'solicitud',
+            cargar: () async => {...datos, 'total_cliente': 12345678.9},
+          ),
+        ),
+      ),
+    ));
+    await tester.tap(find.text('Desglose del precio'));
+    await tester.pumpAndSettle();
+    final importe = find.textContaining('12.345.678,90');
+    await tester.ensureVisible(importe);
+    expect(importe.hitTestable(), findsOneWidget);
+    final actualizar = find.text('Actualizar');
+    await tester.ensureVisible(actualizar);
+    expect(actualizar.hitTestable(), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('permite reintentar y actualizar sin iniciar un cobro',
       (tester) async {
     var llamadas = 0;

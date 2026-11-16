@@ -3,11 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-abstract class FlutterFlowTheme {
-  static const double minTextScaleFactor = 1.0;
-  static const double maxTextScaleFactor = 1.0;
-  static const double defaultTextScaleFactor = 1.0;
+import 'hulp_colors.dart';
+import 'hulp_text_styles.dart';
 
+abstract class FlutterFlowTheme {
   static FlutterFlowTheme of(BuildContext context) {
     return LightModeTheme();
   }
@@ -126,26 +125,26 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF016D5A);
-  late Color secondary = const Color(0xFF5E594E);
-  late Color tertiary = const Color(0xFF999489);
-  late Color alternate = const Color(0xFFB7B1A7);
-  late Color primaryText = const Color(0xFF14181B);
-  late Color secondaryText = const Color(0xFF57636C);
-  late Color primaryBackground = const Color(0xFFFBF8F4);
-  late Color secondaryBackground = const Color(0xFFFFFFFF);
-  late Color accent1 = const Color(0xFF7AFF7F);
-  late Color accent2 = const Color(0xFFFE7734);
-  late Color accent3 = const Color(0xFF7C766C);
+  late Color primary = HulpColors.brand;
+  late Color secondary = HulpColors.textSecondary;
+  late Color tertiary = HulpTextStyles.muted;
+  late Color alternate = HulpColors.borderStrong;
+  late Color primaryText = HulpTextStyles.primary;
+  late Color secondaryText = HulpTextStyles.secondary;
+  late Color primaryBackground = HulpColors.background;
+  late Color secondaryBackground = HulpColors.surface;
+  late Color accent1 = HulpColors.brandSoft;
+  late Color accent2 = const Color(0x4D39D2C0);
+  late Color accent3 = HulpTextStyles.muted;
   late Color accent4 = const Color(0xCCFFFFFF);
-  late Color success = const Color(0xFF18AC4C);
-  late Color warning = const Color(0xFFF9CF58);
-  late Color error = const Color(0xFFFF5963);
+  late Color success = HulpColors.success;
+  late Color warning = HulpColors.warning;
+  late Color error = HulpTextStyles.error;
   late Color info = const Color(0xFFFFFFFF);
 
   late Color texto1 = const Color(0xFF606060);
-  late Color customColor1 = const Color(0xFFF7F8F9);
-  late Color energia = const Color(0xFF7AFF7F);
+  late Color customColor1 = HulpColors.inputSurface;
+  late Color energia = HulpColors.brand;
 }
 
 abstract class Typography {
@@ -201,111 +200,66 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Inter Tight';
+  String get displayLargeFamily => 'Inter';
   bool get displayLargeIsCustom => false;
-  TextStyle get displayLarge => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 64.0,
-      );
-  String get displayMediumFamily => 'Inter Tight';
+  TextStyle get displayLarge =>
+      HulpTextStyles.textTheme.displayLarge!.copyWith(color: theme.primaryText);
+  String get displayMediumFamily => 'Inter';
   bool get displayMediumIsCustom => false;
-  TextStyle get displayMedium => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 44.0,
-      );
-  String get displaySmallFamily => 'Inter Tight';
+  TextStyle get displayMedium => HulpTextStyles.textTheme.displayMedium!
+      .copyWith(color: theme.primaryText);
+  String get displaySmallFamily => 'Inter';
   bool get displaySmallIsCustom => false;
-  TextStyle get displaySmall => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 36.0,
-      );
-  String get headlineLargeFamily => 'Inter Tight';
+  TextStyle get displaySmall =>
+      HulpTextStyles.textTheme.displaySmall!.copyWith(color: theme.primaryText);
+  String get headlineLargeFamily => 'Inter';
   bool get headlineLargeIsCustom => false;
-  TextStyle get headlineLarge => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 32.0,
-      );
-  String get headlineMediumFamily => 'Inter Tight';
+  TextStyle get headlineLarge =>
+      HulpTextStyles.header.copyWith(color: theme.primaryText);
+  String get headlineMediumFamily => 'Inter';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 28.0,
-      );
-  String get headlineSmallFamily => 'Inter Tight';
+  TextStyle get headlineMedium =>
+      HulpTextStyles.section.copyWith(color: theme.primaryText);
+  String get headlineSmallFamily => 'Inter';
   bool get headlineSmallIsCustom => false;
-  TextStyle get headlineSmall => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 24.0,
-      );
-  String get titleLargeFamily => 'Inter Tight';
+  TextStyle get headlineSmall =>
+      HulpTextStyles.section.copyWith(color: theme.primaryText);
+  String get titleLargeFamily => 'Inter';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 20.0,
-      );
-  String get titleMediumFamily => 'Inter Tight';
+  TextStyle get titleLarge =>
+      HulpTextStyles.header.copyWith(color: theme.primaryText);
+  String get titleMediumFamily => 'Inter';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 18.0,
-      );
-  String get titleSmallFamily => 'Inter Tight';
+  TextStyle get titleMedium =>
+      HulpTextStyles.section.copyWith(color: theme.primaryText);
+  String get titleSmallFamily => 'Inter';
   bool get titleSmallIsCustom => false;
-  TextStyle get titleSmall => GoogleFonts.interTight(
-        color: theme.primaryText,
-        fontWeight: FontWeight.w600,
-        fontSize: 16.0,
-      );
+  TextStyle get titleSmall =>
+      HulpTextStyles.card.copyWith(color: theme.primaryText);
   String get labelLargeFamily => 'Inter';
   bool get labelLargeIsCustom => false;
-  TextStyle get labelLarge => GoogleFonts.inter(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 16.0,
-      );
+  TextStyle get labelLarge =>
+      HulpTextStyles.input.copyWith(color: theme.secondaryText);
   String get labelMediumFamily => 'Inter';
   bool get labelMediumIsCustom => false;
-  TextStyle get labelMedium => GoogleFonts.inter(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 14.0,
-      );
+  TextStyle get labelMedium =>
+      HulpTextStyles.label.copyWith(color: theme.secondaryText);
   String get labelSmallFamily => 'Inter';
   bool get labelSmallIsCustom => false;
-  TextStyle get labelSmall => GoogleFonts.inter(
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 12.0,
-      );
+  TextStyle get labelSmall =>
+      HulpTextStyles.help.copyWith(color: theme.secondaryText);
   String get bodyLargeFamily => 'Inter';
   bool get bodyLargeIsCustom => false;
-  TextStyle get bodyLarge => GoogleFonts.inter(
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 16.0,
-      );
+  TextStyle get bodyLarge =>
+      HulpTextStyles.input.copyWith(color: theme.primaryText);
   String get bodyMediumFamily => 'Inter';
   bool get bodyMediumIsCustom => false;
-  TextStyle get bodyMedium => GoogleFonts.inter(
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 14.0,
-      );
+  TextStyle get bodyMedium =>
+      HulpTextStyles.body.copyWith(color: theme.primaryText);
   String get bodySmallFamily => 'Inter';
   bool get bodySmallIsCustom => false;
-  TextStyle get bodySmall => GoogleFonts.inter(
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 12.0,
-      );
+  TextStyle get bodySmall =>
+      HulpTextStyles.help.copyWith(color: theme.secondaryText);
 }
 
 extension TextStyleHelper on TextStyle {
@@ -337,7 +291,7 @@ extension TextStyleHelper on TextStyle {
             fontWeight: fontWeight ?? this.fontWeight,
             fontStyle: fontStyle ?? this.fontStyle,
             decoration: decoration,
-            height: lineHeight,
+            height: lineHeight ?? height,
             shadows: shadows,
           )
         : copyWith(

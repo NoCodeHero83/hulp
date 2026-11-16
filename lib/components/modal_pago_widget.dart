@@ -108,14 +108,14 @@ class _ModalPagoWidgetState extends State<ModalPagoWidget> {
                         style: FlutterFlowTheme.of(context)
                             .headlineSmall
                             .override(
-                              font: GoogleFonts.interTight(
+                              font: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FlutterFlowTheme.of(context)
                                     .headlineSmall
                                     .fontStyle,
                               ),
                               color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 20.0,
+                              fontSize: 18.0,
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
                               fontStyle: FlutterFlowTheme.of(context)
@@ -189,7 +189,7 @@ class _ModalPagoWidgetState extends State<ModalPagoWidget> {
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleMedium.override(
-                                font: GoogleFonts.interTight(
+                                font: GoogleFonts.inter(
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
@@ -225,7 +225,7 @@ class _ModalPagoWidgetState extends State<ModalPagoWidget> {
                       color: Colors.transparent,
                       textStyle:
                           FlutterFlowTheme.of(context).titleMedium.override(
-                                font: GoogleFonts.interTight(
+                                font: GoogleFonts.inter(
                                   fontWeight: FontWeight.w500,
                                   fontStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
