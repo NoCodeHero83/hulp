@@ -9,7 +9,6 @@ import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'desactivar_cuenta_model.dart';
@@ -166,33 +165,32 @@ class _DesactivarCuentaWidgetState extends State<DesactivarCuentaWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 54.0,
-            icon: FaIcon(
-              FontAwesomeIcons.angleLeft,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
+            buttonSize: 48.0,
+            icon: Icon(Icons.arrow_back_rounded,
+                color: FlutterFlowTheme.of(context).primaryText, size: 24.0),
             onPressed: () async {
               context.pop();
             },
           ),
           title: Text(
             'Eliminar Cuenta',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -202,7 +200,7 @@ class _DesactivarCuentaWidgetState extends State<DesactivarCuentaWidget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.1,
+          elevation: 0,
         ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
@@ -262,7 +260,8 @@ class _DesactivarCuentaWidgetState extends State<DesactivarCuentaWidget> {
                                 ),
                           ),
                           TextSpan(
-                            text: 'Al eliminarla, tu cuenta y tus datos personales ',
+                            text:
+                                'Al eliminarla, tu cuenta y tus datos personales ',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -351,7 +350,7 @@ class _DesactivarCuentaWidgetState extends State<DesactivarCuentaWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed:
                             _model.eliminando ? null : () => _eliminarCuenta(),
@@ -372,7 +371,7 @@ class _DesactivarCuentaWidgetState extends State<DesactivarCuentaWidget> {
                           color: Color(0xFFFDE7EA),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .titleSmall

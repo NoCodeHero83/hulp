@@ -1,6 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class FFButtonOptions {
   const FFButtonOptions({
@@ -80,9 +79,25 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
 
   FocusNode get _focusNode => widget.focusNode ?? _internalFocusNode;
 
-  int get maxLines => widget.options.maxLines ?? 1;
+  int get maxLines {
+    if (widget.options.maxLines != null) return widget.options.maxLines!;
+
+    final fontSize = widget.options.textStyle?.fontSize ?? 14.0;
+    final scaledFontSize = MediaQuery.textScalerOf(context).scale(fontSize);
+    return scaledFontSize > fontSize * 1.1 ? 2 : 1;
+  }
+
   String? get text =>
       widget.options.textStyle?.fontSize == 0 ? null : widget.text;
+
+  double? _alturaAdaptada(BuildContext context) {
+    final height = widget.options.height;
+    if (height == null) return null;
+
+    final fontSize = widget.options.textStyle?.fontSize ?? 14.0;
+    final escala = MediaQuery.textScalerOf(context).scale(fontSize) / fontSize;
+    return escala > 1 ? height * escala : height;
+  }
 
   @override
   void initState() {
@@ -115,7 +130,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
               ),
             ),
           )
-        : AutoSizeText(
+        : Text(
             text ?? '',
             style:
                 text == null ? null : widget.options.textStyle?.withoutColor(),
@@ -219,7 +234,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
 
       if (text == null) {
         return Container(
-          height: widget.options.height,
+          height: _alturaAdaptada(context),
           width: widget.options.width,
           decoration: BoxDecoration(
             border: Border.fromBorderSide(
@@ -241,7 +256,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
         );
       }
       return SizedBox(
-        height: widget.options.height,
+        height: _alturaAdaptada(context),
         width: widget.options.width,
         child: ElevatedButton.icon(
           icon: Padding(
@@ -258,7 +273,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
     }
 
     return SizedBox(
-      height: widget.options.height,
+      height: _alturaAdaptada(context),
       width: widget.options.width,
       child: ElevatedButton(
         onPressed: onPressed,

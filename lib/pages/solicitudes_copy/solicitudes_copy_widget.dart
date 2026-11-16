@@ -62,7 +62,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
         canPop: false,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -815,7 +815,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                     iconColor: FlutterFlowTheme.of(context).accent3,
                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                          font: GoogleFonts.interTight(
+                                                                                          font: GoogleFonts.inter(
                                                                                             fontWeight: FontWeight.w600,
                                                                                             fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                           ),
@@ -876,7 +876,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                               iconColor: FlutterFlowTheme.of(context).energia,
                                                                                               color: FlutterFlowTheme.of(context).primary,
                                                                                               textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                                    font: GoogleFonts.interTight(
+                                                                                                    font: GoogleFonts.inter(
                                                                                                       fontWeight: FontWeight.w600,
                                                                                                       fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                                     ),
@@ -1326,7 +1326,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                               iconColor: FlutterFlowTheme.of(context).accent3,
                                                                               color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                               textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                    font: GoogleFonts.interTight(
+                                                                                    font: GoogleFonts.inter(
                                                                                       fontWeight: FontWeight.w600,
                                                                                       fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                     ),
@@ -1420,7 +1420,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                       iconColor: FlutterFlowTheme.of(context).success,
                                                                                       color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                       textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                            font: GoogleFonts.interTight(
+                                                                                            font: GoogleFonts.inter(
                                                                                               fontWeight: FontWeight.w600,
                                                                                               fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                             ),
@@ -1896,7 +1896,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                 iconColor: FlutterFlowTheme.of(context).accent3,
                                                                                 color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                      font: GoogleFonts.interTight(
+                                                                                      font: GoogleFonts.inter(
                                                                                         fontWeight: FontWeight.w600,
                                                                                         fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                       ),
@@ -1937,7 +1937,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                         iconColor: FlutterFlowTheme.of(context).success,
                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                              font: GoogleFonts.interTight(
+                                                                                              font: GoogleFonts.inter(
                                                                                                 fontWeight: FontWeight.w600,
                                                                                                 fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                               ),

@@ -113,7 +113,7 @@ class _Registro1WidgetState extends State<Registro1Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
@@ -121,11 +121,11 @@ class _Registro1WidgetState extends State<Registro1Widget> {
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -133,15 +133,17 @@ class _Registro1WidgetState extends State<Registro1Widget> {
           ),
           title: Text(
             'Registro',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -151,7 +153,7 @@ class _Registro1WidgetState extends State<Registro1Widget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 1.0,
+          elevation: 0,
         ),
         body: SafeArea(
           // Reserva el hueco de la barra de navegacion del movil:
@@ -219,12 +221,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .bodyMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                         color: FlutterFlowTheme.of(context)
                                             .confianza,
@@ -251,7 +255,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Align(
-                                      alignment: AlignmentDirectional(-1.0, 0.0),
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
@@ -278,7 +283,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                       color: Color(0xFF413B30),
                                                       fontSize: 16.0,
                                                       letterSpacing: 0.0,
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       fontStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -288,37 +294,36 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               ),
                                               TextSpan(
                                                 text: ' *',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color:
-                                                              Color(0xFFE91429),
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFFE91429),
+                                                      fontSize: 16.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                               )
                                             ],
                                             style: FlutterFlowTheme.of(context)
@@ -336,16 +341,18 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -388,20 +395,22 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               'Uploading file...',
                                               showLoading: true,
                                             );
-                                            selectedUploadedFiles = selectedMedia
-                                                .map((m) => FFUploadedFile(
-                                                      name: m.storagePath
-                                                          .split('/')
-                                                          .last,
-                                                      bytes: m.bytes,
-                                                      height:
-                                                          m.dimensions?.height,
-                                                      width: m.dimensions?.width,
-                                                      blurHash: m.blurHash,
-                                                      originalFilename:
-                                                          m.originalFilename,
-                                                    ))
-                                                .toList();
+                                            selectedUploadedFiles =
+                                                selectedMedia
+                                                    .map((m) => FFUploadedFile(
+                                                          name: m.storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: m.bytes,
+                                                          height: m.dimensions
+                                                              ?.height,
+                                                          width: m.dimensions
+                                                              ?.width,
+                                                          blurHash: m.blurHash,
+                                                          originalFilename: m
+                                                              .originalFilename,
+                                                        ))
+                                                    .toList();
 
                                             downloadUrls =
                                                 await uploadSupabaseStorageFiles(
@@ -428,8 +437,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                 context, 'Success!');
                                           } else {
                                             safeSetState(() {});
-                                            showUploadMessage(
-                                                context, 'Failed to upload data');
+                                            showUploadMessage(context,
+                                                'Failed to upload data');
                                             return;
                                           }
                                         }
@@ -449,8 +458,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              color: FlutterFlowTheme.of(context)
-                                                  .confianza,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .confianza,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight:
@@ -513,16 +523,19 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Nombres *',
-                                          labelStyle: FlutterFlowTheme.of(context)
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .labelMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -536,16 +549,19 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                         .labelMedium
                                                         .fontStyle,
                                               ),
-                                          hintStyle: FlutterFlowTheme.of(context)
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .labelMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -565,8 +581,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .bordesTextField,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bordesTextField,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -574,8 +591,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .bordesTextField,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -583,17 +601,20 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .error,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 0.5,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(20.0),
                                           ),
-                                          focusedErrorBorder: OutlineInputBorder(
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .error,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -625,8 +646,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                        cursorColor: FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                        cursorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
                                         validator: _model
                                             .nameTextControllerValidator
                                             .asValidator(context),
@@ -640,23 +662,27 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                     child: Container(
                                       width: 200.0,
                                       child: TextFormField(
-                                        controller: _model.lastNameTextController,
+                                        controller:
+                                            _model.lastNameTextController,
                                         focusNode: _model.lastNameFocusNode,
                                         autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Apellidos *',
-                                          labelStyle: FlutterFlowTheme.of(context)
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .labelMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -670,16 +696,19 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                         .labelMedium
                                                         .fontStyle,
                                               ),
-                                          hintStyle: FlutterFlowTheme.of(context)
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .labelMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -699,8 +728,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .bordesTextField,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bordesTextField,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -708,8 +738,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .bordesTextField,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -717,17 +748,20 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .error,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 0.5,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(20.0),
                                           ),
-                                          focusedErrorBorder: OutlineInputBorder(
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .error,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -759,8 +793,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                        cursorColor: FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                        cursorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
                                         validator: _model
                                             .lastNameTextControllerValidator
                                             .asValidator(context),
@@ -781,14 +816,16 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                 Expanded(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Align(
                                         alignment:
                                             AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              10.0, 0.0, 0.0, 0.0),
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Tipo documento *',
                                             style: FlutterFlowTheme.of(context)
@@ -806,16 +843,18 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -846,16 +885,19 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                   val),
                                           width: 200.0,
                                           height: 40.0,
-                                          textStyle: FlutterFlowTheme.of(context)
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .bodyMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -887,8 +929,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                   .bordesTextField,
                                           borderWidth: 1.0,
                                           borderRadius: 20.0,
-                                          margin: EdgeInsetsDirectional.fromSTEB(
-                                              12.0, 0.0, 12.0, 0.0),
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 0.0, 12.0, 0.0),
                                           hidesUnderline: true,
                                           isOverButton: false,
                                           isSearchable: false,
@@ -900,11 +943,13 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -927,28 +972,31 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                   child: Align(
                                     alignment: AlignmentDirectional(-1.0, 0.0),
                                     child: Container(
-                                      width:
-                                          MediaQuery.sizeOf(context).width * 1.0,
+                                      width: MediaQuery.sizeOf(context).width *
+                                          1.0,
                                       child: TextFormField(
                                         controller: _model
                                             .inputnNumberDocumentTextController,
-                                        focusNode:
-                                            _model.inputnNumberDocumentFocusNode,
+                                        focusNode: _model
+                                            .inputnNumberDocumentFocusNode,
                                         autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Número de documento *',
-                                          labelStyle: FlutterFlowTheme.of(context)
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .labelMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -962,16 +1010,19 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                         .labelMedium
                                                         .fontStyle,
                                               ),
-                                          hintStyle: FlutterFlowTheme.of(context)
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .labelMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -991,8 +1042,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .bordesTextField,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bordesTextField,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -1000,8 +1052,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .bordesTextField,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -1009,17 +1062,20 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .error,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 0.5,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(20.0),
                                           ),
-                                          focusedErrorBorder: OutlineInputBorder(
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .error,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 0.5,
                                             ),
                                             borderRadius:
@@ -1052,8 +1108,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                       .fontStyle,
                                             ),
                                         keyboardType: TextInputType.number,
-                                        cursorColor: FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                        cursorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
                                         validator: _model
                                             .inputnNumberDocumentTextControllerValidator
                                             .asValidator(context),
@@ -1122,7 +1179,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                     options: _model.ciudades,
                                     onChanged: (val) => safeSetState(
                                         () => _model.dropdownCiudadValue = val),
-                                    width: MediaQuery.sizeOf(context).width * 1.0,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
                                     height: 40.0,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -1141,17 +1199,20 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               .secondaryText,
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                     hintText: 'Select...',
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
-                                      color: FlutterFlowTheme.of(context).accent3,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent3,
                                       size: 24.0,
                                     ),
                                     fillColor: Color(0xFFFBFAF9),
@@ -1181,12 +1242,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                     .fontStyle,
                                           ),
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
@@ -1203,14 +1266,16 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                 Expanded(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Align(
                                         alignment:
                                             AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              15.0, 0.0, 0.0, 0.0),
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  15.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'País *',
                                             style: FlutterFlowTheme.of(context)
@@ -1228,16 +1293,18 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1265,18 +1332,22 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                           ),
                                           options: ['+57'],
                                           onChanged: (val) => safeSetState(() =>
-                                              _model.dropdownCountryValue = val),
+                                              _model.dropdownCountryValue =
+                                                  val),
                                           height: 40.0,
-                                          textStyle: FlutterFlowTheme.of(context)
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
                                               .bodyMedium
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1308,8 +1379,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                   .bordesTextField,
                                           borderWidth: 1.0,
                                           borderRadius: 20.0,
-                                          margin: EdgeInsetsDirectional.fromSTEB(
-                                              12.0, 0.0, 12.0, 0.0),
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 0.0, 12.0, 0.0),
                                           hidesUnderline: true,
                                           isOverButton: false,
                                           isSearchable: false,
@@ -1321,11 +1393,13 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .labelMedium
                                                           .fontStyle,
                                                 ),
@@ -1350,7 +1424,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                     child: TextFormField(
                                       controller:
                                           _model.inputPhoneNumberTextController,
-                                      focusNode: _model.inputPhoneNumberFocusNode,
+                                      focusNode:
+                                          _model.inputPhoneNumberFocusNode,
                                       autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
@@ -1392,8 +1467,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                         .labelMedium
                                                         .fontStyle,
                                               ),
-                                              color: FlutterFlowTheme.of(context)
-                                                  .tertiary,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiary,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight:
@@ -1417,7 +1493,7 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .bordesTextField,
+                                                .primary,
                                             width: 0.5,
                                           ),
                                           borderRadius:
@@ -1510,12 +1586,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                     .fontStyle,
                                           ),
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
@@ -1534,12 +1612,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               .tertiary,
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -1552,21 +1632,23 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
-                                            .bordesTextField,
+                                            .primary,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
@@ -1578,12 +1660,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .bodyMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -1644,12 +1728,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                     .fontStyle,
                                           ),
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .labelMedium
@@ -1668,12 +1754,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               .tertiary,
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -1686,21 +1774,23 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
-                                            .bordesTextField,
+                                            .primary,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
@@ -1713,12 +1803,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .bodyMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -1751,14 +1843,17 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .bodyMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         fontSize: 12.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
@@ -1818,12 +1913,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .labelMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
@@ -1838,15 +1935,17 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .labelMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
-                                        color:
-                                            FlutterFlowTheme.of(context).tertiary,
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
@@ -1866,8 +1965,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .bordesTextField,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       width: 0.5,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
@@ -1945,12 +2044,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                     .fontStyle,
                                           ),
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                     hintText: 'Ingrese 2° red social ',
                                     hintStyle: FlutterFlowTheme.of(context)
@@ -1970,12 +2071,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                               .tertiary,
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -1988,21 +2091,23 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
-                                            .bordesTextField,
+                                            .primary,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context).error,
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
                                         width: 0.5,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
@@ -2014,12 +2119,14 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       .bodyMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -2053,7 +2160,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Icon(
                                       Icons.info_outline,
-                                      color: FlutterFlowTheme.of(context).accent3,
+                                      color:
+                                          FlutterFlowTheme.of(context).accent3,
                                       size: 18.0,
                                     ),
                                   ),
@@ -2079,8 +2187,9 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              color: FlutterFlowTheme.of(context)
-                                                  .secondaryText,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               fontSize: 13.0,
                                               letterSpacing: 0.0,
                                               fontWeight:
@@ -2195,7 +2304,8 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                       ..tipodocumento =
                                           _model.dropdownTypeDocumentValue
                                       ..numerodocumento = _model
-                                          .inputnNumberDocumentTextController.text
+                                          .inputnNumberDocumentTextController
+                                          .text
                                       ..ciudad = _model.dropdownCiudadValue
                                       ..direccion =
                                           _model.direccionTextController.text
@@ -2207,22 +2317,24 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                   );
                                   safeSetState(() {});
                                   if ((_model.red1TextController.text != null &&
-                                          _model.red1TextController.text != '') ||
+                                          _model.red1TextController.text !=
+                                              '') ||
                                       (_model.red2TextController.text != null &&
-                                          _model.red2TextController.text != '')) {
+                                          _model.red2TextController.text !=
+                                              '')) {
                                     FFAppState().updateRegistroStruct(
                                       (e) => e
                                         ..updateRedesSociales(
-                                          (e) => e.insert(
-                                              0, _model.red1TextController.text),
+                                          (e) => e.insert(0,
+                                              _model.red1TextController.text),
                                         ),
                                     );
                                     safeSetState(() {});
                                     FFAppState().updateRegistroStruct(
                                       (e) => e
                                         ..updateRedesSociales(
-                                          (e) => e.insert(
-                                              1, _model.red2TextController.text),
+                                          (e) => e.insert(1,
+                                              _model.red2TextController.text),
                                         ),
                                     );
                                     safeSetState(() {});
@@ -2262,7 +2374,7 @@ class _Registro1WidgetState extends State<Registro1Widget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      font: GoogleFonts.interTight(
+                                      font: GoogleFonts.inter(
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FlutterFlowTheme.of(context)
                                             .titleSmall

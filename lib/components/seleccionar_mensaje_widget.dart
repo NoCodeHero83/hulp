@@ -89,7 +89,7 @@ class _SeleccionarMensajeWidgetState extends State<SeleccionarMensajeWidget> {
                     Text(
                       'Seleccionar archivo',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
-                            font: GoogleFonts.interTight(
+                            font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .fontWeight,

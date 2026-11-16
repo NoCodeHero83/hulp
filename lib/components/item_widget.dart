@@ -115,7 +115,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                       'Agregar Cobro',
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
-                                font: GoogleFonts.interTight(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .headlineMedium
                                       .fontWeight,
@@ -287,8 +287,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
+                                      color: FlutterFlowTheme.of(context).primary,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
@@ -442,8 +441,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
+                                                    FlutterFlowTheme.of(context).primary,
                                                 width: 1.0,
                                               ),
                                               borderRadius:
@@ -603,8 +601,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
                                                 color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
+                                                    FlutterFlowTheme.of(context).primary,
                                                 width: 1.0,
                                               ),
                                               borderRadius:
@@ -752,7 +749,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                        FlutterFlowTheme.of(context).primary,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -814,7 +811,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                           'Total:',
                           style:
                               FlutterFlowTheme.of(context).titleMedium.override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .fontWeight,
@@ -863,7 +860,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).titleMedium.override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .fontWeight,
@@ -1055,7 +1052,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .fontWeight,

@@ -2,12 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' show FunctionException;
 import 'package:uuid/uuid.dart';
 
-import '/environment_values.dart';
 import 'supabase/supabase.dart';
 
-bool get usaTransicionesSprint3 =>
-    Uri.tryParse(FFDevEnvironmentValues().supabaseUrl)?.host ==
-    'ptafsiwlhxomgqmdmidf.supabase.co';
+bool get usaTransicionesSprint3 => true;
 
 enum AccionSolicitud {
   aceptar('aceptar', 'Aceptar', 'Tu solicitud ha sido aceptada'),

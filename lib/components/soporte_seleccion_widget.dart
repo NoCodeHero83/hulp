@@ -97,7 +97,7 @@ class _SoporteSeleccionWidgetState extends State<SoporteSeleccionWidget> {
                         'Soporte',
                         style:
                             FlutterFlowTheme.of(context).headlineSmall.override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .fontWeight,

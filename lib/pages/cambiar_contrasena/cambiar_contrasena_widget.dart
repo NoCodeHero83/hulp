@@ -1,5 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/men_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -161,11 +162,11 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -173,10 +174,12 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
           ),
           title: Text(
             'Cambiar contrasena',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(fontWeight: FontWeight.w600),
+                  font: GoogleFonts.inter(fontWeight: FontWeight.w600),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,
                 ),
@@ -184,142 +187,158 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        body: SafeArea(
-          top: true,
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    24.0, 24.0, 24.0, 24.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Header info
-                    Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary
-                            .withOpacity(0.08),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.lock_outline_rounded,
-                              color: FlutterFlowTheme.of(context).primary,
-                              size: 24.0,
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: SafeArea(
+                top: true,
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          24.0, 24.0, 24.0, 24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Header info
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primary
+                                  .withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(12.0),
                             ),
-                            const SizedBox(width: 12.0),
-                            Expanded(
-                              child: Text(
-                                'Por seguridad, ingresa tu contrasena actual antes de establecer una nueva.',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.inter(),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.lock_outline_rounded,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 24.0,
+                                  ),
+                                  const SizedBox(width: 12.0),
+                                  Expanded(
+                                    child: Text(
+                                      'Por seguridad, ingresa tu contrasena actual antes de establecer una nueva.',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 32.0),
+
+                          // Current password
+                          _buildPasswordField(
+                            context,
+                            label: 'Contrasena actual',
+                            controller: _model.currentPasswordTextController!,
+                            focusNode: _model.currentPasswordFocusNode!,
+                            isVisible: _model.currentPasswordVisibility,
+                            onToggleVisibility: () => safeSetState(() =>
+                                _model.currentPasswordVisibility =
+                                    !_model.currentPasswordVisibility),
+                            validator: _validateCurrentPassword,
+                          ),
+                          const SizedBox(height: 20.0),
+
+                          // Divider
+                          Divider(
+                              color: FlutterFlowTheme.of(context).alternate,
+                              thickness: 1.0),
+                          const SizedBox(height: 20.0),
+
+                          // New password
+                          _buildPasswordField(
+                            context,
+                            label: 'Nueva contrasena',
+                            controller: _model.newPasswordTextController!,
+                            focusNode: _model.newPasswordFocusNode!,
+                            isVisible: _model.newPasswordVisibility,
+                            onToggleVisibility: () => safeSetState(() =>
+                                _model.newPasswordVisibility =
+                                    !_model.newPasswordVisibility),
+                            validator: _validateNewPassword,
+                          ),
+                          const SizedBox(height: 16.0),
+
+                          // Confirm password
+                          _buildPasswordField(
+                            context,
+                            label: 'Confirmar nueva contrasena',
+                            controller: _model.confirmPasswordTextController!,
+                            focusNode: _model.confirmPasswordFocusNode!,
+                            isVisible: _model.confirmPasswordVisibility,
+                            onToggleVisibility: () => safeSetState(() =>
+                                _model.confirmPasswordVisibility =
+                                    !_model.confirmPasswordVisibility),
+                            validator: _validateConfirmPassword,
+                          ),
+                          const SizedBox(height: 12.0),
+
+                          // Password requirements
+                          _buildRequirements(context),
+                          const SizedBox(height: 32.0),
+
+                          // Submit button
+                          FFButtonWidget(
+                            onPressed:
+                                _model.isLoading ? null : () => _onSubmit(),
+                            text: _model.isLoading
+                                ? 'Actualizando...'
+                                : 'Cambiar contrasena',
+                            options: FFButtonOptions(
+                              width: MediaQuery.sizeOf(context).width * 1.0,
+                              height: 52.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600),
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(12.0),
+                              disabledColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 32.0),
-
-                    // Current password
-                    _buildPasswordField(
-                      context,
-                      label: 'Contrasena actual',
-                      controller: _model.currentPasswordTextController!,
-                      focusNode: _model.currentPasswordFocusNode!,
-                      isVisible: _model.currentPasswordVisibility,
-                      onToggleVisibility: () => safeSetState(() => _model
-                              .currentPasswordVisibility =
-                          !_model.currentPasswordVisibility),
-                      validator: _validateCurrentPassword,
-                    ),
-                    const SizedBox(height: 20.0),
-
-                    // Divider
-                    Divider(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        thickness: 1.0),
-                    const SizedBox(height: 20.0),
-
-                    // New password
-                    _buildPasswordField(
-                      context,
-                      label: 'Nueva contrasena',
-                      controller: _model.newPasswordTextController!,
-                      focusNode: _model.newPasswordFocusNode!,
-                      isVisible: _model.newPasswordVisibility,
-                      onToggleVisibility: () => safeSetState(() =>
-                          _model.newPasswordVisibility =
-                              !_model.newPasswordVisibility),
-                      validator: _validateNewPassword,
-                    ),
-                    const SizedBox(height: 16.0),
-
-                    // Confirm password
-                    _buildPasswordField(
-                      context,
-                      label: 'Confirmar nueva contrasena',
-                      controller: _model.confirmPasswordTextController!,
-                      focusNode: _model.confirmPasswordFocusNode!,
-                      isVisible: _model.confirmPasswordVisibility,
-                      onToggleVisibility: () => safeSetState(() =>
-                          _model.confirmPasswordVisibility =
-                              !_model.confirmPasswordVisibility),
-                      validator: _validateConfirmPassword,
-                    ),
-                    const SizedBox(height: 12.0),
-
-                    // Password requirements
-                    _buildRequirements(context),
-                    const SizedBox(height: 32.0),
-
-                    // Submit button
-                    FFButtonWidget(
-                      onPressed: _model.isLoading ? null : () => _onSubmit(),
-                      text: _model.isLoading
-                          ? 'Actualizando...'
-                          : 'Cambiar contrasena',
-                      options: FFButtonOptions(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: 52.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 0.0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  font: GoogleFonts.interTight(
-                                      fontWeight: FontWeight.w600),
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                        elevation: 0.0,
-                        borderRadius: BorderRadius.circular(12.0),
-                        disabledColor:
-                            FlutterFlowTheme.of(context).alternate,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+            if (MediaQuery.viewInsetsOf(context).bottom == 0)
+              wrapWithModel(
+                model: _model.menModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const MenWidget(index: 3),
+              ),
+          ],
         ),
       ),
     );
@@ -385,8 +404,8 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
             ),
             filled: true,
             fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                16.0, 16.0, 16.0, 16.0),
+            contentPadding:
+                const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
             suffixIcon: InkWell(
               onTap: onToggleVisibility,
               focusNode: FocusNode(skipTraversal: true),
@@ -394,7 +413,7 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
                 isVisible
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: FlutterFlowTheme.of(context).secondaryText,
+                color: null,
                 size: 22.0,
               ),
             ),
@@ -430,10 +449,11 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Requisitos de la contrasena:', style: style.override(
-              font: GoogleFonts.inter(fontWeight: FontWeight.w600),
-              fontWeight: FontWeight.w600,
-            )),
+            Text('Requisitos de la contrasena:',
+                style: style.override(
+                  font: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w600,
+                )),
             const SizedBox(height: 6.0),
             Text('  \u2022  Minimo 8 caracteres', style: style),
             Text('  \u2022  Al menos una letra mayuscula', style: style),

@@ -3,6 +3,7 @@ import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/hulp_colors.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
@@ -314,7 +315,7 @@ class _ServiciosState extends State<Servicios> {
     return Container(
       width: widget.width,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+        color: HulpColors.background,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -344,7 +345,7 @@ class _ServiciosState extends State<Servicios> {
               Text(
                 'Cargando servicios...',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
+                      fontFamily: 'Inter',
                       color: FlutterFlowTheme.of(context).secondaryText,
                     ),
               ),
@@ -371,7 +372,7 @@ class _ServiciosState extends State<Servicios> {
               Text(
                 error!,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
+                      fontFamily: 'Inter',
                       color: FlutterFlowTheme.of(context).error,
                     ),
                 textAlign: TextAlign.center,
@@ -404,7 +405,7 @@ class _ServiciosState extends State<Servicios> {
               Text(
                 'No hay categorías disponibles',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
+                      fontFamily: 'Inter',
                       color: FlutterFlowTheme.of(context).secondaryText,
                     ),
               ),
@@ -427,8 +428,19 @@ class _ServiciosState extends State<Servicios> {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       elevation: 0,
+      color: HulpColors.surface,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(color: HulpColors.border),
+      ),
       child: Column(
         children: [
+          Container(
+            height: 3,
+            width: double.infinity,
+            color: HulpColors.brand,
+          ),
           // Header de la categoría
           ListTile(
             leading: Checkbox(
@@ -439,7 +451,7 @@ class _ServiciosState extends State<Servicios> {
             title: Text(
               categoria.nombre,
               style: FlutterFlowTheme.of(context).titleMedium.override(
-                    fontFamily: 'Readex Pro',
+                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
                   ),
             ),
@@ -478,9 +490,19 @@ class _ServiciosState extends State<Servicios> {
     return Card(
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 8),
-      color: FlutterFlowTheme.of(context).secondaryBackground,
+      color: HulpColors.surface,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(color: HulpColors.border),
+      ),
       child: Column(
         children: [
+          Container(
+            height: 3,
+            width: double.infinity,
+            color: HulpColors.brand,
+          ),
           ListTile(
             leading: Checkbox(
               value: subcategoria.isSelected,
@@ -490,7 +512,7 @@ class _ServiciosState extends State<Servicios> {
             title: Text(
               subcategoria.nombre,
               style: FlutterFlowTheme.of(context).titleSmall.override(
-                    fontFamily: 'Readex Pro',
+                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
                   ),
             ),
@@ -529,6 +551,11 @@ class _ServiciosState extends State<Servicios> {
     return Card(
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 4),
+      color: HulpColors.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: HulpColors.border),
+      ),
       child: ListTile(
         leading: Checkbox(
           value: servicio.isSelected,
@@ -538,7 +565,7 @@ class _ServiciosState extends State<Servicios> {
         title: Text(
           servicio.nombre,
           style: FlutterFlowTheme.of(context).bodyMedium.override(
-                fontFamily: 'Readex Pro',
+                fontFamily: 'Inter',
                 fontWeight: FontWeight.w500,
               ),
         ),

@@ -1,11 +1,14 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/men_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/hulp_colors.dart';
+import '/flutter_flow/hulp_text_styles.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,13 +55,12 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
     super.dispose();
   }
 
-  static const _fondoCampo = Color(0xFFF7F7F7);
-  static const _borde = Color(0xFFC4C4C8);
+  static const _fondoCampo = HulpColors.inputSurface;
+  static const _borde = HulpColors.border;
   static const _radioCampo = 14.0;
 
-  TextStyle get _estiloValor => GoogleFonts.inter(
-        color: const Color(0xFF161323),
-        fontSize: 16,
+  TextStyle get _estiloValor => HulpTextStyles.input.copyWith(
+        color: HulpColors.textPrimary,
       );
 
   InputDecoration _decoracion({String? hint, double height = 48}) {
@@ -90,13 +92,29 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
     );
   }
 
-  Widget _fila(Widget izquierda, Widget derecha) => Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(child: izquierda),
-          const SizedBox(width: 18),
-          Expanded(child: derecha),
-        ],
+  Widget _fila(Widget izquierda, Widget derecha) => LayoutBuilder(
+        builder: (context, constraints) {
+          final escala = MediaQuery.textScalerOf(context).scale(14) / 14;
+          final apilar = constraints.maxWidth < 360 || escala > 1.15;
+          if (apilar) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                izquierda,
+                const SizedBox(height: 16),
+                derecha,
+              ],
+            );
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(child: izquierda),
+              const SizedBox(width: 16),
+              Expanded(child: derecha),
+            ],
+          );
+        },
       );
 
   Widget _campo(String etiqueta, Widget control) => Column(
@@ -104,11 +122,7 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
         children: [
           Text(
             etiqueta,
-            style: GoogleFonts.inter(
-              color: const Color(0xFF505050),
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-            ),
+            style: HulpTextStyles.label.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8),
           control,
@@ -121,6 +135,8 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
     required FocusNode? focusNode,
     required FormFieldValidator<String>? validator,
     double height = 48,
+    int minLines = 1,
+    int maxLines = 1,
   }) =>
       _campo(
         etiqueta,
@@ -128,6 +144,8 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
           controller: controller,
           focusNode: focusNode,
           validator: validator,
+          minLines: minLines,
+          maxLines: maxLines,
           textAlignVertical: TextAlignVertical.center,
           decoration: _decoracion(hint: etiqueta, height: height),
           style: _estiloValor,
@@ -158,12 +176,12 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
           textStyle: _estiloValor,
           icon: const Icon(
             Icons.keyboard_arrow_down_rounded,
-            color: Color(0xFF5D5D5D),
             size: 24,
           ),
           fillColor: _fondoCampo,
           elevation: 2,
           borderColor: _borde,
+          focusBorderColor: HulpColors.brand,
           borderWidth: 1,
           borderRadius: _radioCampo,
           margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -180,19 +198,19 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: const Color(0xFF293332),
-              size: 22,
+              Icons.arrow_back_rounded,
+              color: HulpColors.textPrimary,
+              size: 24,
             ),
             onPressed: () async {
               context.pop();
@@ -200,14 +218,14 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
           ),
           title: Text(
             'Datos Personales',
-            style: GoogleFonts.interTight(
-              color: const Color(0xFF102621),
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
+            style: HulpTextStyles.header.copyWith(
+              color: HulpColors.textPrimary,
             ),
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
           ),
           centerTitle: true,
-          toolbarHeight: 56,
+          toolbarHeight: 72,
           elevation: 0,
           surfaceTintColor: Colors.transparent,
           bottom: const PreferredSize(
@@ -215,295 +233,354 @@ class _DatospersonalesWidgetState extends State<DatospersonalesWidget> {
             child: Divider(height: 1, thickness: 1, color: _borde),
           ),
         ),
-        body: SafeArea(
-          top: true,
-          child: FutureBuilder<List<UsuariosRow>>(
-            future: UsuariosTable().querySingleRow(
-              queryFn: (q) => q.eqOrNull(
-                'id',
-                currentUserUid,
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: SafeArea(
+                top: true,
+                child: FutureBuilder<List<UsuariosRow>>(
+                  future: UsuariosTable().querySingleRow(
+                    queryFn: (q) => q.eqOrNull(
+                      'id',
+                      currentUserUid,
+                    ),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    List<UsuariosRow> columnUsuariosRowList = snapshot.data!;
+
+                    final columnUsuariosRow = columnUsuariosRowList.isNotEmpty
+                        ? columnUsuariosRowList.first
+                        : null;
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                            child: Form(
+                              key: _model.formKey,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Center(
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        valueOrDefault<String>(
+                                          columnUsuariosRow?.fotoPerfilUrl,
+                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                                        ),
+                                        width: 112,
+                                        height: 112,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 28),
+                                  _fila(
+                                    _campoTexto(
+                                      'Nombres *',
+                                      controller:
+                                          _model.nombreTextController ??=
+                                              TextEditingController(
+                                        text: columnUsuariosRow?.nombres,
+                                      ),
+                                      focusNode: _model.nombreFocusNode,
+                                      validator: _model
+                                          .nombreTextControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                    _campoTexto(
+                                      'Apellidos *',
+                                      controller:
+                                          _model.apellidoTextController ??=
+                                              TextEditingController(
+                                        text: columnUsuariosRow?.apellidos,
+                                      ),
+                                      focusNode: _model.apellidoFocusNode,
+                                      validator: _model
+                                          .apellidoTextControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _fila(
+                                    _selector(
+                                      'Tipo documento *',
+                                      controller: _model
+                                              .tipoDocumentoValueController ??=
+                                          FormFieldController<String>(
+                                        _model.tipoDocumentoValue ??=
+                                            columnUsuariosRow?.tipoDocumento,
+                                      ),
+                                      options: const [
+                                        'Cédula de ciudadana',
+                                        'Cédula de extranjería',
+                                        'NIT',
+                                        'PPT',
+                                      ],
+                                      optionLabels: const [
+                                        'Cédula de ciudadanía',
+                                        'Cédula de extranjería',
+                                        'NIT',
+                                        'PPT',
+                                      ],
+                                      onChanged: (val) => safeSetState(() =>
+                                          _model.tipoDocumentoValue = val),
+                                      hintText:
+                                          columnUsuariosRow?.tipoDocumento,
+                                      height: 50,
+                                      selectedMaxLines: 2,
+                                    ),
+                                    _campoTexto(
+                                      'Número de documento *',
+                                      controller: _model
+                                              .numeroDocumentoTextController ??=
+                                          TextEditingController(
+                                        text:
+                                            columnUsuariosRow?.numeroDocumento,
+                                      ),
+                                      focusNode:
+                                          _model.numeroDocumentoFocusNode,
+                                      validator: _model
+                                          .numeroDocumentoTextControllerValidator
+                                          .asValidator(context),
+                                      height: 50,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _fila(
+                                    _selector(
+                                      'País *',
+                                      controller: _model.paisValueController ??=
+                                          FormFieldController<String>(
+                                        _model.paisValue ??=
+                                            columnUsuariosRow?.codigoPais,
+                                      ),
+                                      options: const ['+57'],
+                                      onChanged: (val) => safeSetState(
+                                          () => _model.paisValue = val),
+                                      hintText: 'Seleccionar',
+                                    ),
+                                    _campoTexto(
+                                      'Teléfono *',
+                                      controller:
+                                          _model.telefonoTextController ??=
+                                              TextEditingController(
+                                        text: columnUsuariosRow?.telefono,
+                                      ),
+                                      focusNode: _model.telefonoFocusNode,
+                                      validator: _model
+                                          .telefonoTextControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _campo(
+                                    'Correo electrónico',
+                                    InputDecorator(
+                                      decoration: _decoracion(),
+                                      child: SelectableText(
+                                        (columnUsuariosRow?.correoElectronico
+                                                    ?.trim()
+                                                    .isNotEmpty ??
+                                                false)
+                                            ? columnUsuariosRow!
+                                                .correoElectronico!
+                                            : (currentUserEmail.isNotEmpty
+                                                ? currentUserEmail
+                                                : 'Sin correo registrado'),
+                                        style: _estiloValor,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _campoTexto(
+                                    'Dirección (Opcional)',
+                                    controller:
+                                        _model.direccionTextController ??=
+                                            TextEditingController(
+                                      text: columnUsuariosRow?.direccion,
+                                    ),
+                                    focusNode: _model.direccionFocusNode,
+                                    validator: _model
+                                        .direccionTextControllerValidator
+                                        .asValidator(context),
+                                    minLines: 1,
+                                    maxLines: 2,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 16, 0, 32),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        if (_model.formKey.currentState ==
+                                                null ||
+                                            !_model.formKey.currentState!
+                                                .validate()) {
+                                          return;
+                                        }
+                                        if (_model.tipoDocumentoValue == null) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'El tipo de documento es obligatorio',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .labelMedium
+                                                    .override(
+                                                      font: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFFFDFEFF),
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  Color(0xFFFC0505),
+                                            ),
+                                          );
+                                          return;
+                                        }
+                                        if (_model.paisValue == null) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Seleccione el codigo de pais',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: Colors.white,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                            ),
+                                          );
+                                          return;
+                                        }
+                                        await UsuariosTable().update(
+                                          data: {
+                                            'nombres': _model
+                                                .nombreTextController.text,
+                                            'apellidos': _model
+                                                .apellidoTextController.text,
+                                            'tipo_documento':
+                                                _model.tipoDocumentoValue,
+                                            'numero_documento': _model
+                                                .numeroDocumentoTextController
+                                                .text,
+                                            'codigo_pais': _model.paisValue,
+                                            'telefono': _model
+                                                .telefonoTextController.text,
+                                            'direccion': _model
+                                                .direccionTextController.text,
+                                          },
+                                          matchingRows: (rows) => rows.eqOrNull(
+                                            'id',
+                                            currentUserUid,
+                                          ),
+                                        );
+
+                                        context.pushNamed(
+                                            MiperfilWidget.routeName);
+                                      },
+                                      text: 'Guardar',
+                                      options: FFButtonOptions(
+                                        width: double.infinity,
+                                        height: 52,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: GoogleFonts.inter(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        elevation: 0,
+                                        borderRadius: BorderRadius.circular(26),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
-                  ),
-                );
-              }
-              List<UsuariosRow> columnUsuariosRowList = snapshot.data!;
-
-              final columnUsuariosRow = columnUsuariosRowList.isNotEmpty
-                  ? columnUsuariosRowList.first
-                  : null;
-
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                      child: Form(
-                        key: _model.formKey,
-                        autovalidateMode: AutovalidateMode.disabled,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Center(
-                              child: ClipOval(
-                                child: Image.network(
-                                  valueOrDefault<String>(
-                                    columnUsuariosRow?.fotoPerfilUrl,
-                                    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
-                                  ),
-                                  width: 112,
-                                  height: 112,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 28),
-                            _fila(
-                              _campoTexto(
-                                'Nombres *',
-                                controller: _model.nombreTextController ??=
-                                    TextEditingController(
-                                  text: columnUsuariosRow?.nombres,
-                                ),
-                                focusNode: _model.nombreFocusNode,
-                                validator: _model.nombreTextControllerValidator
-                                    .asValidator(context),
-                              ),
-                              _campoTexto(
-                                'Apellidos *',
-                                controller: _model.apellidoTextController ??=
-                                    TextEditingController(
-                                  text: columnUsuariosRow?.apellidos,
-                                ),
-                                focusNode: _model.apellidoFocusNode,
-                                validator: _model
-                                    .apellidoTextControllerValidator
-                                    .asValidator(context),
-                              ),
-                            ),
-                            const SizedBox(height: 18),
-                            _fila(
-                              _selector(
-                                'Tipo documento *',
-                                controller:
-                                    _model.tipoDocumentoValueController ??=
-                                        FormFieldController<String>(
-                                  _model.tipoDocumentoValue ??=
-                                      columnUsuariosRow?.tipoDocumento,
-                                ),
-                                options: const [
-                                  'Cédula de ciudadana',
-                                  'Cédula de extranjería',
-                                  'NIT',
-                                  'PPT',
-                                ],
-                                optionLabels: const [
-                                  'Cédula de ciudadanía',
-                                  'Cédula de extranjería',
-                                  'NIT',
-                                  'PPT',
-                                ],
-                                onChanged: (val) => safeSetState(
-                                    () => _model.tipoDocumentoValue = val),
-                                hintText: columnUsuariosRow?.tipoDocumento,
-                                height: 50,
-                                selectedMaxLines: 2,
-                              ),
-                              _campoTexto(
-                                'Número de documento *',
-                                controller:
-                                    _model.numeroDocumentoTextController ??=
-                                        TextEditingController(
-                                  text: columnUsuariosRow?.numeroDocumento,
-                                ),
-                                focusNode: _model.numeroDocumentoFocusNode,
-                                validator: _model
-                                    .numeroDocumentoTextControllerValidator
-                                    .asValidator(context),
-                                height: 50,
-                              ),
-                            ),
-                            const SizedBox(height: 18),
-                            _fila(
-                              _selector(
-                                'País *',
-                                controller: _model.paisValueController ??=
-                                    FormFieldController<String>(
-                                  _model.paisValue ??=
-                                      columnUsuariosRow?.codigoPais,
-                                ),
-                                options: const ['+57'],
-                                onChanged: (val) =>
-                                    safeSetState(() => _model.paisValue = val),
-                                hintText: 'Seleccionar',
-                              ),
-                              _campoTexto(
-                                'Teléfono *',
-                                controller: _model.telefonoTextController ??=
-                                    TextEditingController(
-                                  text: columnUsuariosRow?.telefono,
-                                ),
-                                focusNode: _model.telefonoFocusNode,
-                                validator: _model
-                                    .telefonoTextControllerValidator
-                                    .asValidator(context),
-                              ),
-                            ),
-                            const SizedBox(height: 18),
-                            _campo(
-                              'Correo electrónico',
-                              InputDecorator(
-                                decoration: _decoracion(),
-                                child: SelectableText(
-                                  (columnUsuariosRow?.correoElectronico
-                                              ?.trim()
-                                              .isNotEmpty ??
-                                          false)
-                                      ? columnUsuariosRow!.correoElectronico!
-                                      : (currentUserEmail.isNotEmpty
-                                          ? currentUserEmail
-                                          : 'Sin correo registrado'),
-                                  style: _estiloValor,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 18),
-                            _campoTexto(
-                              'Dirección (Opcional)',
-                              controller: _model.direccionTextController ??=
-                                  TextEditingController(
-                                text: columnUsuariosRow?.direccion,
-                              ),
-                              focusNode: _model.direccionFocusNode,
-                              validator: _model.direccionTextControllerValidator
-                                  .asValidator(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        if (_model.formKey.currentState == null ||
-                            !_model.formKey.currentState!.validate()) {
-                          return;
-                        }
-                        if (_model.tipoDocumentoValue == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'El tipo de documento es obligatorio',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FontWeight.normal,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontStyle,
-                                      ),
-                                      color: Color(0xFFFDFEFF),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontStyle,
-                                    ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor: Color(0xFFFC0505),
-                            ),
-                          );
-                          return;
-                        }
-                        if (_model.paisValue == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Seleccione el codigo de pais',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontStyle,
-                                      ),
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .fontStyle,
-                                    ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).error,
-                            ),
-                          );
-                          return;
-                        }
-                        await UsuariosTable().update(
-                          data: {
-                            'nombres': _model.nombreTextController.text,
-                            'apellidos': _model.apellidoTextController.text,
-                            'tipo_documento': _model.tipoDocumentoValue,
-                            'numero_documento':
-                                _model.numeroDocumentoTextController.text,
-                            'codigo_pais': _model.paisValue,
-                            'telefono': _model.telefonoTextController.text,
-                            'direccion': _model.direccionTextController.text,
-                          },
-                          matchingRows: (rows) => rows.eqOrNull(
-                            'id',
-                            currentUserUid,
-                          ),
-                        );
-
-                        context.pushNamed(MiperfilWidget.routeName);
-                      },
-                      text: 'Guardar',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 52,
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle: GoogleFonts.interTight(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        elevation: 0,
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+            if (MediaQuery.viewInsetsOf(context).bottom == 0)
+              wrapWithModel(
+                model: _model.menModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const MenWidget(index: 1),
+              ),
+          ],
         ),
       ),
     );
