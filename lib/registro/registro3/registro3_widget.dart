@@ -63,19 +63,19 @@ class _Registro3WidgetState extends State<Registro3Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFFFBFAF9),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -83,15 +83,17 @@ class _Registro3WidgetState extends State<Registro3Widget> {
           ),
           title: Text(
             'Registro',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -101,7 +103,7 @@ class _Registro3WidgetState extends State<Registro3Widget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 1.0,
+          elevation: 0,
         ),
         body: SafeArea(
           // Reserva el hueco de la barra de navegacion del movil:
@@ -115,7 +117,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -148,9 +151,10 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                           fontSize: 20.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                   TextSpan(
@@ -173,7 +177,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                             .bodyMedium
                                             .fontStyle,
                                       ),
-                                      color: FlutterFlowTheme.of(context).primary,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -219,8 +224,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 36.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -231,7 +236,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Align(
-                                      alignment: AlignmentDirectional(-1.0, 0.0),
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
@@ -242,11 +248,13 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -316,8 +324,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                       hintText: 'Select...',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
-                                        color:
-                                            FlutterFlowTheme.of(context).accent3,
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent3,
                                         size: 24.0,
                                       ),
                                       fillColor: Color(0xFFFBFAF9),
@@ -332,7 +340,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                       isSearchable: false,
                                       isMultiSelect: false,
                                       labelText: '',
-                                      labelTextStyle: FlutterFlowTheme.of(context)
+                                      labelTextStyle: FlutterFlowTheme.of(
+                                              context)
                                           .labelMedium
                                           .override(
                                             font: GoogleFonts.inter(
@@ -366,7 +375,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Align(
-                                      alignment: AlignmentDirectional(-1.0, 0.0),
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
@@ -377,11 +387,13 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                               .override(
                                                 font: GoogleFonts.inter(
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -442,8 +454,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                       hintText: 'Select...',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
-                                        color:
-                                            FlutterFlowTheme.of(context).accent3,
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent3,
                                         size: 24.0,
                                       ),
                                       fillColor: Color(0xFFFBFAF9),
@@ -458,7 +470,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                       isSearchable: false,
                                       isMultiSelect: false,
                                       labelText: '',
-                                      labelTextStyle: FlutterFlowTheme.of(context)
+                                      labelTextStyle: FlutterFlowTheme.of(
+                                              context)
                                           .labelMedium
                                           .override(
                                             font: GoogleFonts.inter(
@@ -489,8 +502,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 36.0, 0.0, 0.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             child: TextFormField(
@@ -551,7 +564,7 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: FlutterFlowTheme.of(context).primary,
                                     width: 0.5,
                                   ),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -603,8 +616,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 36.0, 0.0, 0.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             child: TextFormField(
@@ -665,7 +678,7 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: FlutterFlowTheme.of(context).primary,
                                     width: 0.5,
                                   ),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -720,7 +733,8 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(40.0, 20.0, 40.0, 36.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(40.0, 20.0, 40.0, 36.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       if (_model.formKey.currentState == null ||
@@ -816,20 +830,22 @@ class _Registro3WidgetState extends State<Registro3Widget> {
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
-                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                            font: GoogleFonts.interTight(
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .fontStyle,
-                            ),
-                            color:
-                                FlutterFlowTheme.of(context).secondaryBackground,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w500,
-                            fontStyle:
-                                FlutterFlowTheme.of(context).titleSmall.fontStyle,
-                          ),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
                       elevation: 0.0,
                       borderRadius: BorderRadius.circular(20.0),
                     ),

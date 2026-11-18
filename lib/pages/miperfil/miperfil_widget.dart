@@ -1,17 +1,14 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/men_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/proveedores/alert_cerrarsesion/alert_cerrarsesion_widget.dart';
 import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'miperfil_model.dart';
 export 'miperfil_model.dart';
 
@@ -54,35 +51,24 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
+          leading: null,
           title: Text(
             'Cuenta',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -92,7 +78,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 1.0,
+          elevation: 0,
         ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
@@ -196,7 +182,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                           ),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
-                                          fontSize: 22.0,
+                                          fontSize: 20.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
@@ -632,10 +618,9 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,

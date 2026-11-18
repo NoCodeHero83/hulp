@@ -1,10 +1,12 @@
 import '/flutter_flow/flutter_flow_model.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/components/men_widget.dart';
 import 'cambiar_contrasena_widget.dart' show CambiarContrasenaWidget;
 import 'package:flutter/material.dart';
 
-class CambiarContrasenaModel
-    extends FlutterFlowModel<CambiarContrasenaWidget> {
+class CambiarContrasenaModel extends FlutterFlowModel<CambiarContrasenaWidget> {
+  late MenModel menModel;
+
   FocusNode? currentPasswordFocusNode;
   TextEditingController? currentPasswordTextController;
   late bool currentPasswordVisibility = false;
@@ -20,10 +22,13 @@ class CambiarContrasenaModel
   bool isLoading = false;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    menModel = createModel(context, () => MenModel());
+  }
 
   @override
   void dispose() {
+    menModel.dispose();
     currentPasswordFocusNode?.dispose();
     currentPasswordTextController?.dispose();
     newPasswordFocusNode?.dispose();

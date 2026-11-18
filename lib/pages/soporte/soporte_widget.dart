@@ -1,16 +1,12 @@
 import '/backend/schema/structs/index.dart';
 import '/components/men_widget.dart';
 import '/components/soporte_seleccion2_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/chat_i_a/chat_i_a_widget.dart';
 import '/pages/proveedores/chat_user/chat_user_widget.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'soporte_model.dart';
@@ -63,35 +59,24 @@ class _SoporteWidgetState extends State<SoporteWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 54.0,
-            icon: FaIcon(
-              FontAwesomeIcons.angleLeft,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
+          leading: null,
           title: Text(
             'Soporte',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -101,14 +86,14 @@ class _SoporteWidgetState extends State<SoporteWidget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.5,
+          elevation: 0,
         ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Flexible(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 12.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 12.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,15 +108,15 @@ class _SoporteWidgetState extends State<SoporteWidget> {
 
                           return ListView.separated(
                             padding: EdgeInsets.fromLTRB(
+                              16,
                               0,
-                              0,
-                              0,
+                              16,
                               20.0,
                             ),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: conversaciones.length,
-                            separatorBuilder: (_, __) => SizedBox(height: 40.0),
+                            separatorBuilder: (_, __) => SizedBox(height: 16.0),
                             itemBuilder: (context, conversacionesIndex) {
                               final conversacionesItem =
                                   conversaciones[conversacionesIndex];
@@ -173,7 +158,7 @@ class _SoporteWidgetState extends State<SoporteWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       child: Container(
                         height: 44.0,
                         decoration: BoxDecoration(

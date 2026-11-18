@@ -110,7 +110,7 @@ class _InputRedSocialWidgetState extends State<InputRedSocialWidget> {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: FlutterFlowTheme.of(context).bordesTextField,
+                color: FlutterFlowTheme.of(context).primary,
                 width: 0.5,
               ),
               borderRadius: BorderRadius.circular(20.0),

@@ -103,7 +103,7 @@ class _Textfieldregistro2WidgetState extends State<Textfieldregistro2Widget> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFFB7B1A7),
+              color: FlutterFlowTheme.of(context).primary,
               width: 0.5,
             ),
             borderRadius: BorderRadius.circular(20.0),

@@ -209,7 +209,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         },
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -336,7 +336,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xFFDFDFDF),
+                                      color: FlutterFlowTheme.of(context).primary,
                                       width: 0.5,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
@@ -361,7 +361,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   prefixIcon: Icon(
                                     Icons.email_outlined,
                                     color:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                        null,
                                   ),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -463,7 +463,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xFFDFDFDF),
+                                      color: FlutterFlowTheme.of(context).primary,
                                       width: 0.5,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
@@ -488,7 +488,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   prefixIcon: Icon(
                                     Icons.key_outlined,
                                     color:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                        null,
                                   ),
                                   suffixIcon: InkWell(
                                     onTap: () async {
@@ -650,7 +650,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      font: GoogleFonts.interTight(
+                                      font: GoogleFonts.inter(
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .fontWeight,

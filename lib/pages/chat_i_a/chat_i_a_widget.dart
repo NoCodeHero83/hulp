@@ -49,7 +49,7 @@ class _ChatIAWidgetState extends State<ChatIAWidget> {
     return Align(
       alignment: AlignmentDirectional(-1.0, 0.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Container(
           decoration: BoxDecoration(),
           child: Column(
@@ -137,7 +137,7 @@ class _ChatIAWidgetState extends State<ChatIAWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          await launchURL('https://wa.me/573112250105');
+                          await launchURL('https://wa.me/573117640067');
                         },
                         child: Text(
                           '👉  Ir a soporte por WhatsApp',

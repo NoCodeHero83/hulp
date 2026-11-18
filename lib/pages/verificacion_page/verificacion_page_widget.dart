@@ -254,7 +254,7 @@ class _VerificacionPageWidgetState extends State<VerificacionPageWidget> {
                                 LoginWidget.routeName, context.mounted);
                           } else {
                             if (widget!.estado == 'sin documentos') {
-                              await launchURL('https://wa.me/573112250105');
+                              await launchURL('https://wa.me/573117640067');
                             }
                           }
                         },

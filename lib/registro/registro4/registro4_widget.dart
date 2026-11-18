@@ -60,7 +60,7 @@ class _Registro4WidgetState extends State<Registro4Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
@@ -68,11 +68,11 @@ class _Registro4WidgetState extends State<Registro4Widget> {
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -80,15 +80,17 @@ class _Registro4WidgetState extends State<Registro4Widget> {
           ),
           title: Text(
             'Registro',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -98,7 +100,7 @@ class _Registro4WidgetState extends State<Registro4Widget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 1.0,
+          elevation: 0,
         ),
         body: SafeArea(
           // Reserva el hueco de la barra de navegacion del movil:
@@ -134,12 +136,13 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                       .override(
                                         font: GoogleFonts.inter(
                                           fontWeight: FontWeight.w600,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
-                                        color:
-                                            FlutterFlowTheme.of(context).primary,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                         fontSize: 20.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
@@ -198,8 +201,8 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                                  color:
-                                      FlutterFlowTheme.of(context).secondaryText,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
@@ -256,12 +259,14 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                               .secondaryText,
                                           fontSize: 14.0,
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
@@ -335,7 +340,7 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: FlutterFlowTheme.of(context).primary,
                                     width: 0.5,
                                   ),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -358,12 +363,13 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                 fillColor: Color(0xFFFBFAF9),
                                 prefixIcon: Icon(
                                   Icons.key_outlined,
-                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  color: null,
                                 ),
                                 suffixIcon: InkWell(
                                   onTap: () async {
-                                    safeSetState(() => _model.passwordVisibility =
-                                        !_model.passwordVisibility);
+                                    safeSetState(() =>
+                                        _model.passwordVisibility =
+                                            !_model.passwordVisibility);
                                   },
                                   focusNode: FocusNode(skipTraversal: true),
                                   child: Icon(
@@ -410,7 +416,8 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             child: TextFormField(
-                              controller: _model.confirmedPasswordTextController,
+                              controller:
+                                  _model.confirmedPasswordTextController,
                               focusNode: _model.confirmedPasswordFocusNode,
                               autofocus: false,
                               obscureText: !_model.confirmedPasswordVisibility,
@@ -467,7 +474,7 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: FlutterFlowTheme.of(context).primary,
                                     width: 0.5,
                                   ),
                                   borderRadius: BorderRadius.circular(20.0),
@@ -490,13 +497,13 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                                 fillColor: Color(0xFFFBFAF9),
                                 prefixIcon: Icon(
                                   Icons.key_outlined,
-                                  color: FlutterFlowTheme.of(context).tertiary,
+                                  color: null,
                                 ),
                                 suffixIcon: InkWell(
                                   onTap: () async {
-                                    safeSetState(() =>
-                                        _model.confirmedPasswordVisibility =
-                                            !_model.confirmedPasswordVisibility);
+                                    safeSetState(() => _model
+                                            .confirmedPasswordVisibility =
+                                        !_model.confirmedPasswordVisibility);
                                   },
                                   focusNode: FocusNode(skipTraversal: true),
                                   child: Icon(
@@ -541,8 +548,8 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                   Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(25.0, 20.0, 25.0, 36.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          25.0, 20.0, 25.0, 36.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           if (_model.formKey.currentState == null ||
@@ -553,7 +560,8 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                               _model.confirmedPasswordTextController.text) {
                             FFAppState().updateRegistroStruct(
                               (e) => e
-                                ..contrasena = _model.passwordTextController.text,
+                                ..contrasena =
+                                    _model.passwordTextController.text,
                             );
                             safeSetState(() {});
 
@@ -581,12 +589,12 @@ class _Registro4WidgetState extends State<Registro4Widget> {
                           height: 44.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          iconPadding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .titleSmall

@@ -1,12 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/hulp_colors.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'men_model.dart';
 export 'men_model.dart';
 
@@ -66,7 +64,7 @@ class _MenWidgetState extends State<MenWidget> {
       alignment: AlignmentDirectional(0.0, 1.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFEFF3ED),
+          color: HulpColors.brand,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -102,7 +100,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 0
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -118,6 +121,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -135,8 +142,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
                                           fontStyle:
@@ -170,7 +176,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 0
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -186,6 +197,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -203,8 +218,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
@@ -246,7 +260,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 1
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -262,6 +281,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -280,8 +303,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           fontSize: 14.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
@@ -316,7 +338,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 1
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -332,6 +359,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -350,8 +381,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
@@ -393,7 +423,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 2
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -409,6 +444,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -426,8 +465,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
                                           fontStyle:
@@ -461,7 +499,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 2
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -477,6 +520,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -494,8 +541,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
@@ -537,7 +583,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 3
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -553,6 +604,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -570,8 +625,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
                                           fontStyle:
@@ -605,7 +659,12 @@ class _MenWidgetState extends State<MenWidget> {
                           );
                         },
                         child: Container(
-                          decoration: BoxDecoration(),
+                          decoration: BoxDecoration(
+                            color: widget!.index == 3
+                                ? HulpColors.navigationSelectedOverlay
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 2.0, 0.0, 2.0, 0.0),
@@ -621,6 +680,10 @@ class _MenWidgetState extends State<MenWidget> {
                                     width: 36.0,
                                     height: 36.0,
                                     fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -638,8 +701,7 @@ class _MenWidgetState extends State<MenWidget> {
                                                     .bodyMedium
                                                     .fontStyle,
                                           ),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                          color: Colors.white,
                                           fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,

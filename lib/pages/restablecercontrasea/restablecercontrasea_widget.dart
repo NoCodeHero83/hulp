@@ -61,17 +61,17 @@ class _RestablecercontraseaWidgetState
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -79,15 +79,17 @@ class _RestablecercontraseaWidgetState
           ),
           title: Text(
             'Restablecer Contraseña',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -97,7 +99,7 @@ class _RestablecercontraseaWidgetState
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.1,
+          elevation: 0,
         ),
         body: SafeArea(
           top: true,
@@ -200,7 +202,7 @@ class _RestablecercontraseaWidgetState
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0x00000000),
+                                color: FlutterFlowTheme.of(context).primary,
                                 width: 0.5,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
@@ -224,7 +226,7 @@ class _RestablecercontraseaWidgetState
                                 .secondaryBackground,
                             prefixIcon: Icon(
                               Icons.key_outlined,
-                              color: FlutterFlowTheme.of(context).tertiary,
+                              color: null,
                             ),
                             suffixIcon: InkWell(
                               onTap: () async {
@@ -328,7 +330,7 @@ class _RestablecercontraseaWidgetState
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0x00000000),
+                                color: FlutterFlowTheme.of(context).primary,
                                 width: 0.5,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
@@ -352,7 +354,7 @@ class _RestablecercontraseaWidgetState
                                 .secondaryBackground,
                             prefixIcon: Icon(
                               Icons.key_outlined,
-                              color: FlutterFlowTheme.of(context).tertiary,
+                              color: null,
                             ),
                             suffixIcon: InkWell(
                               onTap: () async {
@@ -504,7 +506,7 @@ class _RestablecercontraseaWidgetState
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .titleSmall

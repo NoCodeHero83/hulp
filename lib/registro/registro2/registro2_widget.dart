@@ -82,7 +82,7 @@ class _Registro2WidgetState extends State<Registro2Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
@@ -90,11 +90,11 @@ class _Registro2WidgetState extends State<Registro2Widget> {
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -102,15 +102,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
           ),
           title: Text(
             'Registro',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -120,7 +122,7 @@ class _Registro2WidgetState extends State<Registro2Widget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.5,
+          elevation: 0,
         ),
         body: SafeArea(
           // Reserva el hueco de la barra de navegacion del movil:
@@ -169,9 +171,10 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                           fontSize: 20.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                   TextSpan(
@@ -194,7 +197,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                             .bodyMedium
                                             .fontStyle,
                                       ),
-                                      color: FlutterFlowTheme.of(context).primary,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -263,12 +267,14 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                       .labelMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                         letterSpacing: 0.0,
                                         fontWeight: FlutterFlowTheme.of(context)
@@ -287,7 +293,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0x00000000),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       width: 0.5,
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
@@ -341,14 +348,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 28.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: AlignmentDirectional(-1.0, 0.0),
@@ -367,8 +375,9 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              color: FlutterFlowTheme.of(context)
-                                                  .primaryText,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 18.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
@@ -396,7 +405,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .shrinkWrap,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                               unselectedWidgetColor:
@@ -405,11 +415,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                             ),
                                             child: Checkbox(
                                               value: _model
-                                                  .siCertificacionValue ??= false,
+                                                      .siCertificacionValue ??=
+                                                  false,
                                               onChanged: (newValue) async {
-                                                safeSetState(() =>
-                                                    _model.siCertificacionValue =
-                                                        newValue!);
+                                                safeSetState(() => _model
+                                                        .siCertificacionValue =
+                                                    newValue!);
                                                 if (newValue!) {
                                                   safeSetState(() {
                                                     _model.noCertificacionValue =
@@ -417,16 +428,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                   });
                                                 }
                                               },
-                                              side: (FlutterFlowTheme.of(context)
-                                                          .alternate !=
-                                                      null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate!,
-                                                    )
-                                                  : null,
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate!,
+                                                        )
+                                                      : null,
                                               activeColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -448,14 +460,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -475,7 +488,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .shrinkWrap,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                               unselectedWidgetColor:
@@ -484,11 +498,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                             ),
                                             child: Checkbox(
                                               value: _model
-                                                  .noCertificacionValue ??= false,
+                                                      .noCertificacionValue ??=
+                                                  false,
                                               onChanged: (newValue) async {
-                                                safeSetState(() =>
-                                                    _model.noCertificacionValue =
-                                                        newValue!);
+                                                safeSetState(() => _model
+                                                        .noCertificacionValue =
+                                                    newValue!);
                                                 if (newValue!) {
                                                   safeSetState(() {
                                                     _model.siCertificacionValue =
@@ -498,16 +513,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                   safeSetState(() {});
                                                 }
                                               },
-                                              side: (FlutterFlowTheme.of(context)
-                                                          .alternate !=
-                                                      null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate!,
-                                                    )
-                                                  : null,
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate!,
+                                                        )
+                                                      : null,
                                               activeColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -529,14 +545,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -567,50 +584,59 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Text(
                                               'Adjunta aquí la información de tus certificaciones educativas o técnicas  ',
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    font: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.normal,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
                                             ),
                                           ),
                                         ),
                                         Builder(
                                           builder: (context) {
-                                            final cert =
-                                                _model.certificacioness.toList();
+                                            final cert = _model.certificacioness
+                                                .toList();
 
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
-                                              children: List.generate(cert.length,
-                                                  (certIndex) {
-                                                final certItem = cert[certIndex];
+                                              children: List.generate(
+                                                  cert.length, (certIndex) {
+                                                final certItem =
+                                                    cert[certIndex];
                                                 return Align(
-                                                  alignment: AlignmentDirectional(
-                                                      0.0, 0.0),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
                                                   child: Padding(
-                                                    padding: EdgeInsetsDirectional
-                                                        .fromSTEB(10.0, 16.0,
-                                                            10.0, 0.0),
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                10.0,
+                                                                16.0,
+                                                                10.0,
+                                                                0.0),
                                                     child: Container(
                                                       width: MediaQuery.sizeOf(
                                                                   context)
@@ -621,13 +647,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                 .of(context)
                                                             .secondaryBackground,
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                20.0),
+                                                            BorderRadius
+                                                                .circular(20.0),
                                                         border: Border.all(
-                                                          color:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .tertiary,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .tertiary,
                                                         ),
                                                       ),
                                                       child: Padding(
@@ -653,7 +678,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                       AlignmentDirectional(
                                                                           -1.0,
                                                                           0.0),
-                                                                  child: Padding(
+                                                                  child:
+                                                                      Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             15.0,
@@ -668,21 +694,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                           .override(
                                                                             font:
                                                                                 GoogleFonts.inter(
-                                                                              fontWeight:
-                                                                                  FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                              fontStyle:
-                                                                                  FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                             ),
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).textos1,
                                                                             letterSpacing:
                                                                                 0.0,
-                                                                            fontWeight: FlutterFlowTheme.of(context)
-                                                                                .bodyMedium
-                                                                                .fontWeight,
-                                                                            fontStyle: FlutterFlowTheme.of(context)
-                                                                                .bodyMedium
-                                                                                .fontStyle,
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                           ),
                                                                     ),
                                                                   ),
@@ -693,10 +715,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                     splashColor:
                                                                         Colors
                                                                             .transparent,
-                                                                    focusColor: Colors
-                                                                        .transparent,
-                                                                    hoverColor: Colors
-                                                                        .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
                                                                     highlightColor:
                                                                         Colors
                                                                             .transparent,
@@ -711,12 +735,13 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                       mainAxisSize:
                                                                           MainAxisSize
                                                                               .max,
-                                                                      children: [
+                                                                      children:
+                                                                          [
                                                                         Icon(
                                                                           Icons
                                                                               .delete,
-                                                                          color: FlutterFlowTheme.of(context)
-                                                                              .error,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).error,
                                                                           size:
                                                                               16.0,
                                                                         ),
@@ -729,9 +754,7 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                           child:
                                                                               Text(
                                                                             'Eliminar',
-                                                                            style: FlutterFlowTheme.of(context)
-                                                                                .bodyMedium
-                                                                                .override(
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                   font: GoogleFonts.inter(
                                                                                     fontWeight: FontWeight.normal,
                                                                                     fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
@@ -744,8 +767,7 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                           ),
                                                                         ),
                                                                       ].divide(SizedBox(
-                                                                          width:
-                                                                              2.0)),
+                                                                              width: 2.0)),
                                                                     ),
                                                                   ),
                                                               ],
@@ -755,13 +777,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                   AlignmentDirectional(
                                                                       0.0, 0.0),
                                                               child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0),
                                                                 child:
                                                                     Textfieldregistro2Widget(
                                                                   key: Key(
@@ -793,13 +814,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                   AlignmentDirectional(
                                                                       0.0, 0.0),
                                                               child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0),
                                                                 child:
                                                                     Textfieldregistro2Widget(
                                                                   key: Key(
@@ -831,13 +851,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                   AlignmentDirectional(
                                                                       0.0, 0.0),
                                                               child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0),
                                                                 child:
                                                                     Subirdocumentoregistro2Widget(
                                                                   key: Key(
@@ -895,15 +914,18 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                 size: 24.0,
                                               ),
                                               options: FFButtonOptions(
-                                                width: MediaQuery.sizeOf(context)
-                                                        .width *
-                                                    1.0,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
                                                 height: 40.0,
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         16.0, 0.0, 16.0, 0.0),
-                                                iconPadding: EdgeInsetsDirectional
-                                                    .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
@@ -911,8 +933,7 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         context)
                                                     .titleSmall
                                                     .override(
-                                                      font:
-                                                          GoogleFonts.interTight(
+                                                      font: GoogleFonts.inter(
                                                         fontWeight:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -924,9 +945,10 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                 .titleSmall
                                                                 .fontStyle,
                                                       ),
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .energia,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .energia,
                                                       letterSpacing: 0.0,
                                                       fontWeight:
                                                           FlutterFlowTheme.of(
@@ -941,9 +963,9 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                     ),
                                                 elevation: 0.0,
                                                 borderSide: BorderSide(
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primary,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
@@ -960,18 +982,20 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 28.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: Align(
-                                      alignment: AlignmentDirectional(-1.0, 0.0),
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             7.0, 0.0, 7.0, 0.0),
@@ -983,7 +1007,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                 font: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1018,7 +1043,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .shrinkWrap,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                               unselectedWidgetColor:
@@ -1026,8 +1052,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                       .alternate,
                                             ),
                                             child: Checkbox(
-                                              value: _model.siReferenciaValue ??=
-                                                  false,
+                                              value: _model
+                                                  .siReferenciaValue ??= false,
                                               onChanged: (newValue) async {
                                                 safeSetState(() =>
                                                     _model.siReferenciaValue =
@@ -1039,16 +1065,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                   });
                                                 }
                                               },
-                                              side: (FlutterFlowTheme.of(context)
-                                                          .alternate !=
-                                                      null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate!,
-                                                    )
-                                                  : null,
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate!,
+                                                        )
+                                                      : null,
                                               activeColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -1070,14 +1097,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1097,7 +1125,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .shrinkWrap,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                               unselectedWidgetColor:
@@ -1105,8 +1134,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                       .alternate,
                                             ),
                                             child: Checkbox(
-                                              value: _model.noReferenciaValue ??=
-                                                  false,
+                                              value: _model
+                                                  .noReferenciaValue ??= false,
                                               onChanged: (newValue) async {
                                                 safeSetState(() =>
                                                     _model.noReferenciaValue =
@@ -1120,16 +1149,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                   safeSetState(() {});
                                                 }
                                               },
-                                              side: (FlutterFlowTheme.of(context)
-                                                          .alternate !=
-                                                      null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate!,
-                                                    )
-                                                  : null,
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate!,
+                                                        )
+                                                      : null,
                                               activeColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -1151,14 +1181,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1193,30 +1224,33 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                             child: Text(
                                               'Adjunta aquí la información de tus referencias laborales',
                                               textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    font: GoogleFonts.inter(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.normal,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts.inter(
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
                                             ),
                                           ),
                                         ),
@@ -1240,13 +1274,13 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                       .fromSTEB(
                                                           8.0, 20.0, 8.0, 0.0),
                                                   child: Container(
-                                                    width:
-                                                        MediaQuery.sizeOf(context)
-                                                                .width *
-                                                            1.0,
+                                                    width: MediaQuery.sizeOf(
+                                                                context)
+                                                            .width *
+                                                        1.0,
                                                     decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
                                                           .secondaryBackground,
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1270,7 +1304,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         children: [
                                                           Row(
                                                             mainAxisSize:
-                                                                MainAxisSize.max,
+                                                                MainAxisSize
+                                                                    .max,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
@@ -1293,14 +1328,12 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                             context)
                                                                         .bodyMedium
                                                                         .override(
-                                                                          font: GoogleFonts
-                                                                              .inter(
-                                                                            fontWeight: FlutterFlowTheme.of(context)
-                                                                                .bodyMedium
-                                                                                .fontWeight,
-                                                                            fontStyle: FlutterFlowTheme.of(context)
-                                                                                .bodyMedium
-                                                                                .fontStyle,
+                                                                          font:
+                                                                              GoogleFonts.inter(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                           ),
                                                                           letterSpacing:
                                                                               0.0,
@@ -1317,8 +1350,9 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                               if (referenciaslistIndex !=
                                                                   0)
                                                                 InkWell(
-                                                                  splashColor: Colors
-                                                                      .transparent,
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
                                                                   focusColor: Colors
                                                                       .transparent,
                                                                   hoverColor: Colors
@@ -1392,7 +1426,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                     'Key0qi_${referenciaslistIndex}_of_${referenciaslist.length}'),
                                                                 index:
                                                                     referenciaslistIndex,
-                                                                titulo: 'Nombre',
+                                                                titulo:
+                                                                    'Nombre',
                                                                 initialValue:
                                                                     referenciaslistItem
                                                                         .nombres,
@@ -1520,55 +1555,58 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                 size: 24.0,
                                               ),
                                               options: FFButtonOptions(
-                                                width: MediaQuery.sizeOf(context)
-                                                        .width *
-                                                    1.0,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
                                                 height: 40.0,
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         16.0, 0.0, 16.0, 0.0),
-                                                iconPadding: EdgeInsetsDirectional
-                                                    .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
-                                                textStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .titleSmall
-                                                    .override(
-                                                      font:
-                                                          GoogleFonts.interTight(
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmall
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmall
-                                                                .fontStyle,
-                                                      ),
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .fontStyle,
-                                                    ),
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                          ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .fontStyle,
+                                                        ),
                                                 elevation: 0.0,
                                                 borderSide: BorderSide(
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primary,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
                                                   width: 1.0,
                                                 ),
                                                 borderRadius:
@@ -1585,18 +1623,20 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 28.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: Align(
-                                      alignment: AlignmentDirectional(-1.0, 0.0),
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
@@ -1608,7 +1648,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                 font: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1643,7 +1684,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .shrinkWrap,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                               unselectedWidgetColor:
@@ -1651,7 +1693,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                       .alternate,
                                             ),
                                             child: Checkbox(
-                                              value: _model.siRucValue ??= false,
+                                              value: _model.siRucValue ??=
+                                                  false,
                                               onChanged: (newValue) async {
                                                 safeSetState(() => _model
                                                     .siRucValue = newValue!);
@@ -1661,16 +1704,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                   });
                                                 }
                                               },
-                                              side: (FlutterFlowTheme.of(context)
-                                                          .alternate !=
-                                                      null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate!,
-                                                    )
-                                                  : null,
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate!,
+                                                        )
+                                                      : null,
                                               activeColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -1692,14 +1736,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1719,7 +1764,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                         .shrinkWrap,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                               unselectedWidgetColor:
@@ -1727,7 +1773,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                       .alternate,
                                             ),
                                             child: Checkbox(
-                                              value: _model.noRucValue ??= false,
+                                              value: _model.noRucValue ??=
+                                                  false,
                                               onChanged: (newValue) async {
                                                 safeSetState(() => _model
                                                     .noRucValue = newValue!);
@@ -1742,16 +1789,17 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                   safeSetState(() {});
                                                 }
                                               },
-                                              side: (FlutterFlowTheme.of(context)
-                                                          .alternate !=
-                                                      null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate!,
-                                                    )
-                                                  : null,
+                                              side:
+                                                  (FlutterFlowTheme.of(context)
+                                                              .alternate !=
+                                                          null)
+                                                      ? BorderSide(
+                                                          width: 2,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate!,
+                                                        )
+                                                      : null,
                                               activeColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
@@ -1773,14 +1821,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -1796,14 +1845,15 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 8.0, 8.0, 0.0),
                                   child: Container(
-                                    width: MediaQuery.sizeOf(context).width * 1.0,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
                                       borderRadius: BorderRadius.circular(20.0),
                                       border: Border.all(
-                                        color:
-                                            FlutterFlowTheme.of(context).tertiary,
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
                                       ),
                                     ),
                                     child: Padding(
@@ -1817,13 +1867,14 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                             alignment:
                                                 AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding:
-                                                  EdgeInsetsDirectional.fromSTEB(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Container(
-                                                width: MediaQuery.sizeOf(context)
-                                                        .width *
-                                                    1.0,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
                                                 child: TextFormField(
                                                   controller: _model
                                                       .inputNITTextController,
@@ -1844,7 +1895,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                             .of(context)
                                                         .labelMedium
                                                         .override(
-                                                          font: GoogleFonts.inter(
+                                                          font:
+                                                              GoogleFonts.inter(
                                                             fontWeight:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -1856,10 +1908,9 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                     .labelMedium
                                                                     .fontStyle,
                                                           ),
-                                                          color:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondaryText,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           fontSize: 16.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -1876,7 +1927,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                     enabledBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
-                                                        color: Color(0xFFB7B1A7),
+                                                        color:
+                                                            Color(0xFFB7B1A7),
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
@@ -1886,7 +1938,10 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
-                                                        color: Color(0xFFB7B1A7),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
                                                         width: 0.5,
                                                       ),
                                                       borderRadius:
@@ -1959,7 +2014,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                                 .fontStyle,
                                                       ),
                                                   cursorColor:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .primaryText,
                                                   validator: _model
                                                       .inputNITTextControllerValidator
@@ -1977,19 +2033,21 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 28.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: Align(
-                                      alignment: AlignmentDirectional(-1.0, 0.0),
+                                      alignment:
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 10.0, 0.0),
@@ -2001,7 +2059,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                                 font: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -2044,9 +2103,10 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                           fontSize: 16.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
@@ -2066,7 +2126,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(40.0, 20.0, 40.0, 36.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(40.0, 20.0, 40.0, 36.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       if (((_model.siCertificacionValue == true) &&
@@ -2077,7 +2138,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                             (_model.noReferenciaValue == true)) {
                           if (FFAppState().idServiciosList.isNotEmpty) {
                             if (((_model.siRucValue == true) &&
-                                    (_model.inputNITTextController.text != null &&
+                                    (_model.inputNITTextController.text !=
+                                            null &&
                                         _model.inputNITTextController.text !=
                                             '')) ||
                                 (_model.noRucValue == true)) {
@@ -2115,12 +2177,14 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                           color: FlutterFlowTheme.of(context)
                                               .primaryBackground,
                                           letterSpacing: 0.0,
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                   duration: Duration(milliseconds: 4000),
@@ -2138,12 +2202,14 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                       .labelMedium
                                       .override(
                                         font: GoogleFonts.inter(
-                                          fontWeight: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontWeight,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .labelMedium
-                                              .fontStyle,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
                                         ),
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
@@ -2190,7 +2256,8 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                                     ),
                               ),
                               duration: Duration(milliseconds: 4000),
-                              backgroundColor: FlutterFlowTheme.of(context).error,
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).error,
                             ),
                           );
                         }
@@ -2236,18 +2303,22 @@ class _Registro2WidgetState extends State<Registro2Widget> {
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
-                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                            font: GoogleFonts.interTight(
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            font: GoogleFonts.inter(
                               fontWeight: FontWeight.w500,
                               fontStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .fontStyle,
                             ),
-                            color: FlutterFlowTheme.of(context).primaryBackground,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w500,
-                            fontStyle:
-                                FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
                           ),
                       elevation: 0.0,
                       borderRadius: BorderRadius.circular(20.0),

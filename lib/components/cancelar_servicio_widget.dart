@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/backend/transiciones_solicitud.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -14,9 +15,11 @@ class CancelarServicioWidget extends StatefulWidget {
   const CancelarServicioWidget({
     super.key,
     required this.solicitudServicioId,
+    this.publicacionId,
   });
 
   final String? solicitudServicioId;
+  final String? publicacionId;
 
   @override
   State<CancelarServicioWidget> createState() => _CancelarServicioWidgetState();
@@ -149,6 +152,22 @@ class _CancelarServicioWidgetState extends State<CancelarServicioWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
+                      if (SupaFlow.sprint4Habilitado) {
+                        final id = widget.solicitudServicioId;
+                        if (id == null) return;
+                        try {
+                          await transicionarSolicitud(id, AccionSolicitud.cancelar,
+                              publicacionId: widget.publicacionId);
+                          if (context.mounted) Navigator.pop(context);
+                        } catch (error) {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(mensajeTransicionSolicitud(error))),
+                            );
+                          }
+                        }
+                        return;
+                      }
                       await SolicitudesServicioTable().update(
                         data: {
                           'estado': 'canceladas',
@@ -183,7 +202,7 @@ class _CancelarServicioWidgetState extends State<CancelarServicioWidget> {
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
-                                font: GoogleFonts.interTight(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .fontWeight,

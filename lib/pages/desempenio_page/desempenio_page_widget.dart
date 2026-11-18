@@ -1,19 +1,15 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/men_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'desempenio_page_model.dart';
 export 'desempenio_page_model.dart';
 
@@ -37,6 +33,7 @@ class _DesempenioPageWidgetState extends State<DesempenioPageWidget> {
   // neteado con calcularIngresoProveedor) para que la tarjeta y el gráfico
   // muestren cifras coherentes.
   double? _ingresosSemanaActual;
+  double _saldoTransferirSemana = 0;
   StreamSubscription<List<Map<String, dynamic>>>? _solicitudesSub;
   bool _primeraEmisionStream = true;
 
@@ -49,19 +46,17 @@ class _DesempenioPageWidgetState extends State<DesempenioPageWidget> {
     // Tiempo real: recalcula al cambiar las solicitudes del proveedor
     // (p. ej. al finalizar un servicio). Realtime no emite sobre vistas, por
     // eso se escucha la tabla base.
-    _solicitudesSub = SupaFlow.client
-        .from('solicitudes_servicio')
-        .stream(primaryKey: ['id'])
+    _solicitudesSub = SupaFlow.solicitudesStream()
         .eq('profesional_id', currentUserUid)
         .listen((_) {
-          if (_primeraEmisionStream) {
-            _primeraEmisionStream = false;
-            return;
-          }
-          if (mounted) {
-            _cargarIngresosSemana();
-          }
-        });
+      if (_primeraEmisionStream) {
+        _primeraEmisionStream = false;
+        return;
+      }
+      if (mounted) {
+        _cargarIngresosSemana();
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -79,13 +74,16 @@ class _DesempenioPageWidgetState extends State<DesempenioPageWidget> {
 
       final response = await SupaFlow.client
           .from('solicitudes_servicio')
-          .select('precio_base, precio_adicionales, precio')
+          .select(SupaFlow.finanzasV1Habilitadas
+              ? 'precio_base, precio_adicionales, precio, finanzas_version, pago_proveedor, saldo_transferir'
+              : 'precio_base, precio_adicionales, precio')
           .eq('profesional_id', currentUserUid)
           .eq('estado', 'finalizadas')
           .gte('fecha', fechaInicio)
           .lte('fecha', fechaFin);
 
       double total = 0;
+      double saldo = 0;
       for (var item in response) {
         // El 72% se aplica sobre el total que paga el cliente, adicionales
         // incluidos: antes los adicionales se sumaban enteros.
@@ -94,10 +92,17 @@ class _DesempenioPageWidgetState extends State<DesempenioPageWidget> {
             0;
         final adicionales =
             double.tryParse((item['precio_adicionales'] ?? 0).toString()) ?? 0;
-        total += functions.calcularIngresoProveedor(base + adicionales);
+        if (item['finanzas_version'] == 1)
+          saldo += (item['saldo_transferir'] as num).toDouble();
+        total += item['finanzas_version'] == null
+            ? functions.calcularIngresoProveedor(base + adicionales)
+            : (item['pago_proveedor'] as num).toDouble();
       }
       if (mounted) {
-        safeSetState(() => _ingresosSemanaActual = total);
+        safeSetState(() {
+          _ingresosSemanaActual = total;
+          _saldoTransferirSemana = saldo;
+        });
       }
     } catch (e) {
       // Silencioso: ante un fallo se conserva el último valor mostrado.
@@ -121,35 +126,24 @@ class _DesempenioPageWidgetState extends State<DesempenioPageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 54.0,
-            icon: FaIcon(
-              FontAwesomeIcons.angleLeft,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
+          leading: null,
           title: Text(
             'Datos',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -159,7 +153,7 @@ class _DesempenioPageWidgetState extends State<DesempenioPageWidget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.1,
+          elevation: 0,
         ),
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),

@@ -62,7 +62,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
         canPop: false,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -759,8 +759,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                             child: Text(
                                                                                               valueOrDefault<String>(
                                                                                                 formatNumber(
-                                                                                                  valueOrDefault<double>(serviciosentItem.precio, 0.0) +
-                                                                                                      valueOrDefault<double>(serviciosentItem.precioAdicionales, 0.0),
+                                                                                                  serviciosentItem.importeProveedor(() => valueOrDefault<double>(serviciosentItem.precio, 0.0) + valueOrDefault<double>(serviciosentItem.precioAdicionales, 0.0)),
                                                                                                   formatType: FormatType.decimal,
                                                                                                   decimalType: DecimalType.periodDecimal,
                                                                                                   currency: '\$',
@@ -816,7 +815,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                     iconColor: FlutterFlowTheme.of(context).accent3,
                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                          font: GoogleFonts.interTight(
+                                                                                          font: GoogleFonts.inter(
                                                                                             fontWeight: FontWeight.w600,
                                                                                             fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                           ),
@@ -877,7 +876,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                               iconColor: FlutterFlowTheme.of(context).energia,
                                                                                               color: FlutterFlowTheme.of(context).primary,
                                                                                               textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                                    font: GoogleFonts.interTight(
+                                                                                                    font: GoogleFonts.inter(
                                                                                                       fontWeight: FontWeight.w600,
                                                                                                       fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                                     ),
@@ -1272,8 +1271,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                       child: Text(
                                                                                         valueOrDefault<String>(
                                                                                           formatNumber(
-                                                                                            valueOrDefault<double>(solicitudesAceptadasListItem.precio, 0.0) +
-                                                                                                valueOrDefault<double>(solicitudesAceptadasListItem.precioAdicionales, 0.0),
+                                                                                            solicitudesAceptadasListItem.importeProveedor(() => valueOrDefault<double>(solicitudesAceptadasListItem.precio, 0.0) + valueOrDefault<double>(solicitudesAceptadasListItem.precioAdicionales, 0.0)),
                                                                                             formatType: FormatType.custom,
                                                                                             currency: '\$',
                                                                                             format: '',
@@ -1328,7 +1326,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                               iconColor: FlutterFlowTheme.of(context).accent3,
                                                                               color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                               textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                    font: GoogleFonts.interTight(
+                                                                                    font: GoogleFonts.inter(
                                                                                       fontWeight: FontWeight.w600,
                                                                                       fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                     ),
@@ -1422,7 +1420,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                       iconColor: FlutterFlowTheme.of(context).success,
                                                                                       color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                       textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                            font: GoogleFonts.interTight(
+                                                                                            font: GoogleFonts.inter(
                                                                                               fontWeight: FontWeight.w600,
                                                                                               fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                             ),
@@ -1845,9 +1843,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                       ),
                                                                                       Flexible(
                                                                                         child: Text(
-                                                                                          (valueOrDefault<double>(serviciosEntrantesListItem.precio, 0.0) +
-                                                                                                  valueOrDefault<double>(serviciosEntrantesListItem.precioAdicionales, 0.0))
-                                                                                              .toString(),
+                                                                                          (serviciosEntrantesListItem.importeProveedor(() => valueOrDefault<double>(serviciosEntrantesListItem.precio, 0.0) + valueOrDefault<double>(serviciosEntrantesListItem.precioAdicionales, 0.0))).toString(),
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                 font: GoogleFonts.inter(
                                                                                                   fontWeight: FontWeight.w600,
@@ -1900,7 +1896,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                 iconColor: FlutterFlowTheme.of(context).accent3,
                                                                                 color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                      font: GoogleFonts.interTight(
+                                                                                      font: GoogleFonts.inter(
                                                                                         fontWeight: FontWeight.w600,
                                                                                         fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                       ),
@@ -1941,7 +1937,7 @@ class _SolicitudesCopyWidgetState extends State<SolicitudesCopyWidget> {
                                                                                         iconColor: FlutterFlowTheme.of(context).success,
                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                         textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                              font: GoogleFonts.interTight(
+                                                                                              font: GoogleFonts.inter(
                                                                                                 fontWeight: FontWeight.w600,
                                                                                                 fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
                                                                                               ),

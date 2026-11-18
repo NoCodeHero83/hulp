@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-import 'package:flutter/foundation.dart';
 import 'form_field_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +12,7 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
     this.searchHintText,
     required this.options,
     this.optionLabels,
+    this.selectedMaxLines = 1,
     this.onChanged,
     this.onMultiSelectChanged,
     this.icon,
@@ -57,6 +57,7 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
   final String? searchHintText;
   final List<T> options;
   final List<String>? optionLabels;
+  final int selectedMaxLines;
   final Function(T?)? onChanged;
   final Function(List<T>?)? onMultiSelectChanged;
   final Widget? icon;
@@ -90,6 +91,17 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
 
 class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
   bool get isMultiSelect => widget.isMultiSelect;
+  Color get _focusedColor =>
+      widget.focusBorderColor ?? Theme.of(context).colorScheme.primary;
+  double? get _alturaAdaptada {
+    final height = widget.height;
+    if (height == null) return null;
+
+    final fontSize = widget.textStyle.fontSize ?? 14.0;
+    final escala = MediaQuery.textScalerOf(context).scale(fontSize) / fontSize;
+    return escala > 1 ? height * escala : height;
+  }
+
   FormFieldController<T?> get controller => widget.controller!;
   FormFieldController<List<T>?> get multiSelectController =>
       widget.multiSelectController!;
@@ -160,12 +172,11 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
   @override
   Widget build(BuildContext context) {
     final dropdownWidget = _buildDropdownWidget();
-    final effectiveBorderColor = _isFocused && widget.focusBorderColor != null
-        ? widget.focusBorderColor!
-        : widget.borderColor;
+    final effectiveBorderColor =
+        _isFocused ? _focusedColor : widget.borderColor;
     return SizedBox(
       width: widget.width,
-      height: widget.height,
+      height: _alturaAdaptada,
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -290,7 +301,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
     final overlayColor = WidgetStateProperty.resolveWith<Color?>((states) =>
         states.contains(WidgetState.focused) ? Colors.transparent : null);
     final iconStyleData = widget.icon != null
-        ? IconStyleData(icon: widget.icon!)
+        ? IconStyleData(icon: _iconForFocus(widget.icon!, _focusedColor))
         : const IconStyleData();
     return DropdownButton2<T>(
       value: currentValue,
@@ -334,7 +345,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
                           .join(', ')
                       : optionLabels[item]!,
                   style: widget.textStyle,
-                  maxLines: 1,
+                  maxLines: widget.selectedMaxLines,
                 )),
           )
           .toList(),
@@ -386,6 +397,28 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
           _focusNode.requestFocus();
         }
       },
+    );
+  }
+
+  Widget _iconForFocus(Widget icon, Color focusedColor) {
+    if (icon is Icon) {
+      return Icon(
+        icon.icon,
+        key: icon.key,
+        size: icon.size,
+        fill: icon.fill,
+        weight: icon.weight,
+        grade: icon.grade,
+        opticalSize: icon.opticalSize,
+        color: _isFocused ? focusedColor : icon.color,
+        shadows: icon.shadows,
+        semanticLabel: icon.semanticLabel,
+        textDirection: icon.textDirection,
+      );
+    }
+    return IconTheme(
+      data: IconThemeData(color: _isFocused ? focusedColor : null),
+      child: icon,
     );
   }
 }

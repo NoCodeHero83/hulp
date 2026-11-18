@@ -1,5 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/men_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -15,6 +16,8 @@ import 'package:provider/provider.dart';
 
 class DatospersonalesModel extends FlutterFlowModel<DatospersonalesWidget> {
   ///  State fields for stateful widgets in this page.
+
+  late MenModel menModel;
 
   final formKey = GlobalKey<FormState>();
   // State field(s) for nombre widget.
@@ -80,6 +83,7 @@ class DatospersonalesModel extends FlutterFlowModel<DatospersonalesWidget> {
 
   @override
   void initState(BuildContext context) {
+    menModel = createModel(context, () => MenModel());
     nombreTextControllerValidator = _nombreTextControllerValidator;
     apellidoTextControllerValidator = _apellidoTextControllerValidator;
     numeroDocumentoTextControllerValidator =
@@ -89,6 +93,7 @@ class DatospersonalesModel extends FlutterFlowModel<DatospersonalesWidget> {
 
   @override
   void dispose() {
+    menModel.dispose();
     nombreFocusNode?.dispose();
     nombreTextController?.dispose();
 

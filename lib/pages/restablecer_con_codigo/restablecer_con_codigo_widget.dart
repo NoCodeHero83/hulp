@@ -54,7 +54,8 @@ class _RestablecerConCodigoWidgetState
   String? _validateCode(String? value) {
     final v = value?.trim() ?? '';
     if (v.isEmpty) return 'Ingresa el código de 6 dígitos';
-    if (!RegExp(r'^\d{6}$').hasMatch(v)) return 'El código debe tener 6 dígitos';
+    if (!RegExp(r'^\d{6}$').hasMatch(v))
+      return 'El código debe tener 6 dígitos';
     return null;
   }
 
@@ -191,11 +192,11 @@ class _RestablecerConCodigoWidgetState
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -203,10 +204,12 @@ class _RestablecerConCodigoWidgetState
           ),
           title: Text(
             'Restablecer contraseña',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(fontWeight: FontWeight.w600),
+                  font: GoogleFonts.inter(fontWeight: FontWeight.w600),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,
                 ),
@@ -220,8 +223,8 @@ class _RestablecerConCodigoWidgetState
             child: Form(
               key: _formKey,
               child: Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    24.0, 24.0, 24.0, 24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,7 +327,7 @@ class _RestablecerConCodigoWidgetState
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600),
                                   color: Colors.white,
                                   fontSize: 16.0,
@@ -344,16 +347,15 @@ class _RestablecerConCodigoWidgetState
                         onTap: _model.isLoading ? null : () => _onResend(),
                         child: Text(
                           '¿No recibiste el código? Reenviar',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                font: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500),
-                                color: FlutterFlowTheme.of(context).primary,
-                                fontSize: 14.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w500),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                         ),
                       ),
                     ),
@@ -427,7 +429,7 @@ class _RestablecerConCodigoWidgetState
                 const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
           ),
           style: FlutterFlowTheme.of(context).headlineSmall.override(
-                font: GoogleFonts.interTight(fontWeight: FontWeight.w700),
+                font: GoogleFonts.inter(fontWeight: FontWeight.w700),
                 letterSpacing: 12.0,
                 fontWeight: FontWeight.w700,
               ),
@@ -506,7 +508,7 @@ class _RestablecerConCodigoWidgetState
                 isVisible
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: FlutterFlowTheme.of(context).secondaryText,
+                color: null,
                 size: 22.0,
               ),
             ),

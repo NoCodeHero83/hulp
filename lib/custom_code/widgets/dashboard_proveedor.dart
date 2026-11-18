@@ -2,6 +2,7 @@
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/hulp_colors.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
@@ -65,12 +66,12 @@ class _DashboardProveedorState extends State<DashboardProveedor> {
   String filtroActivo = 'servicios_realizados';
 
   // Colores para gráficos
-  final Color colorPrimario = const Color(0xFF4CAF50);
+  final Color colorPrimario = HulpColors.brand;
   final List<Color> coloresPie = [
-    const Color(0xFF4CAF50), // Verde - Plomería
-    const Color(0xFFE8F5E8), // Verde claro - Limpieza
-    const Color(0xFF9E9E9E), // Gris - Cerrajería
-    const Color(0xFFEF5350), // Rojo - Mudanza
+    HulpColors.brand,
+    HulpColors.brandSoft,
+    HulpColors.textMuted,
+    HulpColors.error,
   ];
 
   @override
@@ -80,19 +81,17 @@ class _DashboardProveedorState extends State<DashboardProveedor> {
     // Tiempo real: recarga las métricas cuando cambian las solicitudes del
     // proveedor (p. ej. al finalizar un servicio). Supabase Realtime no emite
     // sobre vistas, por eso se escucha la tabla base `solicitudes_servicio`.
-    _solicitudesSub = SupaFlow.client
-        .from('solicitudes_servicio')
-        .stream(primaryKey: ['id'])
+    _solicitudesSub = SupaFlow.solicitudesStream()
         .eq('profesional_id', widget.proveedorId)
         .listen((_) {
-          if (_primeraEmisionStream) {
-            _primeraEmisionStream = false;
-            return;
-          }
-          if (mounted) {
-            _cargarDatos();
-          }
-        });
+      if (_primeraEmisionStream) {
+        _primeraEmisionStream = false;
+        return;
+      }
+      if (mounted) {
+        _cargarDatos();
+      }
+    });
   }
 
   @override
@@ -196,7 +195,9 @@ class _DashboardProveedorState extends State<DashboardProveedor> {
 
         final response = await SupaFlow.client
             .from('solicitudes_servicio')
-            .select('precio_base, precio_adicionales, precio')
+            .select(SupaFlow.finanzasV1Habilitadas
+                ? 'precio_base, precio_adicionales, precio, finanzas_version, pago_proveedor, saldo_transferir'
+                : 'precio_base, precio_adicionales, precio')
             .eq('profesional_id', widget.proveedorId)
             .eq('estado', 'finalizadas')
             .gte('fecha', fechaInicio)
@@ -217,7 +218,9 @@ class _DashboardProveedorState extends State<DashboardProveedor> {
             final adicionales =
                 double.tryParse((item['precio_adicionales'] ?? 0).toString()) ??
                     0;
-            total += calcularIngresoProveedor(base + adicionales);
+            total += item['finanzas_version'] == null
+                ? calcularIngresoProveedor(base + adicionales)
+                : (item['pago_proveedor'] as num).toDouble();
           }
         }
 
@@ -438,9 +441,10 @@ class _DashboardProveedorState extends State<DashboardProveedor> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: isActive ? Colors.grey[800] : Colors.transparent,
+                  color: isActive ? HulpColors.brand : Colors.transparent,
                   border: Border.all(
-                    color: isActive ? Colors.grey[800]! : Colors.grey[400]!,
+                    color:
+                        isActive ? HulpColors.brand : HulpColors.borderStrong,
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(20),
@@ -448,9 +452,9 @@ class _DashboardProveedorState extends State<DashboardProveedor> {
                 child: Text(
                   filtro['label']!,
                   style: TextStyle(
-                    color: isActive ? Colors.white : Colors.grey[600],
+                    color: isActive ? Colors.white : HulpColors.textSecondary,
                     fontWeight: FontWeight.w500,
-                    fontSize: 11,
+                    fontSize: 12,
                   ),
                 ),
               ),

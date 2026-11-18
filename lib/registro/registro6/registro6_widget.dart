@@ -54,7 +54,7 @@ class _Registro6WidgetState extends State<Registro6Widget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
@@ -62,11 +62,11 @@ class _Registro6WidgetState extends State<Registro6Widget> {
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
-            buttonSize: 60.0,
+            buttonSize: 48.0,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -74,15 +74,17 @@ class _Registro6WidgetState extends State<Registro6Widget> {
           ),
           title: Text(
             'Registro',
+            maxLines: MediaQuery.textScalerOf(context).scale(20) > 20 ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
+                  font: GoogleFonts.inter(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   letterSpacing: 0.0,
                   fontWeight:
                       FlutterFlowTheme.of(context).headlineMedium.fontWeight,
@@ -92,7 +94,7 @@ class _Registro6WidgetState extends State<Registro6Widget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.5,
+          elevation: 0,
         ),
         body: SafeArea(
           // Reserva el hueco de la barra de navegacion del movil:
@@ -104,7 +106,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -126,7 +129,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                             .bodyMedium
                                             .fontStyle,
                                       ),
-                                      color: FlutterFlowTheme.of(context).primary,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       fontSize: 20.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
@@ -144,30 +148,31 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                 ),
                               )
                             ],
-                            style:
-                                FlutterFlowTheme.of(context).bodyMedium.override(
-                                      font: GoogleFonts.inter(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      color: Color(0xFF0B6244),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.inter(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  color: Color(0xFF0B6244),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(1.0, 16.0, 0.0, 0.0),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              1.0, 16.0, 0.0, 0.0),
                           child: Text(
                             'Queremos recordarte algunos puntos clave sobre el uso de Hulp como proveedor.',
                             style: FlutterFlowTheme.of(context)
@@ -181,8 +186,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
-                                  color:
-                                      FlutterFlowTheme.of(context).secondaryText,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   fontSize: 17.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
@@ -226,14 +231,15 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primary,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
                                                   fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -320,7 +326,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Align(
                                         alignment:
@@ -345,12 +352,14 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                                                 .bodyMedium
                                                                 .fontStyle,
                                                       ),
-                                                      color: FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
                                                       fontSize: 20.0,
                                                       letterSpacing: 0.0,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -371,7 +380,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                                 .bodyMedium
                                                 .override(
                                                   font: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.normal,
+                                                    fontWeight:
+                                                        FontWeight.normal,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -382,7 +392,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.normal,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -394,8 +405,9 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                         alignment:
                                             AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              10.0, 16.0, 10.0, 16.0),
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 16.0, 10.0, 16.0),
                                           child: Text(
                                             'Todos los pagos se procesan a través de nuestra pasarela oficial. Por cada servicio realizado, Hulp retiene una comisión minoritaria, y el valor restante se transfiere semanalmente a la cuenta registrada. Hulp no aplica comisiones sobre materiales pagados directamente a través de la app.\nCualquier cobro o pago realizado por fuera de la plataforma con usuarios de Hulp puede resultar en sanciones o la suspensión de tu cuenta.\n\nEn caso de que un cliente presente una queja o solicite un reembolso, el pago podrá ser retenido temporalmente hasta que se resuelva el caso. La transparencia y el uso adecuado del sistema de pagos son esenciales para continuar operando dentro de la plataforma.\n\n.',
                                             textAlign: TextAlign.start,
@@ -414,17 +426,19 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryText,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
                                                   fontSize: 16.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontWeight,
                                                   fontStyle:
-                                                      FlutterFlowTheme.of(context)
+                                                      FlutterFlowTheme.of(
+                                                              context)
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
@@ -447,7 +461,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -467,12 +482,13 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                       .override(
                                         font: GoogleFonts.inter(
                                           fontWeight: FontWeight.w600,
-                                          fontStyle: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .fontStyle,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
-                                        color:
-                                            FlutterFlowTheme.of(context).primary,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                         fontSize: 20.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
@@ -550,7 +566,7 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -570,12 +586,14 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                         child: Checkbox(
                           value: _model.checkboxValue ??= false,
                           onChanged: (newValue) async {
-                            safeSetState(() => _model.checkboxValue = newValue!);
+                            safeSetState(
+                                () => _model.checkboxValue = newValue!);
                           },
                           side: (FlutterFlowTheme.of(context).alternate != null)
                               ? BorderSide(
                                   width: 2,
-                                  color: FlutterFlowTheme.of(context).alternate!,
+                                  color:
+                                      FlutterFlowTheme.of(context).alternate!,
                                 )
                               : null,
                           activeColor: FlutterFlowTheme.of(context).primary,
@@ -660,8 +678,8 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                 'direccion': FFAppState().registro.direccion,
                                 'foto_perfil_url': FFAppState().registro.foto,
                                 'rol': 'proveedor',
-                                'fecha_registro':
-                                    supaSerialize<DateTime>(getCurrentTimestamp),
+                                'fecha_registro': supaSerialize<DateTime>(
+                                    getCurrentTimestamp),
                                 'anios_experiencia':
                                     FFAppState().registro.anosexp,
                                 'registro_tributario':
@@ -773,7 +791,10 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                                           .registro
                                           .numerodecuenta
                                           .isNotEmpty ||
-                                      FFAppState().registro.entidad.isNotEmpty) {
+                                      FFAppState()
+                                          .registro
+                                          .entidad
+                                          .isNotEmpty) {
                                     await CuentasBancariasTable().insert({
                                       'usuario_id': currentUserUid,
                                       'entidad_bancaria':
@@ -806,14 +827,14 @@ class _Registro6WidgetState extends State<Registro6Widget> {
                       options: FFButtonOptions(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: 44.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
