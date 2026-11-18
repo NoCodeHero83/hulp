@@ -137,7 +137,7 @@ class _ChatIAWidgetState extends State<ChatIAWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          await launchURL('https://wa.me/573112250105');
+                          await launchURL('https://wa.me/573117640067');
                         },
                         child: Text(
                           '👉  Ir a soporte por WhatsApp',

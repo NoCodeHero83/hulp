@@ -1,4 +1,5 @@
 import '/backend/transiciones_solicitud.dart';
+import '/backend/solicitudes_stream.dart';
 import '/components/desglose_servicio_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -29,6 +30,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
 import 'solicitudes_model.dart';
 export 'solicitudes_model.dart';
 
@@ -43,6 +45,9 @@ class SolicitudesWidget extends StatefulWidget {
 }
 
 enum _PestanaSolicitudesProveedor { entrantes, aceptadas, historial }
+
+const _ofertasValidadasEnServidor =
+    FFDevEnvironmentValues.currentEnvironment == 'Test';
 
 IconData _iconoServicioSolicitud(String? nombre) {
   final servicio = nombre?.toLowerCase() ?? '';
@@ -91,6 +96,7 @@ class _FiltrosSolicitudesProveedor {
 
 class _SolicitudesWidgetState extends State<SolicitudesWidget> {
   late SolicitudesModel _model;
+  StreamSubscription<List<SolicitudesServicioRow>>? _conexionEntrantes;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _transicionesPendientes = <String>{};
@@ -193,6 +199,7 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
     List<ProfesionalServiciosRow> servicios,
   ) {
     if (!_esEntrante(solicitud)) return false;
+    if (_ofertasValidadasEnServidor) return true;
     if (!usaTransicionesSprint3) return _model.esDeMiCiudad(solicitud.ciudadId);
     if (solicitud.profesionalId != null) {
       return solicitud.profesionalId == currentUserUid;
@@ -480,6 +487,20 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
 
   Stream<List<SolicitudesServicioRow>> _solicitudesPorServicio(
       List<ProfesionalServiciosRow> servicios) {
+    if (_ofertasValidadasEnServidor) {
+      // Las ofertas sin proveedor no llegan por Realtime al dispositivo.
+      final entrantes = SolicitudesStream(
+        SupaFlow.client,
+        filters: const {'estado': 'entrantes'},
+        refreshInterval: const Duration(seconds: 8),
+      )
+          .map((rows) => rows.map(SolicitudesServicioRow.new).toList())
+          .publishReplay(maxSize: 1);
+      // La lista y el contador comparten la lectura aunque cambie la pestaña.
+      unawaited(_conexionEntrantes?.cancel());
+      _conexionEntrantes = entrantes.connect();
+      return entrantes;
+    }
     if (usaTransicionesSprint3 && servicios.isEmpty) {
       return Stream.multi((controller) {
         controller.add(const <SolicitudesServicioRow>[]);
@@ -514,13 +535,17 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
     if (!_transicionesPendientes.add(solicitud.id)) return;
     safeSetState(() {});
     try {
-      final nueva = await transicionarSolicitud(solicitud.id, accion);
+      final nueva = await transicionarSolicitud(
+        solicitud.id,
+        accion,
+        publicacionId: solicitud.getField<String>('publicacion_id'),
+      );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(accion.notificacion)),
         );
       }
-      if (nueva) {
+      if (nueva && accion != AccionSolicitud.rechazar) {
         try {
           await SendNotificationUserCall.call(
             userIdSupabase: solicitud.usuarioId,
@@ -640,6 +665,7 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
 
   @override
   void dispose() {
+    unawaited(_conexionEntrantes?.cancel());
     _busquedaSolicitudes.dispose();
     _model.dispose();
 
@@ -1020,14 +1046,16 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
                                                             builder: (context,
                                                                 solicitudesSnapshot) {
                                                               var entrantesDisponibles =
-                                                                  cantidadEntrantesHeader;
+                                                                  _ofertasValidadasEnServidor
+                                                                      ? 0
+                                                                      : cantidadEntrantesHeader;
                                                               if (solicitudesSnapshot
                                                                   .hasData) {
                                                                 final porServicio =
                                                                     solicitudesSnapshot
                                                                         .data!;
                                                                 final solicitudesEntrantes =
-                                                                    usaTransicionesSprint3
+                                                                    usaTransicionesSprint3 && !_ofertasValidadasEnServidor
                                                                         ? {
                                                                             for (final solicitud
                                                                                 in porServicio)
@@ -1158,7 +1186,7 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
                                                                         snapshot
                                                                             .data!;
                                                                     final solicitudesEntrantes =
-                                                                        usaTransicionesSprint3
+                                                                        usaTransicionesSprint3 && !_ofertasValidadasEnServidor
                                                                             ? {
                                                                                 for (final solicitud in solicitudesPorServicio) solicitud.id: solicitud,
                                                                                 for (final solicitud in containerSolicitudesServicioRowList) solicitud.id: solicitud,
@@ -1573,6 +1601,11 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
                                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                                           mainAxisAlignment: MainAxisAlignment.end,
                                                                                                           children: [
+                                                                                                            if (SupaFlow.sprint4Habilitado && serviciosentItem.getField<String>('tipo_asignacion') == 'directa')
+                                                                                                              TextButton(
+                                                                                                                onPressed: _transicionesPendientes.contains(serviciosentItem.id) ? null : () => _registrarAccion(serviciosentItem, AccionSolicitud.rechazar),
+                                                                                                                child: const Text('Rechazar'),
+                                                                                                              ),
                                                                                                             Flexible(
                                                                                                               child: Builder(
                                                                                                                 builder: (context) => FFButtonWidget(
@@ -2494,11 +2527,13 @@ class _SolicitudesWidgetState extends State<SolicitudesWidget> {
                                                                                                                     },
                                                                                                                     child: CancelarServicioWidget(
                                                                                                                       solicitudServicioId: solicitudesAceptadasxItem.id,
+                                                                                                                      publicacionId: solicitudesAceptadasxItem.getField<String>('publicacion_id'),
                                                                                                                     ),
                                                                                                                   ),
                                                                                                                 );
                                                                                                               },
                                                                                                             );
+                                                                                                            if (SupaFlow.sprint4Habilitado) _recargarSolicitudes();
                                                                                                           },
                                                                                                           text: 'Cancelar',
                                                                                                           icon: Icon(

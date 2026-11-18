@@ -8,6 +8,8 @@ bool get usaTransicionesSprint3 => true;
 
 enum AccionSolicitud {
   aceptar('aceptar', 'Aceptar', 'Tu solicitud ha sido aceptada'),
+  rechazar('rechazar', 'Rechazar', 'Rechazaste la oferta'),
+  cancelar('cancelar_proveedor', 'Cancelar', 'Cancelaste la asignación'),
   enCamino('en_camino', 'En camino', 'Tu solicitud está en camino'),
   empece('empece', 'Empecé', 'Tu solicitud está en curso'),
   termine('termine', 'Terminé', 'Tu solicitud ha sido finalizada');
@@ -51,12 +53,18 @@ AccionSolicitud? siguienteAccionSolicitud({
 }
 
 /// Devuelve true solo si el backend acaba de aplicar la transición.
-Future<bool> transicionarSolicitud(String id, AccionSolicitud accion) async {
+Future<bool> transicionarSolicitud(
+  String id,
+  AccionSolicitud accion, {
+  String? publicacionId,
+}) async {
   final client = SupaFlow.client;
   final actor = client.auth.currentUser?.id;
   if (actor == null) throw StateError('Vuelve a iniciar sesión.');
   final prefs = SharedPreferencesAsync();
-  final clave = 'sprint3:$actor:$id:${accion.codigo}';
+  final clave = publicacionId == null
+      ? 'sprint3:$actor:$id:${accion.codigo}'
+      : 'sprint4:$actor:$id:$publicacionId:${accion.codigo}';
   final previo = await prefs.getString(clave);
   final idempotencia = previo ?? const Uuid().v4();
   if (previo == null) await prefs.setString(clave, idempotencia);
@@ -66,6 +74,7 @@ Future<bool> transicionarSolicitud(String id, AccionSolicitud accion) async {
     'id': id,
     'operacion': accion.codigo,
     'idempotencia_id': idempotencia,
+    if (SupaFlow.sprint4Habilitado) 'publicacion_id': publicacionId,
   });
   final datos = respuesta.data;
   if (datos is! Map || datos['repetido'] is! bool) {
