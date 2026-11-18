@@ -1,3 +1,4 @@
+import '/components/encabezado_principal_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -162,13 +163,7 @@ class _SuccesVerificationWidgetState extends State<SuccesVerificationWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          actions: [],
-          centerTitle: false,
-          elevation: 0.0,
-        ),
+        appBar: const EncabezadoPrincipalWidget(titulo: 'Verificación'),
         body: SafeArea(
           top: true,
           child: Column(
@@ -263,7 +258,7 @@ class _SuccesVerificationWidgetState extends State<SuccesVerificationWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
                                     .override(
-                                      font: GoogleFonts.interTight(
+                                      font: GoogleFonts.inter(
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .displaySmall
                                             .fontWeight,

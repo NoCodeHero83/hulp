@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '/backend/supabase/database/tables/ciudades.dart';
+import '/components/encabezado_principal_widget.dart';
 import '/environment_values.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/places_service.dart';
@@ -43,6 +44,7 @@ class PantallaMapaUbicacion extends StatefulWidget {
     required this.ciudades,
     this.inicial,
     this.direccionInicial,
+    this.separarCiudad = false,
   });
 
   /// Las ciudades con cobertura. Si el punto cae fuera, no se deja confirmar.
@@ -51,6 +53,7 @@ class PantallaMapaUbicacion extends StatefulWidget {
   /// Para volver a entrar y corregir sin empezar de cero.
   final Coordenadas? inicial;
   final String? direccionInicial;
+  final bool separarCiudad;
 
   @override
   State<PantallaMapaUbicacion> createState() => _PantallaMapaUbicacionState();
@@ -82,7 +85,8 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
   @override
   void initState() {
     super.initState();
-    _places = PlacesService(FFDevEnvironmentValues().googleMapsApiKey);
+    _places = PlacesService(FFDevEnvironmentValues().googleMapsApiKey,
+        separarCiudad: widget.separarCiudad);
     final ini = widget.inicial;
     if (ini != null) {
       _centro = LatLng(ini.latitud, ini.longitud);
@@ -238,6 +242,9 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
 
     return Scaffold(
       backgroundColor: tema.secondaryBackground,
+      appBar: const EncabezadoPrincipalWidget.subpantalla(
+        titulo: 'Ubicación del servicio',
+      ),
       body: Stack(
         children: [
           GoogleMap(
@@ -263,8 +270,7 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
             child: Center(
               child: Transform.translate(
                 offset: const Offset(0, -18),
-                child: Icon(Icons.location_on,
-                    size: 44.0, color: tema.primary),
+                child: Icon(Icons.location_on, size: 44.0, color: tema.primary),
               ),
             ),
           ),
@@ -275,7 +281,6 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
                 _BarraSuperior(
                   controller: _buscarCtrl,
                   onChanged: _buscar,
-                  onVolver: () => Navigator.of(context).pop(),
                 ),
                 if (_sugerencias.isNotEmpty)
                   Container(
@@ -291,22 +296,20 @@ class _PantallaMapaUbicacionState extends State<PantallaMapaUbicacion> {
                       children: _sugerencias
                           .take(5)
                           .map((s) => _FilaSugerencia(
-                              sugerencia: s,
-                              onTap: () => _elegirSugerencia(s)))
+                              sugerencia: s, onTap: () => _elegirSugerencia(s)))
                           .toList(),
                     ),
                   ),
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                      0.0, 0.0, 12.0, 8.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 8.0),
                   child: Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: _BotonRedondo(
                       icono: Icons.my_location_rounded,
                       cargando: _buscandoGps,
-                      onTap:
-                          _buscandoGps ? null : () => _usarUbicacionActual(),
+                      onTap: _buscandoGps ? null : () => _usarUbicacionActual(),
                     ),
                   ),
                 ),
@@ -336,12 +339,10 @@ class _BarraSuperior extends StatelessWidget {
   const _BarraSuperior({
     required this.controller,
     required this.onChanged,
-    required this.onVolver,
   });
 
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
-  final VoidCallback onVolver;
 
   @override
   Widget build(BuildContext context) {
@@ -358,11 +359,7 @@ class _BarraSuperior extends StatelessWidget {
         ),
         child: Row(
           children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back_rounded,
-                  size: 22.0, color: tema.primaryText),
-              onPressed: onVolver,
-            ),
+            const SizedBox(width: 16.0),
             Expanded(
               child: TextFormField(
                 controller: controller,
@@ -464,7 +461,8 @@ class _PanelInferior extends StatelessWidget {
           ),
           if (ciudad != null && !sinCobertura)
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(26.0, 4.0, 0.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(26.0, 4.0, 0.0, 0.0),
               child: Text(
                 '$ciudad · con cobertura',
                 style: tema.bodySmall.override(
@@ -586,7 +584,7 @@ class _FilaSugerencia extends StatelessWidget {
                       style: tema.bodySmall.override(
                         font: GoogleFonts.inter(),
                         color: tema.secondaryText,
-                        fontSize: 11.0,
+                        fontSize: 12,
                         letterSpacing: 0.0,
                       ),
                     ),

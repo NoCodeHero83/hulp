@@ -1,3 +1,4 @@
+import '/components/encabezado_principal_widget.dart';
 import '/auth/base_auth_user_provider.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/menu_bar_widget.dart';
@@ -65,6 +66,10 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
         // el menu inferior sube y queda pegado sobre las teclas.
         resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Buscar servicios',
+          alVolver: context.safePop,
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -76,22 +81,6 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 56.0, 16.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.network(
-                          'https://zexegravzidwloxeimxx.supabase.co/storage/v1/object/public/archivos/imageneshulp/Logo.png',
-                          width: 100.0,
-                          height: 36.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
@@ -100,7 +89,7 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                         focusNode: _model.textFieldFocusNode,
                         onChanged: (_) => EasyDebounce.debounce(
                           '_model.textController',
-                          Duration(milliseconds: 2000),
+                          Duration(milliseconds: 300),
                           () async {
                             safeSetState(() => _model.requestCompleter = null);
                             await _model.waitForRequestCompleted();
@@ -161,7 +150,7 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 0.5,
                             ),
                             borderRadius: BorderRadius.circular(20.0),
@@ -184,7 +173,6 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                           fillColor: FlutterFlowTheme.of(context).customColor1,
                           prefixIcon: Icon(
                             Icons.search_rounded,
-                            color: FlutterFlowTheme.of(context).tertiary,
                             size: 24.0,
                           ),
                         ),
@@ -215,7 +203,7 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                     child: Container(
                       decoration: BoxDecoration(),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional.topCenter,
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 0.0),
@@ -575,7 +563,7 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                                                                         .titleSmall
                                                                         .override(
                                                                           font:
-                                                                              GoogleFonts.interTight(
+                                                                              GoogleFonts.inter(
                                                                             fontWeight:
                                                                                 FlutterFlowTheme.of(context).titleSmall.fontWeight,
                                                                             fontStyle:
@@ -680,7 +668,7 @@ class _BusquedasWidgetState extends State<BusquedasWidget> {
                                                                         .titleSmall
                                                                         .override(
                                                                           font:
-                                                                              GoogleFonts.interTight(
+                                                                              GoogleFonts.inter(
                                                                             fontWeight:
                                                                                 FlutterFlowTheme.of(context).titleSmall.fontWeight,
                                                                             fontStyle:

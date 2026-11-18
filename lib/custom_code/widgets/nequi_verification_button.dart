@@ -341,7 +341,7 @@ class _NequiVerificationButtonState extends State<NequiVerificationButton> {
                     Text(
                       'Esperando verificación',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -426,7 +426,7 @@ class _NequiVerificationButtonState extends State<NequiVerificationButton> {
                 Text(
                   '¡Nequi vinculado!',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

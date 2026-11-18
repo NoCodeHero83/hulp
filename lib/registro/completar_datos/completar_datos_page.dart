@@ -1,9 +1,11 @@
+import '/components/encabezado_principal_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/hulp_colors.dart';
 import '/registro/login/login_widget.dart';
 import '/registro/pages/home_page/home_page_widget.dart';
 
@@ -27,13 +29,13 @@ class CompletarDatosPage extends StatefulWidget {
   State<CompletarDatosPage> createState() => _CompletarDatosPageState();
 }
 
-const _kPrimary = Color(0xFF1A3C2E);
-const _kAccent = Color(0xFF2D8653);
-const _kBg = Color(0xFFF7F8F9);
-const _kBorde = Color(0xFFD9D9D9);
-const _kError = Color(0xFFD32F2F);
-const _kTextPrimary = Color(0xFF1A1A1A);
-const _kTextSecondary = Color(0xFF6B7280);
+const _kPrimary = HulpColors.brand;
+const _kAccent = HulpColors.brand;
+const _kBg = HulpColors.inputSurface;
+const _kBorde = HulpColors.border;
+const _kError = HulpColors.error;
+const _kTextPrimary = HulpColors.textPrimary;
+const _kTextSecondary = HulpColors.textMuted;
 
 /// Los que ya usa el registro normal. Se respetan tal cual para no añadir una
 /// cuarta forma de escribir «Cédula de ciudadanía» a las que ya hay en la base.
@@ -216,33 +218,19 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
       backgroundColor: Colors.white,
       // El teclado se superpone en vez de encoger la pantalla.
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Completa tus datos',
-          style: GoogleFonts.inter(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: _kTextPrimary,
-          ),
-        ),
-        actions: [
-          // Una salida siempre: si alguien no quiere dar sus datos, que pueda
-          // irse en vez de quedarse encerrado en esta pantalla.
-          TextButton(
-            onPressed: _guardando ? null : _cerrarSesion,
-            child: Text(
-              'Salir',
-              style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: _kTextSecondary,
-              ),
+      appBar: EncabezadoPrincipalWidget(
+        titulo: 'Completa tus datos',
+        accion: TextButton(
+          onPressed: _guardando ? null : _cerrarSesion,
+          child: Text(
+            'Salir',
+            style: GoogleFonts.inter(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: _kTextSecondary,
             ),
           ),
-        ],
+        ),
       ),
       body: _cargando
           ? const Center(child: CircularProgressIndicator(color: _kAccent))
@@ -286,10 +274,10 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                     child: SizedBox(
                       width: double.infinity,
-                      height: 48,
                       child: ElevatedButton(
                         onPressed: _guardando ? null : _guardar,
                         style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(0, 48),
                           backgroundColor: _kPrimary,
                           disabledBackgroundColor: _kPrimary.withValues(alpha: 0.5),
                           shape: RoundedRectangleBorder(
@@ -308,7 +296,7 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
                             : Text(
                                 'Guardar y continuar',
                                 style: GoogleFonts.inter(
-                                  fontSize: 15,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
                                 ),
@@ -329,7 +317,7 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
       builder: (dialogo) => AlertDialog(
         title: Text(
           '¿Salir sin completar?',
-          style: GoogleFonts.inter(fontSize: 17, fontWeight: FontWeight.w600),
+          style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         content: Text(
           'Se cerrará tu sesión. Podrás volver a entrar cuando quieras, y te '
@@ -374,7 +362,7 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
           Text(
             obligatorio ? '$etiqueta *' : etiqueta,
             style: GoogleFonts.inter(
-              fontSize: 13,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               color: _kTextSecondary,
             ),
@@ -388,10 +376,10 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
             onChanged: (_) {
               if (error != null) setState(() => _errores.remove(clave));
             },
-            style: GoogleFonts.inter(fontSize: 15, color: _kTextPrimary),
+            style: GoogleFonts.inter(fontSize: 16, color: _kTextPrimary),
             decoration: InputDecoration(
               prefixText: prefijo,
-              prefixStyle: GoogleFonts.inter(fontSize: 15, color: _kTextSecondary),
+              prefixStyle: GoogleFonts.inter(fontSize: 16, color: _kTextSecondary),
               filled: true,
               fillColor: _kBg,
               contentPadding:
@@ -434,7 +422,7 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
           Text(
             'Tipo de documento (opcional)',
             style: GoogleFonts.inter(
-              fontSize: 13,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               color: _kTextSecondary,
             ),
@@ -453,10 +441,10 @@ class _CompletarDatosPageState extends State<CompletarDatosPage> {
                 isExpanded: true,
                 hint: Text(
                   'Selecciona',
-                  style: GoogleFonts.inter(fontSize: 15, color: _kTextSecondary),
+                  style: GoogleFonts.inter(fontSize: 16, color: _kTextSecondary),
                 ),
                 icon: const Icon(Icons.keyboard_arrow_down, color: _kTextSecondary),
-                style: GoogleFonts.inter(fontSize: 15, color: _kTextPrimary),
+                style: GoogleFonts.inter(fontSize: 16, color: _kTextPrimary),
                 dropdownColor: Colors.white,
                 items: _tiposDocumento
                     .map((t) => DropdownMenuItem(value: t, child: Text(t)))

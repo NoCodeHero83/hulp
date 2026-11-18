@@ -1,6 +1,8 @@
+import '/backend/solicitudes_stream.dart';
+import '/backend/solicitudes_http_client.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '/environment_values.dart';
 
 export 'database/database.dart';
@@ -14,6 +16,8 @@ class SupaFlow {
 
   final _supabase = Supabase.instance.client;
   static SupabaseClient get client => instance._supabase;
+  static SolicitudesStream solicitudesStream() => SolicitudesStream(client);
+  static bool get finanzasV1Habilitadas => true;
 
   /// En el emulador Android, 'localhost' / '127.0.0.1' apunta al propio
   /// emulador, no al host. Se reemplaza por '10.0.2.2' automáticamente
@@ -29,14 +33,18 @@ class SupaFlow {
     return url;
   }
 
-  static Future initialize() => Supabase.initialize(
-        url: _resolveUrl(FFDevEnvironmentValues().supabaseUrl),
-        headers: {
-          'X-Client-Info': 'flutterflow',
-        },
-        anonKey: FFDevEnvironmentValues().supabaseAnonKey,
-        debug: !FFDevEnvironmentValues().isProduction,
-        authOptions:
-            FlutterAuthClientOptions(authFlowType: AuthFlowType.implicit),
-      );
+  static Future initialize() {
+    final environment = FFDevEnvironmentValues();
+    final url = _resolveUrl(environment.supabaseUrl);
+    return Supabase.initialize(
+      url: url,
+      httpClient: SolicitudesHttpClient(supabaseUrl: Uri.parse(url)),
+      headers: {
+        'X-Client-Info': 'flutterflow',
+      },
+      anonKey: environment.supabaseAnonKey,
+      debug: !environment.isProduction,
+      authOptions: FlutterAuthClientOptions(authFlowType: AuthFlowType.implicit),
+    );
+  }
 }

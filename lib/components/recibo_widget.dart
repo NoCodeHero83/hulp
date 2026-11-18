@@ -1,3 +1,4 @@
+import '/backend/confirmar_importe_cobro.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -27,6 +28,16 @@ class ReciboWidget extends StatefulWidget {
 
 class _ReciboWidgetState extends State<ReciboWidget> {
   late ReciboModel _model;
+  bool _esVersion1 = false;
+  Future<void> _cargarVersion() async {
+    if (!SupaFlow.finanzasV1Habilitadas || widget.recibo == null) return;
+    try {
+      final rows = await SolicitudesServicioTable().queryRows(
+          queryFn: (q) => q.eq('id', widget.recibo!.solicitudId), limit: 1);
+      if (mounted)
+        setState(() => _esVersion1 = rows.firstOrNull?.finanzasVersion == 1);
+    } catch (_) {/* Mantener el botón bloqueado si no se puede verificar. */}
+  }
 
   @override
   void setState(VoidCallback callback) {
@@ -39,6 +50,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
     super.initState();
     _model = createModel(context, () => ReciboModel());
 
+    _cargarVersion();
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -98,7 +110,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      font: GoogleFonts.interTight(
+                                      font: GoogleFonts.inter(
                                         fontWeight: FlutterFlowTheme.of(context)
                                             .headlineMedium
                                             .fontWeight,
@@ -338,7 +350,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              font: GoogleFonts.interTight(
+                                              font: GoogleFonts.inter(
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -390,7 +402,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
                                   .override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .headlineSmall
                                           .fontWeight,
@@ -422,7 +434,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
                                   .override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .headlineSmall
                                           .fontWeight,
@@ -448,11 +460,13 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             12.0, 0.0, 12.0, 0.0),
                         child: FFButtonWidget(
-                          onPressed: (widget.recibo?.estado == 'aceptado')
+                          onPressed: (widget.recibo?.estado == 'aceptado' &&
+                                  !_esVersion1)
                               ? null
                               : () async {
                                   final total = widget.recibo?.total;
-                                  if (total == null || !total.isFinite ||
+                                  if (total == null ||
+                                      !total.isFinite ||
                                       (total * 100).round() < 150000) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
@@ -529,6 +543,13 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                                     _model.aceptaceToken2,
                                     r'''$.success''',
                                   )) {
+                                    final cotizacion =
+                                        await confirmarImporteCobro(context,
+                                            solicitudId:
+                                                widget.recibo!.solicitudId,
+                                            reciboId: widget.recibo!.id,
+                                            fuente: psId);
+                                    if (cotizacion == null) return;
                                     _model.pago2 =
                                         await actions.createTransaction(
                                       FFDevEnvironmentValues().privateKey,
@@ -544,6 +565,13 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                                       widget.recibo!.id,
                                       FFDevEnvironmentValues().integrityKey,
                                       FFDevEnvironmentValues().isProduction,
+                                      revisionFinanciera:
+                                          (cotizacion['revision'] as num?)
+                                              ?.toInt(),
+                                      montoCotizado: cotizacion['monto'] == null
+                                          ? null
+                                          : ((cotizacion['monto'] as num) * 100)
+                                              .round(),
                                       personalDataAuthToken: getJsonField(
                                             _model.aceptaceToken2,
                                             r'''$.personalDataAuthToken''',
@@ -706,7 +734,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .fontWeight,
@@ -779,7 +807,7 @@ class _ReciboWidgetState extends State<ReciboWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .fontWeight,

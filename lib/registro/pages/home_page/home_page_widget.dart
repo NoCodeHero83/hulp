@@ -1,6 +1,7 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/cuadricula_categorias_widget.dart';
+import '/components/encabezado_principal_widget.dart';
 import '/components/menu_bar_widget.dart';
 import '/components/nueva_version_widget.dart';
 import '/registro/completar_datos/completar_datos_page.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '/flutter_flow/hulp_text_styles.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -113,21 +115,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     });
 
     _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
-    _model.textFieldFocusNode!.addListener(
-      () async {
-        context.pushNamed(
-          BusquedasWidget.routeName,
-          extra: <String, dynamic>{
-            '__transition_info__': TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 0),
-            ),
-          },
-        );
-      },
-    );
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -136,6 +123,68 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     _model.dispose();
 
     super.dispose();
+  }
+
+  Widget _accionNotificaciones(BuildContext context) {
+    final activado = _model.notificationEnabled;
+    const color = EncabezadoPrincipalWidget.colorTexto;
+    return Semantics(
+      button: true,
+      toggled: activado,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: () async {
+          if (activado) {
+            await actions.toggleNotification(false);
+          } else {
+            await actions.assignUserTags(currentUserUid);
+          }
+          if (!context.mounted) return;
+          safeSetState(() => _model.notificationEnabled = !activado);
+          final tema = FlutterFlowTheme.of(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                activado
+                    ? 'Notificaciones desactivadas, ya no recibirás notificaciones'
+                    : 'Notificaciones activadas, recibirás notificaciones',
+                style: tema.labelMedium.override(
+                  font: GoogleFonts.inter(
+                    fontWeight: tema.labelMedium.fontWeight,
+                    fontStyle: tema.labelMedium.fontStyle,
+                  ),
+                  color: tema.primaryBackground,
+                  letterSpacing: 0,
+                ),
+              ),
+              duration: const Duration(seconds: 4),
+              backgroundColor: tema.primary,
+            ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                activado
+                    ? Icons.notifications_none_outlined
+                    : Icons.notifications_off_outlined,
+                color: color,
+                size: 24,
+              ),
+              const SizedBox(height: 2),
+              Text(
+                activado ? 'Activado' : 'Desactivado',
+                style: GoogleFonts.inter(fontSize: 12, color: color),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -152,6 +201,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           // el menu inferior sube y queda pegado sobre las teclas.
           resizeToAvoidBottomInset: false,
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          appBar: EncabezadoPrincipalWidget(
+            titulo: 'Hulp',
+            accion: _accionNotificaciones(context),
+          ),
           body: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -164,210 +217,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 56.0, 16.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.network(
-                              'https://zexegravzidwloxeimxx.supabase.co/storage/v1/object/public/archivos/imageneshulp/Logo.png',
-                              width: 100.0,
-                              height: 36.0,
-                              fit: BoxFit.cover,
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if (_model.notificationEnabled == false)
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await actions.assignUserTags(
-                                                currentUserUid,
-                                              );
-                                              _model.notificationEnabled = true;
-                                              safeSetState(() {});
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Notificaciones activadas, recibiras notificaciones',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                  duration: Duration(
-                                                      milliseconds: 4000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                ),
-                                              );
-                                            },
-                                            child: Icon(
-                                              Icons.notifications_off_outlined,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 28.0,
-                                            ),
-                                          ),
-                                        if (_model.notificationEnabled == true)
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await actions.toggleNotification(
-                                                false,
-                                              );
-                                              _model.notificationEnabled =
-                                                  false;
-                                              safeSetState(() {});
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Notificaciones desactivadas, ya no recibiras notificaciones',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          font:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontWeight,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                  duration: Duration(
-                                                      milliseconds: 4000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                ),
-                                              );
-                                            },
-                                            child: Icon(
-                                              Icons.notifications_none,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 28.0,
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                    Text(
-                                      _model.notificationEnabled == true
-                                          ? 'Activado'
-                                          : 'Desactivado',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondary,
-                                            fontSize: 11.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           child: TextFormField(
                             controller: _model.textController,
-                            focusNode: _model.textFieldFocusNode,
                             autofocus: false,
+                            readOnly: true,
+                            onTap: () {
+                              context.pushNamed(
+                                BusquedasWidget.routeName,
+                                extra: <String, dynamic>{
+                                  '__transition_info__': TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
@@ -420,7 +288,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
+                                  color: FlutterFlowTheme.of(context).primary,
                                   width: 0.5,
                                 ),
                                 borderRadius: BorderRadius.circular(20.0),
@@ -444,7 +312,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   FlutterFlowTheme.of(context).customColor1,
                               prefixIcon: Icon(
                                 Icons.search_rounded,
-                                color: FlutterFlowTheme.of(context).tertiary,
                                 size: 24.0,
                               ),
                             ),
@@ -481,25 +348,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Servicios disponibles',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
+                            Expanded(
+                              child: Text(
+                                'Servicios disponibles',
+                                style: HulpTextStyles.section,
+                              ),
                             ),
+                            const SizedBox(width: 8),
                             InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -525,26 +380,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         0.0, 0.0, 0.0, 3.0),
                                     child: Text(
                                       'Ver todos',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w500,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
+                                      style: HulpTextStyles.secondaryAction
+                                          .copyWith(color: HulpTextStyles.link),
                                     ),
                                   ),
                                   Padding(
@@ -668,6 +505,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 border: Border.all(
                                                   color: Color(0xFFDFDFDF),
                                                   width: 1.2,
+                                                ),
+                                              ),
+                                              foregroundDecoration:
+                                                  BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                border: Border(
+                                                  top: BorderSide(
+                                                    color:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    width: 3.0,
+                                                  ),
                                                 ),
                                               ),
                                               child: Padding(
@@ -842,8 +693,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     .bodyMedium
                                                                     .fontStyle,
                                                               ),
-                                                              color: Color(
-                                                                  0xFF7C766C),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
                                                               fontSize: 12.0,
                                                               letterSpacing:
                                                                   0.0,

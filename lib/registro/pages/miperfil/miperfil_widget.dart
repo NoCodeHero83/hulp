@@ -1,8 +1,8 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/alert_cerrarsesion_widget.dart';
+import '/components/encabezado_principal_widget.dart';
 import '/components/menu_bar_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -54,45 +54,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
         // el menu inferior sube y queda pegado sobre las teclas.
         resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFFBFAF9),
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: Color(0xFF606060),
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Text(
-            'Cuenta',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
-                    fontWeight:
-                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                  ),
-                  color: FlutterFlowTheme.of(context).texto1,
-                  fontSize: 18.0,
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.5,
-        ),
+        appBar: const EncabezadoPrincipalWidget(titulo: 'Cuenta'),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -258,7 +220,8 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Text(
+                                            Flexible(
+                                                child: Text(
                                               'Datos personales',
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -273,7 +236,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF757575),
+                                                    color: Color(0xFF65676A),
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
@@ -283,7 +246,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                            ),
+                                            )),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
@@ -338,8 +301,9 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Text(
-                                              'Metodos de pago',
+                                            Flexible(
+                                                child: Text(
+                                              'Métodos de pago',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -353,7 +317,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF757575),
+                                                    color: Color(0xFF65676A),
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
@@ -363,7 +327,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                            ),
+                                            )),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
@@ -418,7 +382,8 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Text(
+                                            Flexible(
+                                                child: Text(
                                               'Términos y condiciones',
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -433,7 +398,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF757575),
+                                                    color: Color(0xFF65676A),
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
@@ -443,7 +408,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                            ),
+                                            )),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
@@ -499,8 +464,9 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Text(
-                                              'Politicas de privacidad',
+                                            Flexible(
+                                                child: Text(
+                                              'Política de privacidad',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -514,7 +480,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF757575),
+                                                    color: Color(0xFF65676A),
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
@@ -524,7 +490,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                            ),
+                                            )),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
@@ -561,10 +527,11 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                           children: [
                                             Icon(
                                               Icons.lock_outline_rounded,
-                                              color: Color(0xFF757575),
+                                              color: Color(0xFF65676A),
                                               size: 24.0,
                                             ),
-                                            Text(
+                                            Flexible(
+                                                child: Text(
                                               'Cambiar contraseña',
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -579,7 +546,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF757575),
+                                                    color: Color(0xFF65676A),
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
@@ -589,7 +556,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                            ),
+                                            )),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
@@ -634,7 +601,8 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Text(
+                                            Flexible(
+                                                child: Text(
                                               'Eliminar cuenta',
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -649,7 +617,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                               .bodyMedium
                                                               .fontStyle,
                                                     ),
-                                                    color: Color(0xFF757575),
+                                                    color: Color(0xFF65676A),
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
@@ -659,7 +627,7 @@ class _MiperfilWidgetState extends State<MiperfilWidget> {
                                                             .bodyMedium
                                                             .fontStyle,
                                                   ),
-                                            ),
+                                            )),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),

@@ -7,12 +7,54 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
+import 'package:hulp/auth/supabase_auth/supabase_user_provider.dart';
 import 'package:hulp/custom_code/widgets/nequi_verification_button.dart';
 import 'package:hulp/flutter_flow/flutter_flow_widgets.dart';
 import 'package:hulp/nequi_registro/nequi_registro_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
-  setUp(() => GoogleFonts.config.allowRuntimeFetching = false);
+  TestWidgetsFlutterBinding.ensureInitialized();
+  var metodos = <Map<String, dynamic>>[];
+  var fallarConsulta = false;
+
+  setUpAll(() async {
+    SharedPreferences.setMockInitialValues({});
+    await Supabase.initialize(
+      url: 'https://nequi.test',
+      anonKey: 'test-key',
+      debug: false,
+      httpClient: MockClient((request) async {
+        expect(request.method, 'GET');
+        expect(request.url.path, '/rest/v1/metodos_pago');
+        expect(request.url.queryParameters['usuario_id'], 'eq.cliente-prueba');
+        expect(request.url.queryParameters['tipo'], 'eq.NEQUI');
+        return http.Response(
+          fallarConsulta
+              ? '{"message":"Consulta no disponible"}'
+              : jsonEncode(metodos),
+          fallarConsulta ? 500 : 200,
+          request: request,
+          headers: {'content-type': 'application/json'},
+        );
+      }),
+    );
+  });
+  tearDownAll(() => Supabase.instance.dispose());
+  setUp(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
+    metodos = [];
+    fallarConsulta = false;
+    currentUser = HulpSupabaseUser(const User(
+      id: 'cliente-prueba',
+      appMetadata: {},
+      userMetadata: {},
+      aud: 'authenticated',
+      createdAt: '2026-11-01T00:00:00Z',
+    ));
+  });
+  tearDown(() => currentUser = null);
 
   Future<void> montar(WidgetTester tester) async {
     // Evita descargar el logo durante la prueba del formulario.
@@ -35,6 +77,48 @@ void main() {
       tester.widget<FFButtonWidget>(find.descendant(
           of: find.byType(NequiVerificationButton),
           matching: find.byType(FFButtonWidget)));
+
+  testWidgets('muestra el vínculo guardado sin preparar una nueva vinculación',
+      (tester) async {
+    metodos = [
+      {'estado': 'Inactivo', 'es_predeterminado': true},
+      {'estado': 'Activo', 'numero_telefono': '399 111 1111'},
+      {
+        'estado': 'Active',
+        'numero_telefono': '+57 399 111 1234',
+        'es_predeterminado': true,
+      },
+    ];
+    await http.runWithClient(() async {
+      await montar(tester);
+      await tester.pumpAndSettle();
+      expect(find.text('Nequi vinculado'), findsOneWidget);
+      expect(find.text('+57 ••• ••• 1234'), findsOneWidget);
+      expect(find.text('+57 399 111 1234'), findsNothing);
+      expect(find.text('Predeterminado'), findsOneWidget);
+      expect(find.byType(NequiVerificationButton), findsNothing);
+    }, () => MockClient((_) => throw StateError('No debe consultar Wompi')));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('reintenta la consulta del vínculo si falla', (tester) async {
+    fallarConsulta = true;
+    await montar(tester);
+    await tester.pumpAndSettle();
+    expect(
+        find.text('No pudimos consultar tu método de pago.'), findsOneWidget);
+    expect(find.byType(NequiVerificationButton), findsNothing);
+
+    fallarConsulta = false;
+    metodos = [
+      {'estado': 'Activo'}
+    ];
+    await tester.tap(find.text('Reintentar'));
+    await tester.pumpAndSettle();
+    expect(find.text('Nequi vinculado'), findsOneWidget);
+    expect(find.text('Predeterminado'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('espera ambos tokens y envía el teléfono escrito sin espacios',
       (tester) async {

@@ -77,8 +77,8 @@ class _AlertCerrarsesionWidgetState extends State<AlertCerrarsesionWidget> {
                     valueOrDefault<String>(
                       widget.nombre != null && widget.nombre != ''
                           ? widget.nombre
-                          : '¿Estas seguro de cerrar sesión?',
-                      '¿Estas seguro de cerrar sesión?',
+                          : '¿Estás seguro de que quieres cerrar sesión?',
+                      '¿Estás seguro de que quieres cerrar sesión?',
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           font: GoogleFonts.inter(
@@ -88,7 +88,7 @@ class _AlertCerrarsesionWidgetState extends State<AlertCerrarsesionWidget> {
                                 .fontStyle,
                           ),
                           color: FlutterFlowTheme.of(context).primaryText,
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,
                           fontStyle:
@@ -110,7 +110,7 @@ class _AlertCerrarsesionWidgetState extends State<AlertCerrarsesionWidget> {
                   },
                   child: Container(
                     width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: 44.0,
+                    constraints: const BoxConstraints(minHeight: 44),
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(20.0),
@@ -142,7 +142,7 @@ class _AlertCerrarsesionWidgetState extends State<AlertCerrarsesionWidget> {
                                         .fontStyle,
                                   ),
                                   color: Color(0xFFBC1021),
-                                  fontSize: 18.0,
+                                  fontSize: 16.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FlutterFlowTheme.of(context)
@@ -167,7 +167,7 @@ class _AlertCerrarsesionWidgetState extends State<AlertCerrarsesionWidget> {
                     },
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 44.0,
+                      constraints: const BoxConstraints(minHeight: 44),
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primary,
                         borderRadius: BorderRadius.circular(20.0),
@@ -195,7 +195,7 @@ class _AlertCerrarsesionWidgetState extends State<AlertCerrarsesionWidget> {
                                     ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
-                                    fontSize: 18.0,
+                                    fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FlutterFlowTheme.of(context)

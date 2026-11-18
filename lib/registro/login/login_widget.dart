@@ -171,7 +171,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           .fontStyle,
                                     ),
                                     color: FlutterFlowTheme.of(context).primary,
-                                    fontSize: 26.0,
+                                    fontSize: 24.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FlutterFlowTheme.of(context)
@@ -200,7 +200,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .labelMedium
                                         .fontStyle,
                                   ),
-                                  color: Color(0xFF757575),
+                                  color: FlutterFlowTheme.of(context).tertiary,
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
@@ -241,7 +241,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: FlutterFlowTheme.of(context).primary,
                                 width: 0.5,
                               ),
                               borderRadius: BorderRadius.circular(20.0),
@@ -265,7 +265,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 .secondaryBackground,
                             prefixIcon: Icon(
                               Icons.email_outlined,
-                              color: FlutterFlowTheme.of(context).tertiary,
                             ),
                           ),
                           style:
@@ -315,7 +314,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           .labelMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF757575),
+                                    color: FlutterFlowTheme.of(context).tertiary,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .labelMedium
@@ -356,7 +355,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
+                                  color: FlutterFlowTheme.of(context).primary,
                                   width: 0.5,
                                 ),
                                 borderRadius: BorderRadius.circular(20.0),
@@ -380,7 +379,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   .secondaryBackground,
                               prefixIcon: Icon(
                                 Icons.key_outlined,
-                                color: FlutterFlowTheme.of(context).tertiary,
                               ),
                               suffixIcon: InkWell(
                                 onTap: () async {
@@ -392,7 +390,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   _model.passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
-                                  color: Color(0xFF757575),
                                   size: 22,
                                 ),
                               ),
@@ -510,7 +507,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
                           safeSetState(() {});
                         },
-                        text: 'Iniciar Sesión',
+                        text: 'Iniciar sesión',
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: 44.0,
@@ -518,10 +515,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                               16.0, 0.0, 16.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: Color(0xFF016D5A),
+                          color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.interTight(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .fontWeight,
@@ -654,7 +651,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF757575),
+                                    color: FlutterFlowTheme.of(context).tertiary,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -699,7 +696,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             },
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 48.0,
+                              constraints: const BoxConstraints(minHeight: 48),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -738,7 +735,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF0B6244),
+                                            color: FlutterFlowTheme.of(context).primary,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
@@ -784,7 +781,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               },
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: 48.0,
+                                constraints: const BoxConstraints(minHeight: 48),
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -823,7 +820,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                              color: Color(0xFF0B6244),
+                                              color: FlutterFlowTheme.of(context).primary,
                                               fontSize: 16.0,
                                               letterSpacing: 0.0,
                                               fontWeight:
@@ -861,7 +858,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             },
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 48.0,
+                              constraints: const BoxConstraints(minHeight: 48),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -900,7 +897,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF0B6244),
+                                            color: FlutterFlowTheme.of(context).primary,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
@@ -934,7 +931,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             },
                             child: Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 48.0,
+                              constraints: const BoxConstraints(minHeight: 48),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -973,7 +970,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF0B6244),
+                                            color: FlutterFlowTheme.of(context).primary,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
@@ -1003,13 +1000,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ))
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 48.0,
+                              constraints: const BoxConstraints(minHeight: 48),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(
-                                  color: Color(0xFF8A8A8A),
+                                  color: Color(0xFF65676A),
                                   width: 1.0,
                                 ),
                               ),
@@ -1048,7 +1045,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF0B6244),
+                                            color: FlutterFlowTheme.of(context).primary,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
@@ -1077,13 +1074,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ))
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 48.0,
+                              constraints: const BoxConstraints(minHeight: 48),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(
-                                  color: Color(0xFF8A8A8A),
+                                  color: Color(0xFF65676A),
                                   width: 1.0,
                                 ),
                               ),
@@ -1114,7 +1111,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF0B6244),
+                                            color: FlutterFlowTheme.of(context).primary,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
@@ -1143,13 +1140,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ))
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
-                              height: 48.0,
+                              constraints: const BoxConstraints(minHeight: 48),
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                                 borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(
-                                  color: Color(0xFF8A8A8A),
+                                  color: Color(0xFF65676A),
                                   width: 1.0,
                                 ),
                               ),
@@ -1181,7 +1178,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                       .bodyMedium
                                                       .fontStyle,
                                             ),
-                                            color: Color(0xFF0B6244),
+                                            color: FlutterFlowTheme.of(context).primary,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight:
@@ -1226,7 +1223,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .fontStyle,
                                   ),
                                   color: FlutterFlowTheme.of(context).secondary,
-                                  fontSize: 10.0,
+                                  fontSize: 12.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .bodyMedium

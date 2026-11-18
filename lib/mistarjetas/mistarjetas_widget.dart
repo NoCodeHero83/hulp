@@ -1,3 +1,4 @@
+import '/components/encabezado_principal_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/notificaciones_modal_widget.dart';
@@ -53,38 +54,9 @@ class _MistarjetasWidgetState extends State<MistarjetasWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFEFF3ED),
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderRadius: 20.0,
-            buttonSize: 40.0,
-            icon: Icon(
-              Icons.arrow_back,
-              color: Color(0xFF070909),
-              size: 24.0,
-            ),
-            onPressed: () async {
-              context.safePop();
-            },
-          ),
-          title: Text(
-            ' ',
-            style: FlutterFlowTheme.of(context).headlineSmall.override(
-                  font: GoogleFonts.interTight(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineSmall.fontStyle,
-                  ),
-                  letterSpacing: 0.0,
-                  fontWeight: FontWeight.w600,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineSmall.fontStyle,
-                ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
+        appBar: EncabezadoPrincipalWidget.subpantalla(
+          titulo: 'Mis tarjetas',
+          alVolver: context.safePop,
         ),
         body: StreamBuilder<List<TarjetasGuardadasRow>>(
           stream: _model.containerSupabaseStream ??= SupaFlow.client
@@ -133,7 +105,7 @@ class _MistarjetasWidgetState extends State<MistarjetasWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .headlineMedium
                                 .override(
-                                  font: GoogleFonts.interTight(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FontWeight.bold,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .headlineMedium
@@ -268,7 +240,7 @@ class _MistarjetasWidgetState extends State<MistarjetasWidget> {
                                                   .headlineMedium
                                                   .override(
                                                     font:
-                                                        GoogleFonts.interTight(
+                                                        GoogleFonts.inter(
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontStyle:
@@ -320,8 +292,8 @@ class _MistarjetasWidgetState extends State<MistarjetasWidget> {
                                                                       .fontStyle,
                                                                 ),
                                                                 color: Color(
-                                                                    0xCCFFFFFF),
-                                                                fontSize: 10.0,
+                                                                    0xFFFFFFFF),
+                                                                fontSize: 12.0,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight: FlutterFlowTheme.of(
@@ -395,8 +367,8 @@ class _MistarjetasWidgetState extends State<MistarjetasWidget> {
                                                                       .fontStyle,
                                                                 ),
                                                                 color: Color(
-                                                                    0xCCFFFFFF),
-                                                                fontSize: 10.0,
+                                                                    0xFFFFFFFF),
+                                                                fontSize: 12.0,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight: FlutterFlowTheme.of(

@@ -2,6 +2,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import 'hulp_text_styles.dart';
+
 class FFButtonOptions {
   const FFButtonOptions({
     this.textAlign,
@@ -98,6 +100,15 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final expandedText = MediaQuery.textScalerOf(context).scale(16) > 16;
+    final options = widget.options;
+    final textStyle =
+        (options.textStyle ?? HulpTextStyles.primaryAction).withoutColor();
+    final buttonSize = BoxConstraints(
+      minHeight: options.height ?? 0,
+      maxHeight:
+          expandedText ? double.infinity : options.height ?? double.infinity,
+    );
     Widget textWidget = loading
         ? SizedBox(
             width: widget.options.width == null
@@ -115,14 +126,15 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
               ),
             ),
           )
-        : AutoSizeText(
-            text ?? '',
-            style:
-                text == null ? null : widget.options.textStyle?.withoutColor(),
-            textAlign: widget.options.textAlign,
-            maxLines: maxLines,
-            overflow: TextOverflow.ellipsis,
-          );
+        : expandedText
+            ? Text(text ?? '', style: textStyle, textAlign: options.textAlign)
+            : AutoSizeText(
+                text ?? '',
+                style: textStyle,
+                textAlign: widget.options.textAlign,
+                maxLines: maxLines,
+                overflow: TextOverflow.ellipsis,
+              );
 
     final onPressed = widget.onPressed != null
         ? (widget.showLoadingIndicator
@@ -241,30 +253,34 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
         );
       }
       return SizedBox(
-        height: widget.options.height,
-        width: widget.options.width,
-        child: ElevatedButton.icon(
-          icon: Padding(
-            padding: widget.options.iconPadding ?? EdgeInsets.zero,
-            child: icon,
+        width: options.width,
+        child: ConstrainedBox(
+          constraints: buttonSize,
+          child: ElevatedButton.icon(
+            icon: Padding(
+              padding: widget.options.iconPadding ?? EdgeInsets.zero,
+              child: icon,
+            ),
+            label: textWidget,
+            onPressed: onPressed,
+            style: style,
+            iconAlignment: widget.options.iconAlignment ?? IconAlignment.start,
+            focusNode: _focusNode,
           ),
-          label: textWidget,
-          onPressed: onPressed,
-          style: style,
-          iconAlignment: widget.options.iconAlignment ?? IconAlignment.start,
-          focusNode: _focusNode,
         ),
       );
     }
 
     return SizedBox(
-      height: widget.options.height,
-      width: widget.options.width,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: style,
-        focusNode: _focusNode,
-        child: textWidget,
+      width: options.width,
+      child: ConstrainedBox(
+        constraints: buttonSize,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: style,
+          focusNode: _focusNode,
+          child: textWidget,
+        ),
       ),
     );
   }
