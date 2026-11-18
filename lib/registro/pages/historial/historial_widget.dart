@@ -27,7 +27,7 @@ const _verde = HulpTextStyles.link;
 const _menta = HulpColors.brandSoft;
 const _borde = HulpColors.border;
 const _rojo = HulpTextStyles.error;
-const _soporte = 'https://wa.me/573104829808';
+const _soporte = 'https://wa.me/573117640067';
 
 class HistorialWidget extends StatefulWidget {
   const HistorialWidget({super.key});
@@ -580,7 +580,12 @@ class _HistorialWidgetState extends State<HistorialWidget> {
     );
   }
 
-  void _recargar() => setState(() => _solicitudes = _consultarSolicitudes());
+  void _recargar() {
+    final consulta = _consultarSolicitudes();
+    setState(() {
+      _solicitudes = consulta;
+    });
+  }
 
   @override
   void dispose() {
